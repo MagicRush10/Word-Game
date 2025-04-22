@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tapple Multiplayer</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #121212;
+      color: #FFD700;
+      text-align: center;
+      padding: 20px;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .player-setup {
+      background-color: #1E1E1E;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      border: 2px solid #FFD700;
+    }
+    .game-area {
+      display: none;
+      background-color: #1E1E1E;
+      padding: 20px;
+      border-radius: 10px;
+      border: 2px solid #FFD700;
+    }
+    button {
+      background-color: #FFD700;
+      color: #121212;
+      border: none;
+      padding: 10px 20px;
+      margin: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s;
+    }
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px #FFD700;
+    }
+    #letters-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px;
+      margin: 20px 0;
+    }
+    .letter {
+      background-color: #333;
+      color: #FFD700;
+      padding: 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1.5em;
+      transition: all 0.3s;
+    }
+    .letter:hover {
+      background-color: #444;
+    }
+    .letter.used {
+      background-color: #FF5555;
+      cursor: not-allowed;
+    }
+    .player-info {
+      display: flex;
+      justify-content: space-around;
+      margin: 20px 0;
+    }
+    .player {
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .active-player {
+      background-color: rgba(255, 215, 0, 0.2);
+      border: 1px solid #FFD700;
+    }
+    .lives {
+      color: #FF5555;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <!-- Container Pubblicitario -->
+  <div id="ad-container">
+    <!-- Banner Top -->
+    <div class="ad-unit" id="ad-top">
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-TUO_ID"></script>
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-TUO_ID"
+           data-ad-slot="1234567890"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+  </div>
+
+  <button class="back-button" onclick="location.href='index.html'">← Torna al menu</button>
+
+  <div class="container">
+    <h1>TAPPLE MULTIPLAYER</h1>
+    
+    <div class="player-setup" id="playerSetup">
+      <h2>Numero di giocatori:</h2>
+      <button onclick="startGame(1)">1 Giocatore</button>
+      <button onclick="startGame(2)">2 Giocatori</button>
+      <button onclick="startGame(3)">3 Giocatori</button>
+      <button onclick="startGame(4)">4 Giocatori</button>
+    </div>
+    
+    <div class="game-area" id="gameArea">
+      <div class="player-info" id="playerInfo"></div>
+      
+      <div id="categoryDisplay">Categoria: <span id="category">?</span></div>
+      
+      <div id="letters-grid"></div>
+      
+      <div id="timer">Timer: <span id="time">10</span>s</div>
+      <div id="message"></div>
+    </div>
+  </div>
+
+  <script>
+    // Configurazione del gioco
+    const categories = [
+      "Città italiane", "Film", "Animali", "Colori","Nomi Maschili","Nomi Femminili","Cartoni animati",
+      "Sport", "Cibo", "Fumetti","Marche Automobilistiche","Marche Abbigliamento", 
+      "Nazioni", "Videogiochi", "Professioni","Anime","Razze canine"
+    ];
+    
+    const letters = "ABCDEFGHILMNOPQRSTUVZ";
+    let currentCategory = "";
+    let usedLetters = [];
+    let timer;
+    let timeLeft = 10;
+    let isGameActive = false;
+    let currentPlayer = 0;
+    let players = [];
+    
+    // Elementi DOM
+    const playerSetup = document.getElementById("playerSetup");
+    const gameArea = document.getElementById("gameArea");
+    const playerInfo = document.getElementById("playerInfo");
+    const lettersGrid = document.getElementById("letters-grid");
+    const categoryDisplay = document.getElementById("category");
+    const timerDisplay = document.getElementById("time");
+    const messageDisplay = document.getElementById("message");
+    
+    // Inizia il gioco
+    function startGame(numPlayers) {
+      playerSetup.style.display = "none";
+      gameArea.style.display = "block";
+      
+      // Crea i giocatori
+      players = [];
+      for (let i = 0; i < numPlayers; i++) {
+        players.push({
+          name: `Giocatore ${i+1}`,
+          lives: 2,
+          element: null
+        });
+      }
+      
+      // Inizializza l'interfaccia giocatori
+      updatePlayersUI();
+      initLettersGrid();
+      newRound();
+    }
+    
+    // Nuovo round
+    function newRound() {
+      currentCategory = categories[Math.floor(Math.random() * categories.length)];
+      categoryDisplay.textContent = currentCategory;
+      usedLetters = [];
+      resetLettersGrid();
+      resetTimer();
+      isGameActive = true;
+      
+      // Mostra il giocatore corrente
+      messageDisplay.textContent = `Tocca a ${players[currentPlayer].name}!`;
+    }
+    
+    // Aggiorna l'UI dei giocatori
+    function updatePlayersUI() {
+      playerInfo.innerHTML = "";
+      players.forEach((player, index) => {
+        const playerDiv = document.createElement("div");
+        playerDiv.className = `player ${index === currentPlayer ? 'active-player' : ''}`;
+        playerDiv.innerHTML = `
+          ${player.name}<br>
+          <span class="lives">Vite: ${'♥'.repeat(player.lives)}</span>
+        `;
+        playerInfo.appendChild(playerDiv);
+        player.element = playerDiv;
+      });
+    }
+    
+    // Inizializza la griglia di lettere
+    function initLettersGrid() {
+      lettersGrid.innerHTML = "";
+      for (const letter of letters) {
+        const letterButton = document.createElement("div");
+        letterButton.className = "letter";
+        letterButton.textContent = letter;
+        letterButton.addEventListener("click", () => handleLetterClick(letter));
+        lettersGrid.appendChild(letterButton);
+      }
+    }
+    
+    // Resetta la griglia di lettere
+    function resetLettersGrid() {
+      document.querySelectorAll(".letter").forEach(letter => {
+        letter.classList.remove("used");
+      });
+    }
+    
+    // Gestione click su lettera
+    function handleLetterClick(letter) {
+      if (!isGameActive || usedLetters.includes(letter)) return;
+      
+      const word = prompt(`${players[currentPlayer].name}, scrivi una parola di categoria "${currentCategory}" che inizia con "${letter}"`);
+      
+      if (word && word.trim().length > 0 && word[0].toUpperCase() === letter) {
+        usedLetters.push(letter);
+        document.querySelectorAll(".letter").forEach(tile => {
+          if (tile.textContent === letter) tile.classList.add("used");
+        });
+        messageDisplay.textContent = `${players[currentPlayer].name} ha detto: "${word}"`;
+        nextPlayer();
+        resetTimer();
+      } else {
+        penalizePlayer();
+      }
+    }
+    
+    // Passa al prossimo giocatore
+    function nextPlayer() {
+      currentPlayer = (currentPlayer + 1) % players.length;
+      updatePlayersUI();
+    }
+    
+    // Penalizza il giocatore corrente
+    function penalizePlayer() {
+      const player = players[currentPlayer];
+      player.lives--;
+      player.element.innerHTML = `
+        ${player.name}<br>
+        <span class="lives">Vite: ${'♥'.repeat(player.lives)}</span>
+      `;
+      
+      if (player.lives <= 0) {
+        endGame(`${player.name} è eliminato!`);
+      } else {
+        messageDisplay.textContent = "Parola non valida! Perdi una vita.";
+        nextPlayer();
+        resetTimer();
+      }
+    }
+    
+    // Timer
+    function resetTimer() {
+      clearInterval(timer);
+      timeLeft = 10;
+      timerDisplay.textContent = timeLeft;
+      timer = setInterval(() => {
+        timeLeft--;
+        timerDisplay.textContent = timeLeft;
+        if (timeLeft <= 0) {
+          clearInterval(timer);
+          penalizePlayer();
+        }
+      }, 1000);
+    }
+    
+    // Fine gioco
+    function endGame(msg) {
+      isGameActive = false;
+      clearInterval(timer);
+      
+      const remainingPlayers = players.filter(p => p.lives > 0);
+      if (remainingPlayers.length === 1) {
+        messageDisplay.textContent = `🏆 ${remainingPlayers[0].name} vince! ${msg}`;
+      } else {
+        messageDisplay.textContent = msg;
+        setTimeout(() => {
+          newRound();
+        }, 2000);
+      }
+    }
+
+    // Caricamento ritardato pubblicità
+    function loadAds() {
+      setTimeout(() => {
+        if(typeof adsbygoogle !== 'undefined') {
+          adsbygoogle = window.adsbygoogle || [];
+          adsbygoogle.push({});
+        }
+        
+        setTimeout(() => {
+          const adSide = document.createElement('div');
+          adSide.id = 'ad-side';
+          adSide.className = 'ad-unit';
+          adSide.innerHTML = `
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-TUO_ID"></script>
+            <ins class="adsbygoogle"
+                 style="display:inline-block;width:160px;height:600px"
+                 data-ad-client="ca-pub-TUO_ID"
+                 data-ad-slot="0987654321"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+          `;
+          document.body.appendChild(adSide);
+        }, 30000);
+      }, 3000);
+    }
+
+    // Avvia il gioco
+    document.addEventListener('DOMContentLoaded', () => {
+      loadAds();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,559 @@
+ body {
+  margin: 0;
+  padding: 0;
+  background-color: #000;
+  color: #FFD700;
+  font-family: 'Merriweather', serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.menu-container {
+  background-color: #111;
+  padding: 50px;
+  border: 2px solid #FFD700;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: #FFD700;
+  text-shadow: 0 0 5px rgba(255, 215, 0, 0.4);
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.menu-button {
+  padding: 12px 20px;
+  font-size: 1.1rem;
+  border: 1px solid #FFD700;
+  background-color: transparent;
+  color: #FFD700;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.menu-button:hover {
+  background-color: #FFD700;
+  color: #000000;
+}
+
+/* Game style */
+
+.game-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, 60px);
+  grid-gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.tile {
+  width: 60px;
+  height: 60px;
+  border: 2px solid #FFD700;
+  font-size: 2rem;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.correct {
+  background-color: #28a745; /* Verde per la lettera corretta */
+  color: #fff;
+  border: none;
+}
+
+.present {
+  background-color: #ffc107; /* Giallo per la lettera presente ma fuori posizione */
+  color: #000;
+  border: none;
+}
+
+.absent {
+  background-color: #dc3545; /* Rosso per la lettera non presente */
+  color: #fff;
+  border: none;
+}
+
+
+.message {
+  margin-top: 20px;
+  font-size: 1.2rem;
+}
+
+/* Back button */
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: transparent;
+  color: #FFD700;
+  border: 1px solid #FFD700;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+
+.back-button:hover {
+  background-color: #FFD700;
+  color: #000;
+}
+/* Stile per Tapple */
+#letters-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 60px);
+  margin: 20px auto;
+}
+
+.letter-tile {
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.letter-tile:hover {
+  background-color: rgba(255, 215, 0, 0.2);
+}
+
+.letter-tile.used {
+  background-color: #dc3545; /* Rosso per lettere usate */
+  cursor: not-allowed;
+}
+
+#category-display {
+  font-size: 1.3rem;
+  margin: 15px 0;
+}
+
+#timer {
+  font-size: 1.2rem;
+  margin: 10px 0;
+}
+
+#start-button {
+  padding: 10px 20px;
+  background: transparent;
+  color: #FFD700;
+  border: 1px solid #FFD700;
+  margin-top: 20px;
+  cursor: pointer;
+}
+/* Stile per Tapple - Multiplayer */
+#players-info {
+  display: flex;
+  justify-content: space-around;
+  margin: 15px 0;
+  font-size: 1.2rem;
+}
+
+.player {
+  padding: 8px 15px;
+  border: 1px solid #FFD700;
+  border-radius: 6px;
+}
+
+.player.active {
+  background-color: rgba(255, 215, 0, 0.2);
+}
+
+#letters-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 60px);
+  margin: 20px auto;
+}
+
+.letter-tile {
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.letter-tile:hover {
+  background-color: rgba(255, 215, 0, 0.2);
+}
+
+.letter-tile.used {
+  background-color: #dc3545;
+  cursor: not-allowed;
+}
+
+#start-button {
+  padding: 12px 25px;
+  background: transparent;
+  color: #FFD700;
+  border: 2px solid #FFD700;
+  font-size: 1.1rem;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+#start-button:hover {
+  background-color: #FFD700;
+  color: #000;
+}
+/* REGOLE DEL GIOCO - STILE MIGLIORATO */
+#introMessage {
+  display: flex;
+  gap: 25px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 30px 0;
+  max-width: 900px;
+}
+
+.rule-card {
+  background: rgba(20, 20, 20, 0.8);
+  border: 2px solid #FFD700;
+  border-radius: 12px;
+  padding: 20px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.1);
+  transition: transform 0.3s;
+}
+
+.rule-card:hover {
+  transform: translateY(-5px);
+}
+
+.rule-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 15px;
+  color: #FFD700;
+}
+
+.rule-header i {
+  font-size: 1.5rem;
+}
+
+.rule-header h3 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.rule-list {
+  padding-left: 0;
+  list-style: none;
+}
+
+.rule-list li {
+  margin-bottom: 12px;
+  padding-left: 10px;
+  position: relative;
+  line-height: 1.5;
+}
+
+.rule-number {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  background: #FFD700;
+  color: #000;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 22px;
+  font-weight: bold;
+  margin-right: 10px;
+  font-size: 0.8rem;
+}
+
+.correct-example {
+  color: #28a745;
+}
+
+.present-example {
+  color: #ffc107;
+}
+
+.absent-example {
+  color: #dc3545;
+}
+
+.rule-list i.fas.fa-square {
+  font-size: 0.8rem;
+  margin-right: 5px;
+}
+
+.example {
+  color: #aaa;
+  font-style: italic;
+  margin-top: 15px !important;
+}
+
+.example i {
+  margin-right: 8px;
+  color: #FFD700;
+}
+
+/* PULSANTI CON ICONE */
+.menu-button i {
+  margin-right: 10px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  #introMessage {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .rule-card {
+    max-width: 100%;
+  }
+}
+/* Aggiungi in style.css */
+#loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.loader {
+  border: 5px solid #333;
+  border-top: 5px solid #FFD700;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+/* Stili aggiuntivi per Word Brawl */
+#word-display {
+  min-height: 60px;
+  font-size: 1.8rem;
+  letter-spacing: 5px;
+  margin: 20px;
+  color: #FFD700;
+  border-bottom: 2px solid #FFD700;
+  padding: 10px;
+}
+
+#word-list {
+  margin-top: 20px;
+  max-height: 150px;
+  overflow-y: auto;
+  background-color: rgba(30, 30, 30, 0.7);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+#word-list div {
+  padding: 5px;
+  border-bottom: 1px solid #333;
+}
+
+.action-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px #FFD700;
+}
+
+.action-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: transparent;
+  color: #FFD700;
+  border: 1px solid #FFD700;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+  z-index: 10;
+}
+
+.back-button:hover {
+  background-color: #FFD700;
+  color: #000;
+}
+#message {
+  min-height: 30px;
+  font-size: 1.2rem;
+  margin: 15px;
+  padding: 10px;
+  border-radius: 5px;
+}
+/* Stili Crucipuzzle */
+.puzzle-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+#puzzle-grid {
+  display: grid;
+  grid-template-columns: repeat(10, 40px);
+  grid-gap: 2px;
+  margin: 20px 0;
+}
+
+.cell {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #FFD700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.2s;
+  background-color: rgba(30, 30, 30, 0.7);
+}
+
+.cell.selected {
+  background-color: rgba(255, 215, 0, 0.3);
+}
+
+.cell.found {
+  background-color: rgba(40, 167, 69, 0.5);
+}
+
+#word-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  margin: 20px;
+  max-width: 500px;
+}
+
+.word-item {
+  padding: 5px 10px;
+  border-radius: 4px;
+  background-color: rgba(20, 20, 20, 0.5);
+}
+
+.word-item.found {
+  text-decoration: line-through;
+  color: #28a745;
+}
+
+#controls {
+  margin: 20px;
+}
+
+#theme-display {
+  font-size: 1.2rem;
+  margin: 10px;
+  color: #FFD700;
+}
+/* Aggiungi questo al tuo style.css */
+#puzzle-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 30px); /* Celle più piccole */
+  grid-gap: 1px;
+  margin: 10px auto;
+  overflow: visible;
+}
+
+.cell {
+  width: 30px;
+  height: 30px;
+  font-size: 1rem;
+  line-height: 30px;
+}
+
+.word-list {
+  columns: 2;
+  column-gap: 20px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.word-item {
+  break-inside: avoid;
+  margin-bottom: 5px;
+}
+
+.game-container {
+  max-width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  #puzzle-grid {
+    grid-template-columns: repeat(12, 25px);
+  }
+  
+  .cell {
+    width: 25px;
+    height: 25px;
+    font-size: 0.9rem;
+  }
+  
+  .word-list {
+    columns: 1;
+  }
+}
+/* Stili Pubblicitari */
+#ad-container {
+  padding: 10px;
+  background: rgba(255, 215, 0, 0.1);
+  border-radius: 8px;
+}
+
+/* Responsive Ads */
+@media (min-width: 768px) {
+  #ad-side {
+    display: block;
+    position: fixed;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+  }
+  
+  #ad-top {
+    margin-bottom: 30px;
+  }
+}
+
+@media (max-width: 767px) {
+  #ad-top {
+    margin: 10px auto;
+  }
+  
+  .adsbygoogle {
+    width: 320px;
+    height: 100px;
+  }
+}

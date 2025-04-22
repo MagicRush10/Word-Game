@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crucipuzzle</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<!-- Container Pubblicitario -->
+<div id="ad-container">
+  <!-- Banner Top -->
+  <div class="ad-unit" id="ad-top">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-TUO_ID"></script>
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-TUO_ID"
+         data-ad-slot="1234567890"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+</div>
+<body>
+  <button class="back-button" onclick="location.href='index.html'">← Torna al menu</button>
+
+  <div class="game-container">
+    <h1>CRUCIPUZZLE</h1>
+    <p>Trova tutte le parole nascoste nella griglia!</p>
+    
+    <div id="timer">TEMPO: 5:00</div>
+    <div id="theme-display"></div>
+    
+    <div class="puzzle-container">
+      <div id="puzzle-grid"></div>
+      <div id="word-list"></div>
+    </div>
+    
+    <div id="controls">
+      <button id="new-game-btn" class="action-btn">Nuova Partita</button>
+      <button id="hint-btn" class="action-btn">Aiuto</button>
+    </div>
+    
+    <div id="message"></div>
+  </div>
+
+  <script src="gioco3.js"></script>
+</body>
+</html>

@@ -105,26 +105,23 @@
     </div>
   </div>
 
-  <button class="back-button" onclick="location.href='index.html'">← Torna al menu</button>
+  <button class="back-button" onclick="window.location.href='index.html'">← Torna al menu</button>
 
   <div class="container">
     <h1>TAPPLE MULTIPLAYER</h1>
     
     <div class="player-setup" id="playerSetup">
       <h2>Numero di giocatori:</h2>
-<button onclick="startGame(1)">1 Giocatore</button>
-<button onclick="startGame(2)">2 Giocatori</button>
-<button onclick="startGame(3)">3 Giocatori</button>
-<button onclick="startGame(4)">4 Giocatori</button>
+      <button id="btn1player">1 Giocatore</button>
+      <button id="btn2players">2 Giocatori</button>
+      <button id="btn3players">3 Giocatori</button>
+      <button id="btn4players">4 Giocatori</button>
     </div>
     
     <div class="game-area" id="gameArea">
       <div class="player-info" id="playerInfo"></div>
-      
       <div id="categoryDisplay">Categoria: <span id="category">?</span></div>
-      
       <div id="letters-grid"></div>
-      
       <div id="timer">Timer: <span id="time">10</span>s</div>
       <div id="message"></div>
     </div>
@@ -155,9 +152,16 @@
     const categoryDisplay = document.getElementById("category");
     const timerDisplay = document.getElementById("time");
     const messageDisplay = document.getElementById("message");
+
+    // Aggiungi event listeners ai pulsanti
+    document.getElementById("btn1player").addEventListener("click", () => startGame(1));
+    document.getElementById("btn2players").addEventListener("click", () => startGame(2));
+    document.getElementById("btn3players").addEventListener("click", () => startGame(3));
+    document.getElementById("btn4players").addEventListener("click", () => startGame(4));
     
     // Inizia il gioco
     function startGame(numPlayers) {
+      console.log("Avvio gioco con", numPlayers, "giocatori"); // Debug
       playerSetup.style.display = "none";
       gameArea.style.display = "block";
       
@@ -325,6 +329,7 @@
 
     // Avvia il gioco
     document.addEventListener('DOMContentLoaded', () => {
+      console.log("Pagina caricata"); // Debug
       loadAds();
     });
   </script>

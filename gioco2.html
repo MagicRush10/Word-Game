@@ -6,120 +6,98 @@
   <title>Tapple Multiplayer</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    body {
-      font-family: 'Arial', sans-serif;
-      background-color: #121212;
-      color: #FFD700;
-      text-align: center;
-      padding: 20px;
-    }
+    /* Stili specifici per questo gioco */
     .container {
       max-width: 600px;
       margin: 0 auto;
+      padding: 20px;
     }
-    .player-setup {
+    
+    .player-setup, .game-area {
       background-color: #1E1E1E;
       padding: 20px;
       border-radius: 10px;
       margin-bottom: 20px;
       border: 2px solid #FFD700;
     }
+    
     .game-area {
       display: none;
-      background-color: #1E1E1E;
-      padding: 20px;
-      border-radius: 10px;
-      border: 2px solid #FFD700;
     }
-    button {
-      background-color: #FFD700;
-      color: #121212;
-      border: none;
-      padding: 10px 20px;
-      margin: 10px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: all 0.3s;
-    }
-    button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 10px #FFD700;
-    }
+    
     #letters-grid {
       display: grid;
       grid-template-columns: repeat(6, 1fr);
       gap: 10px;
       margin: 20px 0;
     }
+    
     .letter {
-  background-color: #333;
-  color: #FFD700;
-  padding: 15px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1.5em;
-  transition: all 0.3s;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+      background-color: #333;
+      color: #FFD700;
+      padding: 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1.5em;
+      text-align: center;
+      transition: all 0.3s;
+    }
+    
     .letter:hover {
       background-color: #444;
     }
+    
     .letter.used {
       background-color: #FF5555;
       cursor: not-allowed;
     }
+    
     .player-info {
       display: flex;
       justify-content: space-around;
       margin: 20px 0;
     }
+    
     .player {
       padding: 10px;
       border-radius: 5px;
     }
+    
     .active-player {
       background-color: rgba(255, 215, 0, 0.2);
       border: 1px solid #FFD700;
     }
+    
     .lives {
       color: #FF5555;
       font-weight: bold;
     }
+    
+    #timer {
+      font-size: 1.2rem;
+      margin: 15px 0;
+    }
+    
+    #message {
+      min-height: 30px;
+      padding: 10px;
+      border-radius: 5px;
+    }
   </style>
 </head>
 <body>
-  <!-- Container Pubblicitario -->
-  <div id="ad-container">
-    <!-- Banner Top -->
-    <div class="ad-unit" id="ad-top">
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6771549640814111"></script>
-      <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-client="ca-pub-6771549640814111"
-           data-ad-slot="1234567890"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
-      <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
-    </div>
-  </div>
-
   <button class="back-button" onclick="window.location.href='index.html'">← Torna al menu</button>
 
   <div class="container">
     <h1>TAPPLE MULTIPLAYER</h1>
     
     <div class="player-setup" id="playerSetup">
-  <h2>Numero di giocatori:</h2>
-  <button id="btn1player">1 Giocatore</button>
-  <button id="btn2players">2 Giocatori</button>
-  <button id="btn3players">3 Giocatori</button>
-  <button id="btn4players">4 Giocatori</button>
-</div>
+      <h2>Numero di giocatori:</h2>
+      <button id="btn1player">1 Giocatore</button>
+      <button id="btn2players">2 Giocatori</button>
+      <button id="btn3players">3 Giocatori</button>
+      <button id="btn4players">4 Giocatori</button>
+    </div>
     
     <div class="game-area" id="gameArea">
       <div class="player-info" id="playerInfo"></div>
@@ -133,9 +111,10 @@
   <script>
     // Configurazione del gioco
     const categories = [
-      "Città italiane", "Film", "Animali", "Colori","Nomi Maschili","Nomi Femminili","Cartoni animati",
-      "Sport", "Cibo", "Fumetti","Marche Automobilistiche","Marche Abbigliamento", 
-      "Nazioni", "Videogiochi", "Professioni","Anime","Razze canine"
+      "Città italiane", "Film", "Animali", "Colori", "Nomi Maschili", 
+      "Nomi Femminili", "Cartoni animati", "Sport", "Cibo", "Fumetti",
+      "Marche Automobilistiche", "Marche Abbigliamento", "Nazioni", 
+      "Videogiochi", "Professioni", "Anime", "Razze canine"
     ];
     
     const letters = "ABCDEFGHILMNOPQRSTUVZ";
@@ -156,15 +135,17 @@
     const timerDisplay = document.getElementById("time");
     const messageDisplay = document.getElementById("message");
 
-    // Aggiungi event listeners ai pulsanti
-    document.getElementById("btn1player").addEventListener("click", () => startGame(1));
-    document.getElementById("btn2players").addEventListener("click", () => startGame(2));
-    document.getElementById("btn3players").addEventListener("click", () => startGame(3));
-    document.getElementById("btn4players").addEventListener("click", () => startGame(4));
+    // Setup iniziale
+    document.addEventListener('DOMContentLoaded', () => {
+      // Aggiungi event listeners ai pulsanti
+      document.getElementById("btn1player").addEventListener("click", () => startGame(1));
+      document.getElementById("btn2players").addEventListener("click", () => startGame(2));
+      document.getElementById("btn3players").addEventListener("click", () => startGame(3));
+      document.getElementById("btn4players").addEventListener("click", () => startGame(4));
+    });
     
     // Inizia il gioco
     function startGame(numPlayers) {
-      console.log("Avvio gioco con", numPlayers, "giocatori"); // Debug
       playerSetup.style.display = "none";
       gameArea.style.display = "block";
       
@@ -178,7 +159,7 @@
         });
       }
       
-      // Inizializza l'interfaccia giocatori
+      // Inizializza l'interfaccia
       updatePlayersUI();
       initLettersGrid();
       newRound();
@@ -193,7 +174,6 @@
       resetTimer();
       isGameActive = true;
       
-      // Mostra il giocatore corrente
       messageDisplay.textContent = `Tocca a ${players[currentPlayer].name}!`;
     }
     
@@ -260,10 +240,13 @@
     function penalizePlayer() {
       const player = players[currentPlayer];
       player.lives--;
-      player.element.innerHTML = `
-        ${player.name}<br>
-        <span class="lives">Vite: ${'♥'.repeat(player.lives)}</span>
-      `;
+      
+      if (player.element) {
+        player.element.innerHTML = `
+          ${player.name}<br>
+          <span class="lives">Vite: ${'♥'.repeat(player.lives)}</span>
+        `;
+      }
       
       if (player.lives <= 0) {
         endGame(`${player.name} è eliminato!`);
@@ -282,6 +265,7 @@
       timer = setInterval(() => {
         timeLeft--;
         timerDisplay.textContent = timeLeft;
+        
         if (timeLeft <= 0) {
           clearInterval(timer);
           penalizePlayer();
@@ -304,37 +288,6 @@
         }, 2000);
       }
     }
-
-    // Caricamento ritardato pubblicità
-    function loadAds() {
-      setTimeout(() => {
-        if(typeof adsbygoogle !== 'undefined') {
-          adsbygoogle = window.adsbygoogle || [];
-          adsbygoogle.push({});
-        }
-        
-        setTimeout(() => {
-          const adSide = document.createElement('div');
-          adSide.id = 'ad-side';
-          adSide.className = 'ad-unit';
-          adSide.innerHTML = `
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6771549640814111"></script>
-            <ins class="adsbygoogle"
-                 style="display:inline-block;width:160px;height:600px"
-                 data-ad-client="ca-pub-6771549640814111"
-                 data-ad-slot="0987654321"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-          `;
-          document.body.appendChild(adSide);
-        }, 30000);
-      }, 3000);
-    }
-
-    // Avvia il gioco
-    document.addEventListener('DOMContentLoaded', () => {
-      console.log("Pagina caricata"); // Debug
-      loadAds();
-    });
   </script>
 </body>
 </html>

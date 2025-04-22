@@ -7,10 +7,17 @@
   <link rel="stylesheet" href="style.css">
   <style>
     /* Stili specifici per questo gioco */
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #121212;
+      color: #FFD700;
+      text-align: center;
+      padding: 20px;
+    }
+    
     .container {
       max-width: 600px;
       margin: 0 auto;
-      padding: 20px;
     }
     
     .player-setup, .game-area {
@@ -23,6 +30,23 @@
     
     .game-area {
       display: none;
+    }
+    
+    button {
+      background-color: #FFD700;
+      color: #121212;
+      border: none;
+      padding: 12px 20px;
+      margin: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s;
+    }
+    
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px #FFD700;
     }
     
     #letters-grid {
@@ -93,10 +117,10 @@
     
     <div class="player-setup" id="playerSetup">
       <h2>Numero di giocatori:</h2>
-      <button id="btn1player">1 Giocatore</button>
-      <button id="btn2players">2 Giocatori</button>
-      <button id="btn3players">3 Giocatori</button>
-      <button id="btn4players">4 Giocatori</button>
+      <button class="player-btn" data-players="1">1 Giocatore</button>
+      <button class="player-btn" data-players="2">2 Giocatori</button>
+      <button class="player-btn" data-players="3">3 Giocatori</button>
+      <button class="player-btn" data-players="4">4 Giocatori</button>
     </div>
     
     <div class="game-area" id="gameArea">
@@ -135,17 +159,22 @@
     const timerDisplay = document.getElementById("time");
     const messageDisplay = document.getElementById("message");
 
-    // Setup iniziale
-    document.addEventListener('DOMContentLoaded', () => {
-      // Aggiungi event listeners ai pulsanti
-      document.getElementById("btn1player").addEventListener("click", () => startGame(1));
-      document.getElementById("btn2players").addEventListener("click", () => startGame(2));
-      document.getElementById("btn3players").addEventListener("click", () => startGame(3));
-      document.getElementById("btn4players").addEventListener("click", () => startGame(4));
-    });
+    // Inizializzazione del gioco
+    function initGame() {
+      // Aggiungi event listeners a tutti i pulsanti
+      document.querySelectorAll('.player-btn').forEach(button => {
+        button.addEventListener('click', function() {
+          const numPlayers = parseInt(this.getAttribute('data-players'));
+          startGame(numPlayers);
+        });
+      });
+      
+      console.log("Gioco inizializzato. Pronto a partire!");
+    }
     
     // Inizia il gioco
     function startGame(numPlayers) {
+      console.log(`Avvio gioco con ${numPlayers} giocatori`);
       playerSetup.style.display = "none";
       gameArea.style.display = "block";
       
@@ -288,6 +317,7 @@
         }, 2000);
       }
     }
+     window.addEventListener('DOMContentLoaded', initGame);
   </script>
 </body>
 </html>

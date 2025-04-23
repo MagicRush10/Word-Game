@@ -322,5 +322,21 @@
 </div>
     </div>
   </div>
+  <script>
+  function showKaBoomAlert() {
+    document.getElementById('kaBoomAlert').style.display = 'flex';
+  }
+  
+  function closeAlert() {
+    document.getElementById('kaBoomAlert').style.display = 'none';
+  }
+  
+  function donate(amount) {
+    alert(`Grazie per la tua donazione di ${amount}€! Questo ci aiuterà a sviluppare il gioco più velocemente.`);
+    closeAlert();
+    // Qui potresti aggiungere un reindirizzamento a PayPal o altro servizio di pagamento
+    // window.location.href = `tuo_link_di_pagamento?amount=${amount}`;
+  }
+</script>
 </body>
 </html>

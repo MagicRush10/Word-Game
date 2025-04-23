@@ -303,20 +303,26 @@
     }
     
     // Fine gioco
-    function endGame(msg) {
-      isGameActive = false;
-      clearInterval(timer);
-      
-      const remainingPlayers = players.filter(p => p.lives > 0);
-      if (remainingPlayers.length === 1) {
-        messageDisplay.textContent = `🏆 ${remainingPlayers[0].name} vince! ${msg}`;
-      } else {
-        messageDisplay.textContent = msg;
-        setTimeout(() => {
-          newRound();
-        }, 2000);
-      }
-    }
+function endGame(msg) {
+  isGameActive = false;
+  clearInterval(timer);
+  
+  const remainingPlayers = players.filter(p => p.lives > 0);
+  if (remainingPlayers.length === 1) {
+    messageDisplay.textContent = `🏆 ${remainingPlayers[0].name} vince! ${msg}`;
+  } else if (remainingPlayers.length === 0) {
+    messageDisplay.textContent = "Pareggio! Tutti i giocatori sono stati eliminati";
+  } else {
+    messageDisplay.textContent = msg;
+    // Continua il gioco con i giocatori rimanenti
+    players = remainingPlayers;
+    currentPlayer = currentPlayer % players.length;
+    updatePlayersUI();
+    setTimeout(() => {
+      newRound();
+    }, 2000);
+  }
+}
      window.addEventListener('DOMContentLoaded', initGame);
   </script>
 </body>

@@ -298,29 +298,37 @@
     </div>
 
     <div class="buttons">
-      <button class="menu-button" onclick="location.href='gioco1.html'">
-        <i class="fas fa-question"></i> Indovina la parola
-      </button>
-      <button class="menu-button" onclick="location.href='gioco2.html'">
-        <i class="fas fa-clock"></i> Tapple
-      </button>
-      <button class="menu-button" onclick="location.href='gioco3.html'">
-        <i class="fas fa-search"></i> Cruci-Puzzle
-      </button>
-<button class="menu-button" onclick="showKaBoomAlert()">
-  <i class="fas fa-bomb"></i> Ka-Boom
-</button>
+  <button class="menu-button" onclick="location.href='gioco1.html'">
+    <i class="fas fa-question"></i> Indovina la parola
+  </button>
+  <button class="menu-button" onclick="location.href='gioco2.html'">
+    <i class="fas fa-clock"></i> Tapple
+  </button>
+  <button class="menu-button" onclick="location.href='gioco3.html'">
+    <i class="fas fa-search"></i> Cruci-Puzzle
+  </button>
+  <button class="menu-button" onclick="showKaBoomAlert()">
+    <i class="fas fa-bomb"></i> Ka-Boom
+  </button>
+</div>
+
 <div id="kaBoomAlert" class="alert-popup" style="display: none;">
   <div class="alert-content">
     <h3>Gioco in fase di creazione</h3>
     <p>Stiamo lavorando a questo gioco emozionante!</p>
-    </div>
     <button class="close-btn" onclick="closeAlert()">Chiudi</button>
   </div>
 </div>
     </div>
   </div>
-  <script>
+ <script>
+  function showKaBoomAlert() {
+    document.getElementById('kaBoomAlert').style.display = 'flex';
+  }
+
+  function closeAlert() {
+    document.getElementById('kaBoomAlert').style.display = 'none';
+  }
 </script>
 </body>
 </html>

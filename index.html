@@ -313,9 +313,7 @@
 <div id="kaBoomAlert" class="alert-popup" style="display: none;">
   <div class="alert-content">
     <h3>Gioco in fase di creazione</h3>
-    <p>Stiamo lavorando a questo gioco emozionante! Vuoi supportarne lo sviluppo?</p>
-    <div class="donation-options">
-      <button onclick="donate(2)">Aiuta a sviluppare il progetto con 2€</button>
+    <p>Stiamo lavorando a questo gioco emozionante!</p>
     </div>
     <button class="close-btn" onclick="closeAlert()">Chiudi</button>
   </div>
@@ -323,20 +321,6 @@
     </div>
   </div>
   <script>
-  function showKaBoomAlert() {
-    document.getElementById('kaBoomAlert').style.display = 'flex';
-  }
-  
-  function closeAlert() {
-    document.getElementById('kaBoomAlert').style.display = 'none';
-  }
-  
-  function donate(amount) {
-    alert(`Grazie per la tua donazione di ${amount}€! Questo ci aiuterà a sviluppare il gioco più velocemente.`);
-    closeAlert();
-    // Qui potresti aggiungere un reindirizzamento a PayPal o altro servizio di pagamento
-    // window.location.href = `tuo_link_di_pagamento?amount=${amount}`;
-  }
 </script>
 </body>
 </html>

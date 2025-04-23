@@ -307,6 +307,19 @@
       <button class="menu-button" onclick="location.href='gioco3.html'">
         <i class="fas fa-search"></i> Cruci-Puzzle
       </button>
+<button class="menu-button" onclick="showKaBoomAlert()">
+  <i class="fas fa-bomb"></i> Ka-Boom
+</button>
+<div id="kaBoomAlert" class="alert-popup" style="display: none;">
+  <div class="alert-content">
+    <h3>Gioco in fase di creazione</h3>
+    <p>Stiamo lavorando a questo gioco emozionante! Vuoi supportarne lo sviluppo?</p>
+    <div class="donation-options">
+      <button onclick="donate(2)">Aiuta a sviluppare il progetto con 2€</button>
+    </div>
+    <button class="close-btn" onclick="closeAlert()">Chiudi</button>
+  </div>
+</div>
     </div>
   </div>
 </body>

@@ -586,30 +586,6 @@ h1 {
   color: #FFD700;
   margin-top: 0;
 }
-
-.donation-options {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin: 20px 0;
-}
-
-.donation-options button {
-  background: #FFD700;
-  color: #000;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: all 0.3s;
-}
-
-.donation-options button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 10px #FFD700;
-}
-
 .close-btn {
   background: transparent;
   color: #FFD700;

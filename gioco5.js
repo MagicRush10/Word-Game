@@ -33,7 +33,6 @@ const emojiWords = [
     { word: "CIELO", emoji: "☁️", hint: "Vediamo sopra di noi" },
     { word: "PIANTA", emoji: "🌱", hint: "Cresce dalla terra" },
     { word: "SOLDATO", emoji: "💂", hint: "Protegge il paese" },
-    { word: "DOTTORE", emoji: "👨⚕️", hint: "Cura le persone" },
     { word: "MAESTRA", emoji: "👩🏫", hint: "Insegna a scuola" },
     { word: "BAMBINO", emoji: "👶", hint: "Piccolo essere umano" },
     { word: "FAMIGLIA", emoji: "👪", hint: "Genitori e figli" },

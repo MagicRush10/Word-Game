@@ -1,9 +1,9 @@
 // Database di parole con relative emoji
 const emojiWords = [
-    { word: "HARRY POTTER", emoji: "☀🐍⚡👓📚", hint: "Mago protagonista di una saga" },
+    { word: "HARRYPOTTER", emoji: "☀🐍⚡👓📚", hint: "Mago protagonista di una saga" },
     { word: "TITANIC", emoji: "🚢🧊💔🎻", hint: "Film tragico" },
-    { word: "KUNG FU PANDA", emoji: "🐼🥋🌀🐉", hint: "Il famoso Guerriero Dragone" },
-    { word: "RE LEONE", emoji: "🦁👑🌅", hint: "Film Disney" },
+    { word: "KUNGFUPANDA", emoji: "🐼🥋🌀🐉", hint: "Il famoso Guerriero Dragone" },
+    { word: "RELEONE", emoji: "🦁👑🌅", hint: "Film Disney" },
     { word: "CENERENTOLA", emoji: "👑👠🎃🕛", hint: "Favola per bambini" },
     { word: "ALBERO", emoji: "🌳", hint: "Ha foglie e radici" },
     { word: "GATTO", emoji: "🐱", hint: "Animale domestico" },

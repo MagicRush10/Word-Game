@@ -90,7 +90,7 @@ const categories = [
   });
   
   function submitWord() {
-    if (!isGameActive || bombExploded) return;
+    if (!isGameActive || bombExploded || wordInput.disabled) return;
     
     const word = wordInput.value.trim().toUpperCase();
     
@@ -110,6 +110,7 @@ const categories = [
     usedWords.push(word);
     updateWordList();
     wordInput.value = "";
+    wordInput.focus();
     
     // Passa al prossimo giocatore
     nextPlayer();
@@ -117,21 +118,26 @@ const categories = [
   }
   
   // Passa al prossimo giocatore
-  function nextPlayer() {
-    do {
-      currentPlayer = (currentPlayer + 1) % players.length;
-    } while (players[currentPlayer].lives <= 0);
-    
-    updatePlayersUI();
-    messageDisplay.textContent = `Tocca a ${players[currentPlayer].name}! La bomba è nelle tue mani!`;
-    messageDisplay.style.color = "#FFD700";
-    
-    // Controlla se c'è un solo giocatore rimasto
-    const alivePlayers = players.filter(p => p.lives > 0);
-    if (alivePlayers.length === 1) {
-      endGame(`${alivePlayers[0].name} vince!`);
-    }
+ function nextPlayer() {
+  do {
+    currentPlayer = (currentPlayer + 1) % players.length;
+  } while (players[currentPlayer].lives <= 0);
+
+  // Resetta l'input e rimetti il focus
+  wordInput.value = "";
+  wordInput.focus(); // Aggiungi questa linea!
+  wordInput.disabled = false; // Aggiungi questa linea!
+
+  updatePlayersUI();
+  messageDisplay.textContent = `Tocca a ${players[currentPlayer].name}! La bomba è nelle tue mani!`;
+  messageDisplay.style.color = "#FFD700";
+
+  // Controlla se c'è un solo giocatore rimasto
+  const alivePlayers = players.filter(p => p.lives > 0);
+  if (alivePlayers.length === 1) {
+    endGame(`${alivePlayers[0].name} vince!`);
   }
+}
   
   // Penalizza il giocatore corrente
   function penalizePlayer() {
@@ -147,6 +153,7 @@ const categories = [
     // Rimuovi l'esplosione dopo l'animazione
     setTimeout(() => {
       bombDisplay.removeChild(explosion);
+      bombExploded = false;
     }, 500);
     
     // Aggiorna UI giocatore

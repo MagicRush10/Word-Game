@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Indovina la Parola dalle Emoji</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .game-container {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    #emoji-display {
+      font-size: 3rem;
+      margin: 30px 0;
+      min-height: 60px;
+      padding: 20px;
+      background-color: rgba(30, 30, 30, 0.7);
+      border-radius: 10px;
+      border: 2px solid #FFD700;
+    }
+    
+    #word-display {
+      font-size: 2rem;
+      letter-spacing: 5px;
+      margin: 20px 0;
+      min-height: 50px;
+      color: #FFD700;
+    }
+    
+    #keyboard {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin: 20px auto;
+      max-width: 500px;
+    }
+    
+    .key {
+      width: 40px;
+      height: 40px;
+      font-size: 1.2rem;
+      background-color: #333;
+      color: #FFD700;
+      border: 1px solid #FFD700;
+      border-radius: 5px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    
+    .key:hover {
+      background-color: #444;
+    }
+    
+    .key.used {
+      background-color: #dc3545;
+      cursor: not-allowed;
+    }
+    
+    #message {
+      min-height: 30px;
+      font-size: 1.2rem;
+      margin: 15px;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    
+    #hint-btn, #new-game-btn {
+      padding: 10px 20px;
+      margin: 10px;
+      background-color: transparent;
+      color: #FFD700;
+      border: 1px solid #FFD700;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    #hint-btn:hover, #new-game-btn:hover {
+      background-color: #FFD700;
+      color: #000;
+    }
+    
+    .progress-container {
+      width: 100%;
+      max-width: 300px;
+      margin: 20px auto;
+      background-color: #333;
+      border-radius: 5px;
+      padding: 3px;
+    }
+    
+    #progress-bar {
+      height: 20px;
+      background-color: #28a745;
+      border-radius: 3px;
+      width: 0%;
+      transition: width 0.3s;
+    }
+    
+    .attempts {
+      margin: 15px 0;
+      font-size: 1.1rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Container Pubblicitario -->
+  <div id="ad-container">
+    <!-- Banner Top -->
+    <div class="ad-unit" id="ad-top">
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6771549640814111"></script>
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-TUO_ID"
+           data-ad-slot="1234567890"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+  </div>
+
+  <button class="back-button" onclick="location.href='index.html'">← Torna al menu</button>
+
+  <div class="game-container">
+    <h1>INDOVINA LA PAROLA DALLE EMOJI</h1>
+    
+    <div class="progress-container">
+      <div id="progress-bar"></div>
+    </div>
+    
+    <div class="attempts">
+      Tentativi rimasti: <span id="attempts-left">5</span>
+    </div>
+    
+    <div id="emoji-display"></div>
+    <div id="word-display"></div>
+    
+    <div id="keyboard"></div>
+    
+    <div id="message"></div>
+    
+    <div>
+      <button id="hint-btn">Aiuto</button>
+      <button id="new-game-btn">Nuova Partita</button>
+    </div>
+  </div>
+
+  <script src="gioco5.js"></script>
+</body>
+</html>

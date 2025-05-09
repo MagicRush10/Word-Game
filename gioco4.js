@@ -258,7 +258,7 @@ const categories = [
           <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6771549640814111"></script>
           <ins class="adsbygoogle"
                style="display:inline-block;width:160px;height:600px"
-               data-ad-client="ca-pub-TUO_ID"
+               data-ad-client="ca-pub-6771549640814111"
                data-ad-slot="0987654321"></ins>
           <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
         `;

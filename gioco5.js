@@ -47,7 +47,8 @@ const emojiWords = [
     { word: "ARCOBALENO", emoji: "🌈", hint: "Appare dopo la pioggia" },
     { word: "VENTO", emoji: "💨", hint: "Aria in movimento" },
     { word: "TERREMOTO", emoji: "🌋", hint: "Movimento della terra" },
-    { word: "TEMPORALE", emoji: "⛈️", hint: "Pioggia e fulmini" }
+    { word: "TEMPORALE", emoji: "⛈️", hint: "Pioggia e fulmini" },
+    { word: "DRACULA", emoji: "🧛‍♂️🌑🦇🩸", hint:"Mostro notturno"},
   ];
   
   // Stato del gioco

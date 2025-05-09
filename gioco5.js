@@ -1,10 +1,10 @@
 // Database di parole con relative emoji
 const emojiWords = [
-    { word: "SOLE", emoji: "☀️", hint: "Ci dà luce e calore" },
-    { word: "LUNA", emoji: "🌙", hint: "Brilla di notte" },
-    { word: "MARE", emoji: "🌊", hint: "Grande distesa d'acqua" },
-    { word: "FUOCO", emoji: "🔥", hint: "Produce calore e luce" },
-    { word: "FIORE", emoji: "🌸", hint: "Cresce nei giardini" },
+    { word: "HARRY POTTER", emoji: "☀🐍⚡👓📚", hint: "Mago protagonista di una saga" },
+    { word: "TITANIC", emoji: "🚢🧊💔🎻", hint: "Film tragico" },
+    { word: "KUNG FU PANDA", emoji: "🐼🥋🌀🐉", hint: "Il famoso Guerriero Dragone" },
+    { word: "RE LEONE", emoji: "🦁👑🌅", hint: "Film Disney" },
+    { word: "CENERENTOLA", emoji: "👑👠🎃🕛", hint: "Favola per bambini" },
     { word: "ALBERO", emoji: "🌳", hint: "Ha foglie e radici" },
     { word: "GATTO", emoji: "🐱", hint: "Animale domestico" },
     { word: "CANE", emoji: "🐶", hint: "Miglior amico dell'uomo" },

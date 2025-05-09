@@ -45,8 +45,8 @@ const emojiWords = [
     { word: "PIOGGIA", emoji: "🌧️", hint: "Acqua che cade dal cielo" },
     { word: "ARCOBALENO", emoji: "🌈", hint: "Appare dopo la pioggia" },
     { word: "CORRIERE", emoji: "📦🚚", hint: "Consegna i pacchi" },
-    { word: "TERREMOTO", emoji: "🌋", hint: "Movimento della terra" },
-    { word: "TEMPORALE", emoji: "⛈️", hint: "Pioggia e fulmini" },
+    { word: "GIUDICE", emoji: "⚖️👨‍⚖️", hint: "Pronuncia sentenze" },
+    { word: "DEATHNOTE", emoji: "🍎📓🧠", hint: "L'anime del quaderno della morte" },
     { word: "DRACULA", emoji: "🧛‍♂️🌑🦇🩸", hint:"Mostro notturno"},
   ];
   

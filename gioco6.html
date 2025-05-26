@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Taboo Game</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Stile personalizzato per Taboo */
+    .game-container {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .team-points {
+      display: flex;
+      justify-content: space-around;
+      margin: 20px 0;
+      font-size: 1.5rem;
+    }
+    .team {
+      padding: 10px 20px;
+      border-radius: 10px;
+      background-color: rgba(70, 0, 110, 0.7); /* Viola scuro */
+      color: white;
+    }
+    .card {
+      background: linear-gradient(135deg, #8A2BE2, #9932CC); /* Viola */
+      color: white;
+      padding: 20px;
+      border-radius: 15px;
+      margin: 20px auto;
+      max-width: 500px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+    .target-word {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+    .taboo-words {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin: 20px 0;
+    }
+    .taboo-word {
+      background-color: rgba(255, 255, 255, 0.2);
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-size: 1.1rem;
+    }
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    .btn {
+      padding: 12px 25px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .btn-skip {
+      background-color: #FFA500; /* Arancione */
+      color: #000;
+    }
+    .btn-taboo {
+      background-color: #FF0000; /* Rosso */
+      color: white;
+    }
+    .btn-correct {
+      background-color: #28a745; /* Verde */
+      color: white;
+    }
+    .timer {
+      font-size: 2rem;
+      margin: 20px 0;
+      color: #FFD700;
+    }
+    #start-round {
+      background-color: #FFD700;
+      color: #000;
+      padding: 12px 30px;
+      font-size: 1.2rem;
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="ad-container">
+    <div class="ad-unit" id="ad-top">
+      <!-- Banner Ads -->
+    </div>
+  </div>
+
+  <button class="back-button" onclick="location.href='index.html'">← Torna al menu</button>
+
+  <div class="game-container">
+    <h1>TABOO</h1>
+    
+    <!-- Selezione giocatori (inizialmente visibile) -->
+    <div id="player-setup">
+      <h2>Scegli il numero di squadre:</h2>
+      <button onclick="initGame(2)">2 Squadre</button>
+      <button onclick="initGame(3)">3 Squadre</button>
+      <button onclick="initGame(4)">4 Squadre</button>
+    </div>
+
+    <!-- Area di gioco (inizialmente nascosta) -->
+    <div id="game-area" style="display: none;">
+      <!-- Punteggi squadre -->
+      <div class="team-points" id="team-points"></div>
+
+      <!-- Timer -->
+      <div class="timer" id="timer">01:00</div>
+
+      <!-- Pulsante inizio round -->
+      <button id="start-round" class="btn">PRONTI?</button>
+
+      <!-- Carta Taboo -->
+      <div class="card">
+        <div class="target-word" id="target-word">PAROLA</div>
+        <div class="taboo-words" id="taboo-words">
+          <div class="taboo-word">PAROLA 1</div>
+          <div class="taboo-word">PAROLA 2</div>
+          <div class="taboo-word">PAROLA 3</div>
+          <div class="taboo-word">PAROLA 4</div>
+        </div>
+      </div>
+
+      <!-- Pulsanti azione -->
+      <div class="buttons">
+        <button class="btn btn-skip" id="skip-btn">PASSO (3)</button>
+        <button class="btn btn-taboo" id="taboo-btn">TABOO -1</button>
+        <button class="btn btn-correct" id="correct-btn">INDOVINATA +1</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="gioco6.js"></script>
+</body>
+</html>

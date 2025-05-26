@@ -224,8 +224,9 @@ const correctBtn = document.getElementById("correct-btn");
 
 // Inizializza il gioco
 function initGame(numTeams) {
- document.getElementById('playerSetup').style.display = 'none';
-  document.getElementById('gameArea').style.display = 'block';
+ playerSetup.style.display = 'none';
+  gameArea.style.display = 'block';
+
 
   // Crea le squadre
   teams = [];

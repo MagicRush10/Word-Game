@@ -222,14 +222,16 @@ const skipBtn = document.getElementById("skip-btn");
 const tabooBtn = document.getElementById("taboo-btn");
 const correctBtn = document.getElementById("correct-btn");
 
-// Inizializza il gioco
+
 function initGame(numTeams) {
- playerSetup.style.display = 'none';
+  playerSetup.style.display = 'none';
   gameArea.style.display = 'block';
 
-
-  // Crea le squadre
+  // Reset stato gioco
   teams = [];
+  currentTeam = 0;
+  
+  // Crea squadre
   for (let i = 0; i < numTeams; i++) {
     teams.push({
       name: `Squadra ${i+1}`,
@@ -239,6 +241,10 @@ function initGame(numTeams) {
 
   updateTeamPoints();
   loadNewCard();
+  
+  // Mostra pulsante inizio
+  startRoundBtn.style.display = 'block';
+  timerDisplay.textContent = "01:00";
 }
 
 // Aggiorna i punteggi delle squadre

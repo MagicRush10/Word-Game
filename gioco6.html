@@ -130,15 +130,14 @@
   <div class="game-container">
     <h1>TABOO</h1>
     
-    <!-- Selezione giocatori (inizialmente visibile) -->
-    <div id="player-setup">
-      <h2>Scegli il numero di squadre:</h2>
-      <button onclick="initGame(2)">2 Squadre</button>
-      <button onclick="initGame(3)">3 Squadre</button>
-      <button onclick="initGame(4)">4 Squadre</button>
-    </div>
+<div class="player-setup" id="playerSetup">
+  <h2>Numero di squadre:</h2>
+  <button onclick="initGame(2)">2 Squadre</button>
+  <button onclick="initGame(3)">3 Squadre</button>
+  <button onclick="initGame(4)">4 Squadre</button>
+</div>
 
-    <!-- Area di gioco (inizialmente nascosta) -->
+    <!-- Area di gioco -->
     <div id="game-area" style="display: none;">
       <!-- Punteggi squadre -->
       <div class="team-points" id="team-points"></div>

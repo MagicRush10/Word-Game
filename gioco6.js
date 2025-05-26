@@ -210,7 +210,7 @@ let timeLeft = 60;
 let currentCard;
 
 // Elementi DOM
-const playerSetup = document.getElementById("player-setup");
+const playerSetup = document.getElementById("playerSetup");
 const gameArea = document.getElementById("game-area");
 const teamPointsDisplay = document.getElementById("team-points");
 const timerDisplay = document.getElementById("timer");

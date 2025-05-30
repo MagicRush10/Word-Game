@@ -1,5 +1,5 @@
 // public/client.js
-const socket = io(https://popword-backend.onrender.com);
+const socket = io("https://popword-backend.onrender.com");
 
 // Elementi UI - Schermate
 const welcomeScreen = document.getElementById('welcome-screen');

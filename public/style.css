@@ -1,0 +1,520 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+    color: #FFD700; /* Oro */
+    font-family: 'Merriweather', serif; /* Font più classico */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh; /* Usa min-height per adattarsi al contenuto */
+    overflow-x: hidden; /* Evita scroll orizzontale */
+}
+
+.game-container {
+    background-color: #111; /* Sfondo scuro per il contenitore */
+    padding: 40px;
+    border: 2px solid #FFD700; /* Bordo oro */
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+    width: 95%;
+    max-width: 1200px; /* Aumentato per la chat laterale e spazio */
+    text-align: center;
+    box-sizing: border-box;
+    display: flex; /* Flexbox per disporre contenuto principale e chat */
+    flex-direction: column;
+    position: relative; /* Per posizionare la chat assoluta */
+    animation: fadeIn 1s ease-out; /* Animazione di ingresso */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h1 {
+    color: #FFD700;
+    margin-bottom: 30px;
+    font-size: 2.8em;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+h2, h3 {
+    color: #FFD700;
+}
+
+.screen-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+}
+
+input[type="text"] {
+    padding: 12px;
+    margin: 10px 0;
+    border: 2px solid #FFD700;
+    background-color: #333;
+    color: #FFD700;
+    border-radius: 8px;
+    font-size: 1.1em;
+    width: calc(100% - 24px); /* Pulisci il padding dal width */
+    box-sizing: border-box; /* Include padding e border nella larghezza */
+}
+
+input[type="text"]::placeholder {
+    color: rgba(255, 215, 0, 0.7);
+}
+
+button {
+    background-color: #FFD700;
+    color: #111;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin: 5px;
+}
+
+button:hover {
+    background-color: #e6c200;
+    transform: translateY(-2px);
+}
+
+button:disabled {
+    background-color: #555;
+    color: #999;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.error-message {
+    color: #ff4d4d;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/* Lobby Screen */
+.lobby-info, .player-list-section, .chat-section, .game-controls {
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 600px;
+}
+
+.lobby-info p {
+    font-size: 1.2em;
+}
+
+#current-lobby-id {
+    font-weight: bold;
+    color: #00FFFF; /* Turchese per l'ID */
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    background-color: #222;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    border: 1px solid #444;
+}
+
+.chat-box {
+    background-color: #222;
+    border: 1px solid #444;
+    border-radius: 8px;
+    padding: 10px;
+    height: 200px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.chat-message {
+    margin-bottom: 5px;
+    word-wrap: break-word;
+}
+
+.chat-message strong {
+    color: #FFD700;
+}
+
+.system-message {
+    font-style: italic;
+    color: #ADD8E6; /* Azzurro chiaro */
+}
+
+.my-message {
+    color: #90EE90; /* Verde chiaro */
+}
+
+.other-message {
+    color: #FFC0CB; /* Rosa chiaro */
+}
+
+.chat-input-group {
+    display: flex;
+    gap: 10px;
+}
+
+.chat-input-group input {
+    flex-grow: 1;
+    margin: 0;
+}
+
+.chat-input-group button {
+    flex-shrink: 0;
+    margin: 0;
+}
+
+/* --- NUOVI Stili per Selezione Categorie --- */
+.category-selection-area {
+    background-color: #1a1a1a;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #FFD700;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 600px;
+    text-align: left;
+}
+
+.category-selection-area h3 {
+    margin-top: 0;
+    color: #FFD700;
+}
+
+#category-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+#category-list li {
+    background-color: #333;
+    border: 1px solid #555;
+    border-radius: 5px;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#category-list input[type="checkbox"] {
+    width: auto; /* Annulla la larghezza del 100% */
+    margin: 0;
+    accent-color: #FFD700; /* Colore della spunta */
+}
+
+#selected-categories-display {
+    font-style: italic;
+    color: #ccc;
+    margin-top: 10px;
+}
+
+/* --- Game Screen --- */
+.game-content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 20px; /* Spazio tra le colonne */
+}
+
+.game-main-area {
+    flex: 3; /* Occupa più spazio */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.game-chat-area {
+    flex: 1; /* Occupa meno spazio, sul lato */
+    display: flex;
+    flex-direction: column;
+    min-width: 280px; /* Larghezza minima per la chat */
+}
+
+.leaderboard-area {
+    background-color: #1a1a1a;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #FFD700;
+    width: 100%;
+    max-width: 400px; /* Larghezza fissa per la classifica */
+    margin-bottom: 20px;
+}
+
+#game-leaderboard {
+    list-style: none;
+    padding: 0;
+}
+
+#game-leaderboard li {
+    background-color: #222;
+    padding: 8px;
+    margin-bottom: 4px;
+    border-radius: 4px;
+    border: 1px solid #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.1em;
+}
+
+#game-leaderboard li.current-player {
+    background-color: #3e3e00; /* Sfondo leggermente diverso per il giocatore attuale */
+    border-color: #FFD700;
+    font-weight: bold;
+}
+
+.question-display {
+    background-color: #222;
+    padding: 25px;
+    border-radius: 10px;
+    border: 2px solid #FFD700;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+#time-left {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #00FFFF;
+    margin-bottom: 10px;
+}
+
+#current-question {
+    font-size: 1.6em;
+    font-weight: 700;
+    color: #FFD700;
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+    margin-bottom: 15px;
+}
+
+#question-image-container {
+    max-width: 80%;
+    max-height: 300px;
+    overflow: hidden; /* Nasconde parti dell'immagine che eccedono */
+    display: none; /* Nascosto di default, mostrato se c'è un'immagine */
+    border: 1px solid #555;
+    border-radius: 5px;
+}
+
+#question-image {
+    width: 100%;
+    height: auto;
+    display: block; /* Rimuovi spazio sotto l'immagine */
+}
+
+.answer-area {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.answer-area input[type="text"] {
+    flex-grow: 1;
+    margin: 0;
+}
+
+.answer-area button {
+    flex-shrink: 0;
+    margin: 0;
+}
+
+/* NUOVA LOGICA: Stile per l'input quando la risposta è corretta */
+.answer-area input[type="text"].correct-answer {
+    background-color: #4CAF50; /* Verde */
+    color: white;
+    border-color: #4CAF50;
+}
+
+.hint-area {
+    margin-top: 20px;
+}
+
+#revealed-answer-display, #revealed-player-answer-display {
+    background-color: #333;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px dashed #FFD700;
+    margin-top: 15px;
+    color: #FFD700;
+    font-weight: bold;
+    display: none; /* Nascosto di default */
+}
+
+#revealed-player-answer-display #player-given-answer {
+    font-weight: normal; /* Per differenziare il testo fisso dalla risposta */
+}
+
+/* Modifiche specifiche per la chat di gioco */
+#game-chat-input {
+    width: 70%; /* Aumenta la larghezza dell'input */
+    box-sizing: border-box; /* Include padding e border nella larghezza */
+}
+
+#send-game-chat-btn {
+    width: 28%; /* Diminuisci la larghezza del bottone, lasciando un piccolo margine */
+    box-sizing: border-box; /* Include padding e border nella larghezza */
+    padding: 8px 15px; /* Riduci leggermente il padding del bottone */
+    font-size: 0.9em; /* Riduci la dimensione del font del bottone */
+}
+
+/* --- End Game Screen --- */
+#end-game-screen h3 {
+    margin-top: 20px;
+}
+
+#final-leaderboard {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+#final-leaderboard li {
+    background-color: #222;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    border: 1px solid #444;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2em;
+}
+
+#final-leaderboard li.current-player {
+    background-color: #3e3e00;
+    border-color: #FFD700;
+    font-weight: bold;
+}
+
+
+/* --- Media Queries per Responsiveness --- */
+@media (max-width: 992px) {
+    .game-container {
+        padding: 30px;
+    }
+
+    h1 {
+        font-size: 2.2em;
+    }
+
+    .game-content {
+        flex-direction: column; /* Impila le colonne verticalmente */
+    }
+
+    .game-main-area, .game-chat-area {
+        width: 100%; /* Occupano tutta la larghezza disponibile */
+    }
+
+    .game-main-area {
+        order: 2; /* L'area principale del gioco va sotto la chat */
+    }
+
+    .game-chat-area {
+        order: 1; /* La chat va sopra nell'ordine mobile */
+        margin-bottom: 20px; /* Spazio tra chat e gioco */
+    }
+
+    .leaderboard-area {
+        max-width: unset; /* Rimuovi il max-width fisso */
+        width: 100%; /* Occupano tutta la larghezza */
+        margin-bottom: 20px; /* Spazio sotto la leaderboard */
+    }
+}
+
+@media (max-width: 768px) {
+    .game-container {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 1.8em;
+    }
+
+    button {
+        font-size: 1em;
+        padding: 10px 20px;
+    }
+
+    .lobby-content, .game-content {
+        flex-direction: column; /* Stack lobby/game e chat verticalmente */
+    }
+
+    .lobby-main-area, .lobby-chat-area, .game-main-area, .game-chat-area {
+        min-width: unset; /* Rimuovi la larghezza minima */
+        width: 100%; /* Occupano tutta la larghezza disponibile */
+    }
+
+    /* Per schermi piccoli, la leaderboard resta all'inizio dell'area principale */
+    .leaderboard-area {
+        order: -1; /* Mantenuto per coerenza */
+    }
+
+    .answer-area {
+        flex-direction: column; /* Impila input e bottone */
+        gap: 10px;
+    }
+
+    .answer-area input[type="text"] {
+        width: 100%; /* Occupano tutta la larghezza */
+    }
+}
+
+@media (max-width: 480px) {
+    .game-container {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.5em;
+    }
+
+    input[type="text"] {
+        font-size: 0.9em;
+        padding: 10px;
+    }
+
+    button {
+        font-size: 0.9em;
+        padding: 10px 15px;
+    }
+
+    .chat-box {
+        height: 150px;
+    }
+
+    #time-left {
+        font-size: 2em;
+    }
+
+    #current-question {
+        font-size: 1.3em;
+    }
+
+    #game-chat-input {
+        width: 65%;
+    }
+
+    #send-game-chat-btn {
+        width: 33%;
+    }
+}

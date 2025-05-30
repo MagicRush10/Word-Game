@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PopWord Multiplayer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="/socket.io/socket.io.js"></script>
+    <style>
+        /* Modifiche specifiche per la chat di gioco */
+        #game-chat-input {
+            width: 70%; /* Aumenta la larghezza dell'input */
+            box-sizing: border-box; /* Include padding e border nella larghezza */
+        }
+
+        #send-game-chat-btn {
+            width: 28%; /* Diminuisci la larghezza del bottone, lasciando un piccolo margine */
+            box-sizing: border-box; /* Include padding e border nella larghezza */
+            padding: 8px 15px; /* Riduci leggermente il padding del bottone */
+            font-size: 0.9em; /* Riduci la dimensione del font del bottone */
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>PopSauce Multiplayer</h1>
+
+        <div id="welcome-screen" class="screen-content">
+            <h2>Benvenuto!</h2>
+            <input type="text" id="player-name-input" placeholder="Inserisci il tuo nome" maxlength="20">
+            <div class="button-group">
+                <button id="create-lobby-btn">Crea Nuova Lobby</button>
+            </div>
+            <p>- O -</p>
+            <div class="join-lobby-group">
+                <input type="text" id="join-lobby-id-input" placeholder="ID Lobby esistente">
+                <button id="join-lobby-btn">Unisciti alla Lobby</button>
+            </div>
+            <p id="welcome-error" class="error-message"></p>
+        </div>
+
+        <div id="lobby-screen" class="screen-content" style="display: none;">
+            <h2>Lobby ID: <span id="current-lobby-id"></span></h2>
+            <div class="lobby-content">
+                <div class="lobby-main-area">
+                    <h3>Giocatori nella Lobby:</h3>
+                    <ul id="players-list">
+                        </ul>
+                    <div class="button-group">
+                        <button id="startGameBtn">Avvia Gioco</button>
+                        <p id="startGameInfo" class="info-text"></p>
+                    </div>
+
+                    <div class="category-selection-area">
+                        <h3>Seleziona Categorie (Solo Host):</h3>
+                        <ul id="category-list">
+                            </ul>
+                        <p id="selected-categories-display" class="info-text">Categorie selezionate: Nessuna</p>
+                    </div>
+
+                    <button id="leaveLobbyBtn">Lascia Lobby</button>
+                </div>
+                <div class="lobby-chat-area">
+                    <h3>Chat della Lobby</h3>
+                    <div id="chat-messages" class="chat-box"></div>
+                    <div class="chat-input-group">
+                        <input type="text" id="chat-input" placeholder="Scrivi un messaggio...">
+                        <button id="send-chat-btn">Invia</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="game-screen" class="screen-content" style="display: none;">
+            <h2>In Gioco!</h2>
+            <div class="game-content">
+                <div class="game-main-area">
+                    <div class="question-area">
+                        <p id="time-left">20</p>
+                        <h3 id="current-question">La domanda apparirà qui.</h3>
+                        <div id="question-image-container" style="display: none;">
+                            <img id="question-image" src="" alt="Immagine della domanda" style="max-width: 100%; height: auto; border-radius: 8px;">
+                        </div>
+                    </div>
+                    <div class="answer-area">
+                        <input type="text" id="answer-input" placeholder="La tua risposta...">
+                        <button id="send-answer-btn">Invia Risposta</button>
+                    </div>
+                    <div id="revealed-answer-display" class="answer-reveal" style="display: none;">
+                        La risposta corretta era: <span id="correct-answer"></span>
+                    </div>
+                    <div class="button-group">
+                        <button id="reveal-hint-btn">Mostra Suggerimento</button>
+                    </div>
+                    <div id="revealed-player-answer-display" class="answer-reveal" style="display: none;">
+                        La tua risposta: <span id="player-given-answer"></span>
+                    </div>
+
+                    <div class="leaderboard-area">
+                        <h3>Classifica attuale:</h3>
+                        <ul id="game-leaderboard"></ul>
+                    </div>
+                </div>
+
+                <div class="game-chat-area">
+                    <h3>Chat di Gioco</h3>
+                    <div id="game-chat-messages" class="chat-box"></div>
+                    <div class="chat-input-group">
+                        <input type="text" id="game-chat-input" placeholder="Chat di gioco...">
+                        <button id="send-game-chat-btn">Invia</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="end-game-screen" class="screen-content" style="display: none;">
+            <h2>Gioco Terminato!</h2>
+            <h3 id="end-game-message"></h3>
+            <h3>Classifica Finale:</h3>
+            <ul id="final-leaderboard"></ul>
+            <button id="play-again-btn">Gioca di nuovo</button>
+            <button id="leave-lobby-btn">Lascia Lobby</button>
+            <button id="return-to-lobby-btn">Ritorna alla lobby</button>
+        </div>
+    </div>
+
+    <script src="client.js"></script>
+</body>
+</html>

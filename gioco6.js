@@ -128,10 +128,6 @@ const tabooCards = [
     taboo: ["PANTALONI", "APRIRE", "METALLO", "CHIUDERE"]
   },
   {
-    target: "PAPERCLIP",
-    taboo: ["METALLO", "FOGLI", "UFFICIO", "ATTACCARE"]
-  },
-  {
     target: "IGLOO",
     taboo: ["GHIACCIO", "ESCHIMESE", "CASA", "FREDDO"]
   },

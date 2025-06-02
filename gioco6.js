@@ -8,6 +8,18 @@ const tabooCards = [
     taboo: ["CALCIO", "BASKET", "GIOCO", "GONFIARE"]
   },
   {
+    target: "CARTE",
+    taboo: ["NAPOLETANE", "FRANCESI", "GIOCHI", "TAROCCHI"]
+  },
+  {
+    target: "PUZZA ",
+    taboo: ["ODORE", "CATTIVO", "ANNUSARE", "ASCELLA"]
+  },
+  {
+    target: "INGLESE",
+    taboo: ["REGINA", "LONDRA", "LINGUA", "REGNO UNITO"]
+  },
+  {
     target: "CIOCCOLATO",
     taboo: ["DOLCE", "CACAO", "TAVOLETTA", "FONDENTE"]
   },

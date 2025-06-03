@@ -2,6 +2,7 @@
 const emojiWords = [
     { word: "HARRYPOTTER", emoji: "🧹​⚡👓📚", hint: "Mago protagonista di una saga" },
     { word: "TITANIC", emoji: "🚢🧊💔🎻", hint: "Film tragico" },
+    { word: "MINECRAFT", emoji: "💎⛏️🧱", hint: "Videogioco famoso con i cubi" },
     { word: "KUNGFUPANDA", emoji: "🐼🥋🌀🐉", hint: "Il famoso Guerriero Dragone" },
     { word: "RELEONE", emoji: "🦁👑🌅", hint: "Film Disney." },
     { word: "SPIDERMAN", emoji:"🕷️🧑‍🎓🏙️", hint: "Uno studente che ha acquisito straordinari poteri dopo un “incontro” molto pungente" },

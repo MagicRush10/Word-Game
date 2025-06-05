@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Family Feud</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Stili specifici per Family Feud */
+    body {
+      font-family: 'Merriweather', serif;
+      background-color: var(--black) !important;
+      color: var(--gold);
+      text-align: center;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: var(--light-bg);
+      padding: 30px;
+      border-radius: 15px;
+      border: 2px solid var(--gold);
+      box-shadow: 0 0 20px rgba(255,215,0,0.3);
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      margin-bottom: 20px;
+      color: var(--gold);
+      text-shadow: 0 0 8px rgba(255,215,0,0.4);
+    }
+
+    .player-setup, .game-area {
+      margin-bottom: 20px;
+    }
+
+    .player-setup h2 {
+      font-size: 1.8rem;
+      margin-bottom: 25px;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .menu-button { /* riutilizzo dello stile da index.html */
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      border: 2px solid var(--gold);
+      background: transparent;
+      color: var(--gold);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .menu-button::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background: var(--gold);
+      transition: width 0.3s ease;
+      z-index: -1;
+    }
+
+    .menu-button:hover {
+      color: var(--black);
+    }
+
+    .menu-button:hover::before {
+      width: 100%;
+    }
+
+    .menu-button i {
+      transition: transform 0.3s ease;
+    }
+
+    .menu-button:hover i {
+      transform: scale(1.2);
+    }
+
+    #question-display {
+      font-size: 1.6rem;
+      margin: 25px 0;
+      color: var(--gold);
+      font-weight: bold;
+    }
+
+    #answers-board {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 20px auto;
+      max-width: 500px;
+    }
+
+    .answer-row {
+      display: flex;
+      background-color: rgba(30, 30, 30, 0.7);
+      border: 1px solid var(--dark-gold);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .answer-number {
+      background-color: var(--dark-gold);
+      color: var(--black);
+      padding: 10px 15px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    .answer-text, .answer-points {
+      padding: 10px;
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .answer-text {
+        justify-content: flex-start;
+        flex-basis: 70%;
+        color: rgba(255,255,255,0.8);
+    }
+
+    .answer-points {
+        background-color: rgba(50, 50, 50, 0.7);
+        flex-basis: 30%;
+        color: var(--gold);
+        font-weight: bold;
+        border-left: 1px solid var(--dark-gold);
+    }
+
+    .revealed .answer-text {
+      color: var(--gold);
+      font-weight: bold;
+    }
+    
+    .revealed .answer-points {
+        background-color: var(--gold);
+        color: var(--black);
+    }
+
+
+    #guess-input {
+      width: 80%;
+      max-width: 400px;
+      padding: 12px;
+      margin-top: 20px;
+      border: 2px solid var(--gold);
+      background-color: rgba(20, 20, 20, 0.7);
+      color: var(--gold);
+      border-radius: 8px;
+      font-size: 1.1rem;
+      text-align: center;
+    }
+
+    #guess-button {
+      margin-left: 10px;
+      padding: 12px 25px;
+      font-size: 1.1rem;
+      border: 2px solid var(--gold);
+      background: var(--gold);
+      color: var(--black);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    #guess-button:hover {
+        background: var(--dark-gold);
+        border-color: var(--dark-gold);
+    }
+
+    #player-score-display {
+      margin-top: 30px;
+      font-size: 1.3rem;
+      color: rgba(255,215,0,0.9);
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .player-score {
+      background-color: rgba(30, 30, 30, 0.7);
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: 1px solid var(--dark-gold);
+    }
+    
+    #message {
+      margin-top: 20px;
+      font-size: 1.2rem;
+      min-height: 40px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+      .menu-button {
+        padding: 12px 25px;
+        font-size: 1rem;
+      }
+      #question-display {
+        font-size: 1.4rem;
+      }
+      .answer-number, .answer-text, .answer-points {
+        font-size: 1rem;
+        padding: 8px;
+      }
+      #guess-input {
+        width: 70%;
+        padding: 10px;
+      }
+      #guess-button {
+        padding: 10px 20px;
+      }
+      #player-score-display {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+    
+    .final-message {
+        font-size: 2rem;
+        margin-top: 30px;
+        color: var(--gold);
+        font-family: 'Playfair Display', serif;
+        text-shadow: 0 0 10px rgba(255,215,0,0.6);
+    }
+
+  </style>
+</head>
+<body>
+  <button class="back-button" onclick="window.location.href='index.html'">← Torna al menu</button>
+
+  <div class="container">
+    <h1>Family Feud</h1>
+    
+    <div class="player-setup" id="playerSetup">
+      <h2>Scegli il numero di giocatori:</h2>
+      <div class="buttons">
+        <button class="menu-button" data-players="1"><i class="fas fa-user"></i> 1 Giocatore</button>
+        <button class="menu-button" data-players="2"><i class="fas fa-users"></i> 2 Giocatori</button>
+        <button class="menu-button" data-players="3"><i class="fas fa-users"></i> 3 Giocatori</button>
+        <button class="menu-button" data-players="4"><i class="fas fa-users"></i> 4 Giocatori</button>
+      </div>
+    </div>
+    
+    <div class="game-area" id="gameArea" style="display:none;">
+      <p id="question-display"></p>
+      <div id="answers-board">
+        </div>
+      <input type="text" id="guess-input" placeholder="La tua risposta..." autocomplete="off">
+      <button id="guess-button">Indovina</button>
+      <p id="message"></p>
+      <div id="player-score-display">
+        </div>
+    </div>
+  </div>
+
+  <script src="gioco8.js"></script>
+</body>
+</html>

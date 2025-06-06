@@ -143,6 +143,42 @@ const questions = [{
       text: "MAGO DI OZ",
       points: 50
     }, ],
+  },{
+    question: "Nomina qualcosa che ti farebbe sospettare che la tua casa sia infestata",
+    answers: [{
+      text: "RUMORI",
+      points: 100
+    }, {
+      text: "OGGETTI CHE SI MUOVONO",
+      points: 80
+    }, {
+      text: "LUCI INTERMITTENTI",
+      points: 70
+    }, {
+      text: "PORTE CHE SBATTONO",
+      points: 60
+    }, {
+      text: "OMBRE",
+      points: 50
+    }, ],
+  },{
+    question: "Nomina un posto dove le persone preferiscono sedersi dietro",
+    answers: [{
+      text: "CINEMA",
+      points: 100
+    }, {
+      text: "AUTOBUS",
+      points: 80
+    }, {
+      text: "CHIESA",
+      points: 70
+    }, {
+      text: "MACCHINA",
+      points: 60
+    }, {
+      text: "SCUOLA",
+      points: 50
+    }, ],
   },// Puoi aggiungere altre domande qui
 ];
 

@@ -107,7 +107,7 @@ const questions = [{
       text: "CHIAMATA",
       points: 50
     }, ],
-  },{
+  }, {
     question: "Nomina una persona/cosa che non dovrebbe mai essere lasciata da sola",
     answers: [{
       text: "BAMBINO",
@@ -125,7 +125,7 @@ const questions = [{
       text: "CHIAVI DI CASA",
       points: 50
     }, ],
-  },// Puoi aggiungere altre domande qui
+  }, // Puoi aggiungere altre domande qui
 ];
 
 let players = [];
@@ -134,6 +134,7 @@ let currentQuestion = null;
 let revealedAnswers = [];
 let strikes = 0;
 const MAX_STRIKES = 3;
+let playersFailedCount = 0; // Nuova variabile per tenere traccia dei giocatori che hanno esaurito i tentativi
 
 // Elementi del DOM
 const playerSetupDiv = document.getElementById("playerSetup");
@@ -168,6 +169,7 @@ function setupGame(numPlayers) {
     players.push({
       name: `Giocatore ${i + 1}`,
       score: 0,
+      strikesTaken: 0 // Inizializza i tentativi presi per ogni giocatore
     });
   }
 
@@ -180,9 +182,11 @@ function setupGame(numPlayers) {
 function startRound() {
   currentQuestion = questions[Math.floor(Math.random() * questions.length)];
   revealedAnswers = Array(currentQuestion.answers.length).fill(false);
-  strikes = 0; // Reset strikes for the new round
+  strikes = 0; // Resetta gli strike per il nuovo round
+  playersFailedCount = 0; // Resetta i giocatori che hanno fallito per il nuovo round
+  players.forEach(player => player.strikesTaken = 0); // Resetta i tentativi per tutti i giocatori
   messageDisplay.textContent = `È il turno di ${players[currentPlayerIndex].name}.`;
-  
+
   displayQuestion();
   displayAnswersBoard();
 }
@@ -223,7 +227,7 @@ function displayAnswersBoard() {
 
 function handleGuess() {
   const guess = guessInput.value.trim().toUpperCase();
-  guessInput.value = ""; // Clear input
+  guessInput.value = ""; // Pulisci l'input
 
   if (guess === "") {
     messageDisplay.textContent = "Inserisci una risposta!";
@@ -250,18 +254,34 @@ function handleGuess() {
   } else {
     // Risposta errata o già rivelata
     strikes++;
+    players[currentPlayerIndex].strikesTaken++; // Incrementa i tentativi presi dal giocatore attuale
     messageDisplay.textContent = `Sbagliato! Strike ${strikes}/${MAX_STRIKES}.`;
     if (strikes >= MAX_STRIKES) {
       messageDisplay.textContent += ` Il turno di ${players[currentPlayerIndex].name} è finito.`;
-      passTurn();
+      playersFailedCount++; // Incrementa il contatore dei giocatori che hanno fallito i loro tentativi
+      if (playersFailedCount === players.length) {
+        // Tutti i giocatori hanno esaurito i tentativi
+        endRound(true); // Termina il round e rivela le risposte
+      } else {
+        passTurn(); // Passa il turno al prossimo giocatore disponibile
+      }
     }
   }
 }
 
 function passTurn() {
   currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
-  strikes = 0; // Reset strikes for the next player
-  messageDisplay.textContent += ` Ora tocca a ${players[currentPlayerIndex].name}.`;
+  strikes = 0; // Resetta gli strike per il prossimo giocatore
+  // Salta i giocatori che hanno già esaurito i loro tentativi in questo round
+  while (players[currentPlayerIndex].strikesTaken >= MAX_STRIKES && playersFailedCount < players.length) {
+    currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
+  }
+
+  if (playersFailedCount === players.length) {
+    endRound(true); // Se tutti i giocatori hanno fallito, termina il round e rivela
+  } else {
+    messageDisplay.textContent += ` Ora tocca a ${players[currentPlayerIndex].name}.`;
+  }
 }
 
 function updatePlayerScoresUI() {
@@ -274,10 +294,14 @@ function updatePlayerScoresUI() {
   });
 }
 
-function endRound() {
+function endRound(revealAll = false) {
   const allAnswersFound = revealedAnswers.every((status) => status === true);
 
-  if (allAnswersFound) {
+  if (revealAll) {
+    revealedAnswers.fill(true); // Rivelare tutte le risposte
+    displayAnswersBoard(); // Aggiorna la bacheca per mostrare tutte le risposte
+    messageDisplay.textContent = "Tutti i giocatori hanno esaurito i tentativi. Le risposte sono state rivelate! Nuovo round!";
+  } else if (allAnswersFound) {
     messageDisplay.textContent = "Tutte le risposte sono state trovate! Nuovo round!";
   } else {
     messageDisplay.textContent = "Fine del round. Non tutte le risposte sono state trovate.";
@@ -289,12 +313,12 @@ function endRound() {
     // Semplice per ora: scegli una nuova domanda e resetta
     questions.splice(questions.indexOf(currentQuestion), 1); // Rimuove la domanda usata
     if (questions.length === 0) {
-        messageDisplay.textContent = "Tutte le domande sono state esaurite! Il gioco è finito.";
-        const winner = players.reduce((prev, current) => (prev.score > current.score) ? prev : current);
-        messageDisplay.innerHTML = `<p class="final-message">🎉 ${winner.name} vince con ${winner.score} punti! 🎉</p>`;
-        guessInput.style.display = 'none';
-        guessButton.style.display = 'none';
-        return;
+      messageDisplay.textContent = "Tutte le domande sono state esaurite! Il gioco è finito.";
+      const winner = players.reduce((prev, current) => (prev.score > current.score) ? prev : current);
+      messageDisplay.innerHTML = `<p class="final-message">🎉 ${winner.name} vince con ${winner.score} punti! 🎉</p>`;
+      guessInput.style.display = 'none';
+      guessButton.style.display = 'none';
+      return;
     }
     startRound();
   }, 3000); // Ritardo per leggere il messaggio

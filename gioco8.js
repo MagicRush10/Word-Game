@@ -125,7 +125,25 @@ const questions = [{
       text: "CHIAVI DI CASA",
       points: 50
     }, ],
-  }, // Puoi aggiungere altre domande qui
+  }, {
+    question: "Nomina il nome di un mago famoso",
+    answers: [{
+      text: "HARRY POTTER",
+      points: 100
+    }, {
+      text: "MAGO MERLINO",
+      points: 80
+    }, {
+      text: "GANDALF",
+      points: 70
+    }, {
+      text: "DOTTOR STRANGE",
+      points: 60
+    }, {
+      text: "MAGO DI OZ",
+      points: 50
+    }, ],
+  },// Puoi aggiungere altre domande qui
 ];
 
 let players = [];

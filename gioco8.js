@@ -8,7 +8,7 @@ const questions = [{
       text: "GATTO",
       points: 80
     }, {
-      text: "PESCE ROSSO",
+      text: "PESCE",
       points: 60
     }, {
       text: "UCCELLO",
@@ -68,13 +68,13 @@ const questions = [{
       text: "CALCIO",
       points: 65
     }, {
-      text: "PALLACANESTRO",
+      text: "BASKET",
       points: 55
     }, ],
   }, {
     question: "Cose che fai prima di dormire:",
     answers: [{
-      text: "LAVARSI I DENTI",
+      text: "LAVARE I DENTI",
       points: 100
     }, {
       text: "LEGGERE",
@@ -89,7 +89,43 @@ const questions = [{
       text: "PREPARARE I VESTITI PER DOMANI",
       points: 50
     }, ],
-  }, // Puoi aggiungere altre domande qui
+  }, {
+    question: "Nomina le ragioni per cui una persona potrebbe svegliarsi alle 2 di notte",
+    answers: [{
+      text: "ANDARE IN BAGNO",
+      points: 100
+    }, {
+      text: "INCUBO",
+      points: 80
+    }, {
+      text: "SENTIRE UN RUMORE",
+      points: 70
+    }, {
+      text: "SENTIRE CALDO O FREDDO",
+      points: 60
+    }, {
+      text: "CHIAMATA",
+      points: 50
+    }, ],
+  },{
+    question: "Nomina una persona/cosa che non dovrebbe mai essere lasciata da sola",
+    answers: [{
+      text: "BAMBINO",
+      points: 100
+    }, {
+      text: "FIAMMA ACCESA",
+      points: 80
+    }, {
+      text: "CANE",
+      points: 70
+    }, {
+      text: "SOLDI",
+      points: 60
+    }, {
+      text: "CHIAVI DI CASA",
+      points: 50
+    }, ],
+  },// Puoi aggiungere altre domande qui
 ];
 
 let players = [];

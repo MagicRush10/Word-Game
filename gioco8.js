@@ -179,6 +179,78 @@ const questions = [{
       text: "SCUOLA",
       points: 50
     }, ],
+  },{
+    question: "Nomina i cibi italiani più famosi nel mondo",
+    answers: [{
+      text: "PIZZA",
+      points: 100
+    }, {
+      text: "LASAGNA",
+      points: 80
+    }, {
+      text: "CARBONARA",
+      points: 70
+    }, {
+      text: "PESTO",
+      points: 60
+    }, {
+      text: "TORTELLINI",
+      points: 50
+    }, ],
+  },{
+    question: "Nomina i supereroi più famosi nel mondo",
+    answers: [{
+      text: "SPIDERMAN",
+      points: 100
+    }, {
+      text: "WONDER WOMAN",
+      points: 80
+    }, {
+      text: "BATMAN",
+      points: 70
+    }, {
+      text: "IRON MAN",
+      points: 60
+    }, {
+      text: "SUPERMAN",
+      points: 50
+    }, ],
+  },{
+    question: "Nomina i pokemon più popolari al mondo",
+    answers: [{
+      text: "GRENINJA",
+      points: 100
+    }, {
+      text: "LUCARIO",
+      points: 80
+    }, {
+      text: "MIMIKYU",
+      points: 70
+    }, {
+      text: "CHARIZARD",
+      points: 60
+    }, {
+      text: "PIKACHU",
+      points: 50
+    }, ],
+  },{
+    question: "Nomina i videogiochi più venduti nella storia",
+    answers: [{
+      text: "TETRIS",
+      points: 100
+    }, {
+      text: "MINECRAFT",
+      points: 80
+    }, {
+      text: "GTA 5",
+      points: 70
+    }, {
+      text: "WII SPORTS",
+      points: 60
+    }, {
+      text: "PUBG",
+      points: 50
+    }, ],
   },// Puoi aggiungere altre domande qui
 ];
 

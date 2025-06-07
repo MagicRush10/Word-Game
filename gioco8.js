@@ -500,7 +500,7 @@ const questions = [{
       text: "SUCCO DI FRUTTA",
       points: 60
     }, {
-      text: "Tè",
+      text: "TÈ",
       points: 50
     }, ],
   },{

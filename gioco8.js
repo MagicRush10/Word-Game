@@ -54,7 +54,7 @@ const questions = [{
       points: 60
     }, ],
   }, {
-    question: "Sport Olimpici:",
+    question: "Sport Olimpici più famosi",
     answers: [{
       text: "ATLETICA",
       points: 95
@@ -249,6 +249,384 @@ const questions = [{
       points: 60
     }, {
       text: "PUBG",
+      points: 50
+    }, ],
+  },{
+    question: "Nomina i film con il maggior incasso della storia",
+    answers: [{
+      text: "AVATAR",
+      points: 100
+    }, {
+      text: "AVENGERS ENDGAME",
+      points: 80
+    }, {
+      text: "AVATAR LA VIA DELL'ACQUA",
+      points: 70
+    }, {
+      text: "TITANIC",
+      points: 60
+    }, {
+      text: "NE ZHA 2",
+      points: 50
+    }, ],
+  },{
+    question: "Nomina qualcosa associato con i vampiri",
+    answers: [{
+      text: "TWILIGHT",
+      points: 100
+    }, {
+      text: "SANGUE",
+      points: 80
+    }, {
+      text: "AGLIO",
+      points: 70
+    }, {
+      text: "PIPISTRELLO",
+      points: 60
+    }, {
+      text: "DRACULA",
+      points: 50
+    }, ],
+  },{
+    question: "Motivi per cui arrivi tardi a lavoro",
+    answers: [{
+      text: "TRAFFICO",
+      points: 100
+    }, {
+      text: "SVEGLIATO TARDI",
+      points: 80
+    }, {
+      text: "MEZZI PUBBLICI IN RITARDO",
+      points: 70
+    }, {
+      text: "BAMBINI DA PORTARE A SCUOLA",
+      points: 60
+    }, {
+      text: "GUASTO ALL'AUTO",
+      points: 50
+    }, ],
+  },{
+    question: "Nomina gli oggetti che porti in spiaggia",
+    answers: [{
+      text: "TELO",
+      points: 100
+    }, {
+      text: "COSTUME",
+      points: 80
+    }, {
+      text: "CREMA SOLARE",
+      points: 70
+    }, {
+      text: "CIABATTE",
+      points: 60
+    }, {
+      text: "OCCHIALI DA SOLE",
+      points: 50
+    }, ],
+  },{
+    question: "Nomina le 5 password più usate",
+    answers: [{
+      text: "123456",
+      points: 100
+    }, {
+      text: "123456789",
+      points: 80
+    }, {
+      text: "PASSWORD",
+      points: 70
+    }, {
+      text: "CIAO",
+      points: 60
+    }, {
+      text: "QWERTY",
+      points: 50
+    }, ],
+  },{
+    question: "Nomina le cose che una persona dimentica spesso",
+    answers: [{
+      text: "CHIAVI",
+      points: 100
+    }, {
+      text: "CELLULARE",
+      points: 80
+    }, {
+      text: "PORTAFOGLIO",
+      points: 70
+    }, {
+      text: "COMPLEANNO",
+      points: 60
+    }, {
+      text: "PARCHEGGIO",
+      points: 50
+    }, ],
+  },{
+    question: "Nomina i luoghi dove devi fare silenzio",
+    answers: [{
+      text: "BIBLIOTECA",
+      points: 100
+    }, {
+      text: "CHIESA",
+      points: 80
+    }, {
+      text: "CINEMA",
+      points: 70
+    }, {
+      text: "OSPEDALE",
+      points: 60
+    }, {
+      text: "SCUOLA",
+      points: 50
+    }, ],
+  },{
+    question: "Nomina i lavori che un bambino sogna di fare",
+    answers: [{
+      text: "CALCIATORE",
+      points: 100
+    }, {
+      text: "VETERINARIO",
+      points: 80
+    }, {
+      text: "ASTRONAUTA",
+      points: 70
+    }, {
+      text: "DOTTORE",
+      points: 60
+    }, {
+      text: "INSEGNANTE",
+      points: 50
+    }, ],
+  },{
+    question: "Nomina qualcosa di appiccicoso",
+    answers: [{
+      text: "COLLA",
+      points: 100
+    }, {
+      text: "MIELE",
+      points: 80
+    }, {
+      text: "GOMMA DA MASTICARE",
+      points: 70
+    }, {
+      text: "CARAMELLA",
+      points: 60
+    }, {
+      text: "NASTRO ADESIVO",
+      points: 50
+    }, ],
+  },{
+    question: "Nomina le cose che le persone collezionano",
+    answers: [{
+      text: "FRANCOBOLLI",
+      points: 100
+    }, {
+      text: "MONETE",
+      points: 80
+    }, {
+      text: "FIGURINE",
+      points: 70
+    }, {
+      text: "LIBRI",
+      points: 60
+    }, {
+      text: "SCARPE",
+      points: 50
+    }, ],
+  },{
+    question: "Nomina qualcosa che vola",
+    answers: [{
+      text: "UCCELLO",
+      points: 100
+    }, {
+      text: "AEREO",
+      points: 80
+    }, {
+      text: "APE",
+      points: 70
+    }, {
+      text: "FARFALLA",
+      points: 60
+    }, {
+      text: "AQUILONE",
+      points: 50
+    }, ],
+  },{
+    question: "Nomina qualcosa che fa molto rumore",
+    answers: [{
+      text: "CAMPANELLO",
+      points: 100
+    }, {
+      text: "SVEGLIA",
+      points: 80
+    }, {
+      text: "MOTORE",
+      points: 70
+    }, {
+      text: "CELLULARE",
+      points: 60
+    }, {
+      text: "BAMBINI",
+      points: 50
+    }, ],
+  },{
+    question: "Nomina le paure più diffuse",
+    answers: [{
+      text: "FANTASMI",
+      points: 100
+    }, {
+      text: "BUIO",
+      points: 80
+    }, {
+      text: "RAGNI",
+      points: 70
+    }, {
+      text: "SERPENTI",
+      points: 60
+    }, {
+      text: "FILM HORROR",
+      points: 50
+    }, ],
+  },{
+    question: "Nomina le bevande analcoliche più bevute",
+    answers: [{
+      text: "ACQUA",
+      points: 100
+    }, {
+      text: "COCA COLA",
+      points: 80
+    }, {
+      text: "ARANCIATA",
+      points: 70
+    }, {
+      text: "SUCCO DI FRUTTA",
+      points: 60
+    }, {
+      text: "Tè",
+      points: 50
+    }, ],
+  },{
+    question: "Nomina le festività festeggiate tipicamente in famiglia",
+    answers: [{
+      text: "NATALE",
+      points: 100
+    }, {
+      text: "PASQUA",
+      points: 80
+    }, {
+      text: "COMPLEANNO",
+      points: 70
+    }, {
+      text: "CAPODANNO",
+      points: 60
+    }, {
+      text: "FERRAGOSTO",
+      points: 50
+    }, ],
+},{
+    question: "Nomina i superpoteri che la gente vorrebbe avere",
+    answers: [{
+      text: "INVISIBILITà",
+      points: 100
+    }, {
+      text: "VOLARE",
+      points: 80
+    }, {
+      text: "LEGGERE LA MENTE",
+      points: 70
+    }, {
+      text: "TELETRASPORTO",
+      points: 60
+    }, {
+      text: "SUPER FORZA",
+      points: 50
+    }, ],
+  },{
+    question: "Nomina qualcosa che puzza",
+    answers: [{
+      text: "ASCELLE",
+      points: 100
+    }, {
+      text: "SCARPE",
+      points: 80
+    }, {
+      text: "FORMAGGIO",
+      points: 70
+    }, {
+      text: "SPAZZATURA",
+      points: 60
+    }, {
+      text: "CALZINI",
+      points: 50
+    }, ],
+  },{
+    question: "Nomina qualcosa di freddo",
+    answers: [{
+      text: "GHIACCIO",
+      points: 100
+    }, {
+      text: "NEVE",
+      points: 80
+    }, {
+      text: "GELATO",
+      points: 70
+    }, {
+      text: "FREEZER",
+      points: 60
+    }, {
+      text: "ACQUA",
+      points: 50
+    }, ],
+  },{
+    question: "Nomina qualcosa che si rompe facilmente",
+    answers: [{
+      text: "VETRO",
+      points: 100
+    }, {
+      text: "UOVO",
+      points: 80
+    }, {
+      text: "VASO",
+      points: 70
+    }, {
+      text: "TELEFONO",
+      points: 60
+    }, {
+      text: "PIATTO",
+      points: 50
+    }, ],
+  },{
+    question: "Nomina qualcosa che rovina il primo appuntamento",
+    answers: [{
+      text: "EX",
+      points: 100
+    }, {
+      text: "ALITO",
+      points: 80
+    }, {
+      text: "RITARDO",
+      points: 70
+    }, {
+      text: "TELEFONO",
+      points: 60
+    }, {
+      text: "MALEDUCAZIONE",
+      points: 50
+    }, ],
+  },{
+    question: "Nomina qualcosa che puoi lanciare",
+    answers: [{
+      text: "PALLA",
+      points: 100
+    }, {
+      text: "SASSO",
+      points: 80
+    }, {
+      text: "CARTA",
+      points: 70
+    }, {
+      text: "CUSCINO",
+      points: 60
+    }, {
+      text: "INSULTO",
       points: 50
     }, ],
   },// Puoi aggiungere altre domande qui

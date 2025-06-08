@@ -524,7 +524,7 @@ const questions = [{
 },{
     question: "Nomina i superpoteri che la gente vorrebbe avere",
     answers: [{
-      text: "INVISIBILITà",
+      text: "INVISIBILITÀ",
       points: 100
     }, {
       text: "VOLARE",

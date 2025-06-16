@@ -19,7 +19,7 @@ const dizionario = [
   "PUZZA", "FUGGI", "BOZZA", "BOZZE", "DIGHE", "LAGHI", "GHANA", "LEGGE", "LEGGI", "COZZA",
   "GARZA", "BLITZ", "BUFFA", "BUFFE", "BUCHI", "FLASH", "HOBBY", "BAGNO", "BAGNI", "BELGA",
   "ACQUA", "BABBO", "BABBI", "BAFFI", "BEFFA", "BEFFE", "ADAGI", "BEIGE", "DAZIO", "BANDA",
-  "BANDE", "BELVA", "BELVE", "AGLIO", "AGILE", "AGILI", "ADDIO", "AMBRA", "AMBRE", "ABILE",
+  "BANDE", "BELVA", "BELVE", "AGLIO", "AGILE", "AGILI", "ADDIO", "AMBRA", "AMBRE", "ABILE"
 ];
 
 // Sceglie una parola a caso

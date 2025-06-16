@@ -1,8 +1,9 @@
 // Configurazione del gioco
 const categories = [
-    "Città italiane", "Film", "Animali", "Colori", "Nomi Maschili", "Nomi Femminili", 
-    "Sport", "Cibo", "Nazioni", "Videogiochi", "Professioni", "Marche di auto",
-    "Fiori", "Strumenti musicali", "Scuola", "Mestieri", "Mezzi di trasporto"
+    "Città italiane", "Film", "Animali", "Colori", "Nomi Maschili", "Nomi Femminili","Parole di 3 lettere","Oggetti che trovi in casa","Parole palindrome",
+    "Sport", "Cibo", "Nazioni", "Videogiochi", "Professioni", "Marche di auto","Parole di 5 lettere","Parole di 4 lettere","Parole che iniziano e finiscono con la stessa lettera",
+    "Fiori", "Strumenti musicali", "Scuola", "Mestieri", "Mezzi di trasporto","Parole con doppia lettera","Parole straniere usate in italiano","Parole con significati doppi",
+    "Parole che terminano in -one","Parole che terminano in -ino","Sinonimi di bello","Verbi all'infinito"
   ];
   
   let currentCategory = "";

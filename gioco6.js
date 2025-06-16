@@ -206,6 +206,206 @@ const tabooCards = [
   {
     target: "OMBRELLONE",
     taboo: ["SPIAGGIA", "SOLE", "OMBRA", "PIANTARE"]
+  },
+  {
+    "target": "TELEVISIONE",
+    "taboo": ["SCHERMO", "CANALE", "PROGRAMMA", "TELECOMANDO"]
+  },
+  {
+    "target": "PENNA",
+    "taboo": ["INCHIOSTRO", "SCRIVERE", "CARTA", "APPUNTI"]
+  },
+  {
+    "target": "TASTIERA",
+    "taboo": ["LETTERE", "COMPUTER", "SCRIVERE", "DIGITARE"]
+  },
+  {
+    "target": "MARMELLATA",
+    "taboo": ["FRUTTA", "DOLCE", "PANE", "SPALMARE"]
+  },
+  {
+    "target": "ASPIRAPOLVERE",
+    "taboo": ["PULIRE", "POLVERE", "CASA", "MOTORE"]
+  },
+  {
+    "target": "SEMÁFORO",
+    "taboo": ["ROSSO", "VERDE", "STRADA", "INCROCIO"]
+  },
+  {
+    "target": "SPAZZOLINO",
+    "taboo": ["DENTI", "IGIENE", "DENTIFRICIO", "BOCCA"]
+  },
+  {
+    "target": "TRENINO",
+    "taboo": ["GIOCATTOLO", "BINARI", "CARROZZE", "LOCOTOMOTIVA"]
+  },
+  {
+    "target": "FRECCIA",
+    "taboo": ["ARCO", "DIREZIONE", "SEGNALE", "BERSAGLIO"]
+  },
+  {
+    "target": "SCARPONI",
+    "taboo": ["MONTAGNA", "NEVE", "CALZATURE", "TREKKING"]
+  },
+  {
+    "target": "LANTERNA",
+    "taboo": ["LUCE", "NOTTE", "CARTA", "ILLUMINARE"]
+  },
+  {
+    "target": "PALLONCINO",
+    "taboo": ["ARIA", "FESTA", "SCOPPIA", "GONFIARE"]
+  },
+  {
+    "target": "VETRO",
+    "taboo": ["FRAGILE", "FINESTRA", "TRASPARENTE", "ROMPERE"]
+  },
+  {
+    "target": "TERMOMETRO",
+    "taboo": ["FEBBRE", "MISURARE", "GRADI", "MERCURIO"]
+  },
+  {
+    "target": "SCIVOLO",
+    "taboo": ["GIOCO", "PARCO", "CADERE", "SALIRE"]
+  },
+  {
+    "target": "LAMPADINA",
+    "taboo": ["LUCE", "VITE", "ELETTRICITÀ", "INTERRUTTORE"]
+  },
+  {
+    "target": "RAZZO",
+    "taboo": ["SPAZIO", "NASA", "ASTRONAUTA", "DECOLLO"]
+  },
+  {
+    "target": "FERRO DA STIRO",
+    "taboo": ["PIEGHE", "CALORE", "CAMICIA", "VAPORE"]
+  },
+  {
+    "target": "CARAMELLA",
+    "taboo": ["DOLCE", "ZUCCHERO", "GOLOSO", "SUCCO"]
+  },
+  {
+    "target": "BARA",
+    "taboo": ["MORTO", "FUNERALE", "LEGNO", "TOMBA"]
+  },
+  {
+    "target": "CERVELLO",
+    "taboo": ["TESTA", "PENSARE", "NEURONI", "MEMORIA"]
+  },
+  {
+    "target": "NAVIGATORE",
+    "taboo": ["STRADA", "GPS", "AUTO", "INDICAZIONI"]
+  },
+  {
+    "target": "LAVAGNA",
+    "taboo": ["GESSO", "SCUOLA", "CANCELLARE", "SCRIVERE"]
+  },
+  {
+    "target": "CIRCO",
+    "taboo": ["CLOWN", "ACROBATI", "TENDONE", "NUMERO"]
+  },
+  {
+    "target": "MOSAICO",
+    "taboo": ["TASSELLI", "COLORI", "ARTE", "DECORAZIONE"]
+  },
+  {
+    "target": "CASTELLO",
+    "taboo": ["TORRI", "PRINCIPE", "MEDIOEVO", "MURA"]
+  },
+  {
+    "target": "DADO",
+    "taboo": ["NUMERO", "GIOCO", "CUBO", "LANCIO"]
+  },
+  {
+    "target": "PINZETTA",
+    "taboo": ["SOPRACCIGLIA", "PELO", "STRAPPARE", "METALLO"]
+  },
+  {
+    "target": "FAGIANO",
+    "taboo": ["UCCELLO", "CACCIA", "COLORATO", "SELVA"]
+  },
+  {
+    "target": "TORCIA",
+    "taboo": ["LUCE", "PILE", "NOTTE", "BUIO"]
+  },
+  {
+    "target": "TRECCIA",
+    "taboo": ["CAPELLI", "ACCONCIATURA", "LUNGHI", "INTRECCIARE"]
+  },
+  {
+    "target": "ZAINO",
+    "taboo": ["SCUOLA", "SPALLE", "LIBRI", "PORTARE"]
+  },
+  {
+    "target": "CASSAFORTE",
+    "taboo": ["SOLDI", "COMBINAZIONE", "CHIAVE", "BANCA"]
+  },
+  {
+    "target": "MOSAICO",
+    "taboo": ["PIASTRELLE", "COLORI", "ARTE", "VETRO"]
+  },
+  {
+    "target": "FORCHETTA",
+    "taboo": ["MANGIARE", "DENTI", "POSATA", "PASTA"]
+  },
+  {
+    "target": "GHIACCIOLO",
+    "taboo": ["ESTATE", "FREDDO", "STICK", "SCIOLI"]
+  },
+  {
+    "target": "MUMMIA",
+    "taboo": ["EGITTO", "BENDAGGI", "TOMBA", "ANTICO"]
+  },
+  {
+    "target": "TEATRO",
+    "taboo": ["SPETTACOLO", "ATTORE", "PALCO", "PUBBLICO"]
+  },
+  {
+    "target": "BARAONDA",
+    "taboo": ["CASINO", "CONFUSIONE", "RUMORE", "CAOS"]
+  },
+  {
+    "target": "MELOGRANO",
+    "taboo": ["SEMI", "ROSSO", "FRUTTO", "INVERNO"]
+  },
+  {
+    "target": "PAPERA",
+    "taboo": ["ANIMALE", "STAGNO", "PIUMA", "QUACK"]
+  },
+  {
+    "target": "TRAMPOLINO",
+    "taboo": ["SALTO", "PISCINA", "ACQUA", "TUFFO"]
+  },
+  {
+    "target": "SABBIA",
+    "taboo": ["SPIAGGIA", "GRANI", "CASTELLO", "MARE"]
+  },
+  {
+    "target": "COPERTA",
+    "taboo": ["LETTO", "FREDDO", "LANA", "SONNO"]
+  },
+  {
+    "target": "STIVALE",
+    "taboo": ["SCARPA", "PIOGGIA", "ALTO", "FANGO"]
+  },
+  {
+    "target": "FUCILE",
+    "taboo": ["ARMA", "SPARARE", "PROIETTILE", "CACCIA"]
+  },
+  {
+    "target": "MARIONETTA",
+    "taboo": ["BURATTINO", "FILI", "MUOVERE", "SPETTACOLO"]
+  },
+  {
+    "target": "OROLOGIAIO",
+    "taboo": ["AGGIUSTARE", "LANCETTE", "TEMPO", "LAVORO"]
+  },
+  {
+    "target": "PARAPENDIO",
+    "taboo": ["VOLO", "MONTAGNA", "SPORT", "ARIA"]
+  },
+  {
+    "target": "TOMBOLA",
+    "taboo": ["NUMERI", "NATALE", "CARTELLA", "ESTRAZIONE"]
   }
 ];
 

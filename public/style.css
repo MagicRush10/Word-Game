@@ -307,8 +307,8 @@ li {
 }
 
 #question-image-container {
-    max-width: 95%;
-    max-height: 500px;
+    max-width: 85%;
+    max-height: 700px;
     overflow: hidden; /* Nasconde parti dell'immagine che eccedono */
     display: none; /* Nascosto di default, mostrato se c'è un'immagine */
     border: 1px solid #555;

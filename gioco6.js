@@ -3,6 +3,46 @@ const tabooCards = [
     target: "TELEFONO",
     taboo: ["CELLULARE", "CHIAMATA", "SQUILLO", "SMARTPHONE"]
   },
+   {
+    target: "ANTICIPO",
+    taboo: ["RITARDO", "PRIMA", "PRESTO", "ARRIVARE"]
+  },
+   {
+    target: "ANTIDOTO",
+    taboo: ["VELENO", "RIMEDIO", "MEDICINA", "CURA"]
+  },
+   {
+    target: "ALTER EGO",
+    taboo: ["VICE", "PERSONA", "SOSTITUTO", "OPPOSTO"]
+  },
+   {
+    target: "ROMA",
+    taboo: ["CITTA'", "COLOSSEO", "LAZIO", "ITALIA"]
+  },
+   {
+    target: "ABBRACCIO",
+    taboo: ["STRINGERE", "AFFETTO", "COCCOLARE", "COMPRENDERE"]
+  },
+   {
+    target: "BANANA",
+    taboo: ["FRUTTO", "GIALLO", "BUCCIA", "SCIVOLARE"]
+  },
+   {
+    target: "GIRAFFA",
+    taboo: ["COLLO", "AFRICA", "GRANDE", "ERBIVORO"]
+  },
+   {
+    target: "CANE",
+    taboo: ["SCODINZOLARE", "GUINZAGLIO", "ABBAIARE", "CUCCIA"]
+  },
+   {
+    target: "SORELLA",
+    taboo: ["FRATELLO", "FAMIGLIA", "MAMMA", "PAPA'"]
+  },
+   {
+    target: "ANELLO",
+    taboo: ["DITO", "ORO", "PREZIOSO", "ANULARE"]
+  },
   {
     target: "PALLA",
     taboo: ["CALCIO", "BASKET", "GIOCO", "GONFIARE"]

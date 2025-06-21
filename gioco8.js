@@ -629,6 +629,96 @@ const questions = [{
       text: "INSULTO",
       points: 50
     }, ],
+  },{
+    question: "Nomina qualcosa che trovi in frigorifero",
+    answers: [{
+      text: "LATTE",
+      points: 100
+    }, {
+      text: "UOVO",
+      points: 80
+    }, {
+      text: "BURRO",
+      points: 70
+    }, {
+      text: "ACQUA",
+      points: 60
+    }, {
+      text: "FORMAGGIO",
+      points: 50
+    }, ],
+  },{
+    question: "Nomina un animale che trovi in giungla",
+    answers: [{
+      text: "LEONE",
+      points: 100
+    }, {
+      text: "SCIMMIA",
+      points: 80
+    }, {
+      text: "TIGRE",
+      points: 70
+    }, {
+      text: "ELEFANTE",
+      points: 60
+    }, {
+      text: "SERPENTE",
+      points: 50
+    }, ],
+  },{
+    question: "Nomina una parte del corpo che si può slogare",
+    answers: [{
+      text: "CAVIGLIA",
+      points: 100
+    }, {
+      text: "POLSO",
+      points: 80
+    }, {
+      text: "SPALLA",
+      points: 70
+    }, {
+      text: "DITO",
+      points: 60
+    }, {
+      text: "GINOCCHIO",
+      points: 50
+    }, ],
+  },{
+    question: "Nomina qualcosa che trovi in bagno",
+    answers: [{
+      text: "SPAZZOLINO",
+      points: 100
+    }, {
+      text: "SAPONE",
+      points: 80
+    }, {
+      text: "ASCIUGAMANO",
+      points: 70
+    }, {
+      text: "CARTA IGIENICA",
+      points: 60
+    }, {
+      text: "SHAMPOO",
+      points: 50
+    }, ],
+  },{
+    question: "Nomina qualcosa trovi al parco giochi",
+    answers: [{
+      text: "ALTALENA",
+      points: 100
+    }, {
+      text: "SCIVOLO",
+      points: 80
+    }, {
+      text: "BAMBINI",
+      points: 70
+    }, {
+      text: "PANCHINA",
+      points: 60
+    }, {
+      text: "GIOSTRA",
+      points: 50
+    }, ],
   },// Puoi aggiungere altre domande qui
 ];
 

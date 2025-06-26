@@ -1,24 +1,150 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Blog - The Word Games</title>
-  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f9f9f9;
+      margin: 0;
+      padding: 0 20px 40px;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      margin: 40px 0 30px;
+      color: #222;
+      font-weight: 700;
+      font-size: 2.5rem;
+      letter-spacing: 1px;
+    }
+    .posts-list {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 24px;
+    }
+    .post-item {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 3px 6px rgb(0 0 0 / 0.1);
+      padding: 20px 24px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .post-item:hover {
+      box-shadow: 0 8px 20px rgb(0 0 0 / 0.15);
+      transform: translateY(-6px);
+    }
+    .post-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #0b72b9;
+      text-decoration: none;
+    }
+    .post-title:hover {
+      text-decoration: underline;
+    }
+    .post-date {
+      font-size: 0.9rem;
+      color: #777;
+      margin-bottom: 12px;
+      font-style: italic;
+    }
+    .post-excerpt {
+      font-size: 1rem;
+      line-height: 1.4;
+      color: #555;
+      flex-grow: 1;
+    }
+    .back-link {
+      max-width: 900px;
+      margin: 40px auto 0;
+      display: block;
+      text-align: center;
+      font-size: 1rem;
+      color: #0b72b9;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    .back-link:hover {
+      color: #074a73;
+      text-decoration: underline;
+    }
+    @media (max-width: 480px) {
+      body {
+        padding: 0 12px 30px;
+      }
+      h1 {
+        font-size: 2rem;
+        margin: 30px 0 20px;
+      }
+      .posts-list {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+    }
+  </style>
 </head>
 <body>
   <h1>Il nostro Blog</h1>
-  <ul>
-    <li><a href="post1.html">5 Strategie per Vincere a Wordle</a></li>
-    <li><a href="post2.html">Perché i giochi di parole fanno bene alla mente</a></li>
-    <li><a href="post3.html">Tapple: Rapidità e Creatività in un Gioco di Parole</a></li>
-    <li><a href="post4.html">Cruci-Puzzle: Trova le Parole Nascoste nella Griglia</a></li>
-    <li><a href="post5.html">Ka-Boom, il gioco della bomba!</a></li>
-    <li><a href="post6.html">Indovina le Emoji: Un Gioco di Parole a Base di Icone!</a></li>
-    <li><a href="post7.html">Taboo:il gioco delle parole vietate!</a></li>
-    <li><a href="post8.html">PopWord: il gioco delle sfide online!</a></li>
-    <li><a href="post9.html">The Top 5, il gioco dei sondaggi!</a></li>
-    
-    </ul>
-  <a href="/">← Torna alla home</a>
+  <ul class="posts-list">
+    <li class="post-item">
+      <a href="post1.html" class="post-title">5 Strategie per Vincere a Wordle</a>
+      <div class="post-date">9 Maggio 2025</div>
+      <p class="post-excerpt">Scopri come migliorare il tuo punteggio a Wordle con 5 strategie semplici ma efficaci per scoprire la parola misteriosa.</p>
+    </li>
+    <li class="post-item">
+      <a href="post2.html" class="post-title">Perché i giochi di parole fanno bene alla mente</a>
+      <div class="post-date">9 Maggio 2025</div>
+      <p class="post-excerpt">Un approfondimento sui benefici cognitivi dei giochi di parole: stimolano memoria, vocabolario, logica e riducono lo stress.</p>
+    </li>
+    <li class="post-item">
+      <a href="post3.html" class="post-title">Tapple: Rapidità e Creatività in un Gioco di Parole</a>
+      <div class="post-date">9 Maggio 2025</div>
+      <p class="post-excerpt">Metti alla prova la tua prontezza mentale con Tapple: un gioco a tempo che sfida la tua rapidità e fantasia con parole e categorie.</p>
+    </li>
+    <li class="post-item">
+      <a href="post4.html" class="post-title">Cruci-Puzzle: Trova le Parole Nascoste nella Griglia</a>
+      <div class="post-date">9 Maggio 2025</div>
+      <p class="post-excerpt">Allenati con Cruci-Puzzle, trova tutte le parole nascoste nella griglia prima che scada il tempo. Ottimo per vocabolario e osservazione!</p>
+    </li>
+    <li class="post-item">
+      <a href="post5.html" class="post-title">Ka-Boom, il gioco della bomba!</a>
+      <div class="post-date">9 Maggio 2025</div>
+      <p class="post-excerpt">Un gioco frenetico dove velocità e parole attinenti al tema sono la chiave per non perdere vite. Riuscirai a non far esplodere la bomba?</p>
+    </li>
+    <li class="post-item">
+      <a href="post6.html" class="post-title">Indovina le Emoji: Un Gioco di Parole a Base di Icone!</a>
+      <div class="post-date">9 Maggio 2025</div>
+      <p class="post-excerpt">Interpreta combinazioni di emoji e indovina parole o frasi in questo gioco creativo che mette alla prova la tua fantasia e logica.</p>
+    </li>
+    <li class="post-item">
+      <a href="post7.html" class="post-title">Taboo: il gioco delle parole vietate!</a>
+      <div class="post-date">26 Maggio 2025</div>
+      <p class="post-excerpt">Sfida amici e famiglia con Taboo, il gioco in cui devi far indovinare la parola senza usare le parole vietate. Risate e strategia assicurate!</p>
+    </li>
+    <li class="post-item">
+      <a href="post8.html" class="post-title">PopWord: il gioco delle sfide online!</a>
+      <div class="post-date">30 Maggio 2025</div>
+      <p class="post-excerpt">Sfida i tuoi amici online rispondendo rapidamente a foto, audio e frasi. Più veloce sei, più punti guadagni. Preparati a scatenare la competizione!</p>
+    </li>
+    <li class="post-item">
+      <a href="post9.html" class="post-title">The Top 5, il gioco dei sondaggi!</a>
+      <div class="post-date">16 Giugno 2025</div>
+      <p class="post-excerpt">Indovina le risposte più popolari ai sondaggi in Top 5. Un gioco perfetto per gruppi e serate divertenti all'insegna della competizione.</p>
+    </li>
+  </ul>
+  <a href="/" class="back-link">← Torna alla home</a>
 </body>
 </html>

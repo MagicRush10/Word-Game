@@ -1,0 +1,74 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #333;
+}
+
+#game-container {
+    display: flex;
+    border: 2px solid #6c3f3f;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    overflow: hidden; /* Assicura che nulla sbordi */
+    background-color: #fff;
+}
+
+#gameCanvas {
+    background-color: #f9f9f9; /* Colore di base per il negozio */
+    display: block; /* Rimuove lo spazio extra sotto il canvas */
+    border-right: 1px solid #ddd;
+}
+
+#ui-panel {
+    width: 280px; /* Larghezza del pannello UI */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #f7e6d7; /* Colore più caldo per la UI */
+}
+
+#stats p {
+    margin: 10px 0;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+#actions button {
+    display: block;
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    background-color: #a0522d; /* Colore bottone */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#actions button:hover {
+    background-color: #8b4513; /* Colore bottone al passaggio del mouse */
+}
+
+#actions button:last-child {
+    margin-bottom: 0;
+}
+
+#messages {
+    background-color: #fffaf0;
+    border: 1px solid #dcdcdc;
+    border-radius: 5px;
+    padding: 10px;
+    min-height: 80px;
+    overflow-y: auto;
+    font-size: 0.9em;
+    color: #555;
+}

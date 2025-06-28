@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Il Cerchio delle Parole Nascoste - The Word Games</title>
-    <meta name="description" content="Metti alla prova la tua intuizione con Il Cerchio delle Parole Nascoste! Trova le parole collegate al Nucleo e svela tutti i cerchi nascosti. Un gioco avvincente su The Word Games." />
+    <title>Il Cerchio delle Parole Nascoste - Multiplayer - The Word Games</title>
+    <meta name="description" content="Sfida i tuoi amici con Il Cerchio delle Parole Nascoste Multiplayer! Trova le parole collegate al Nucleo, guadagna punti e sopravvivi agli altri giocatori. Gioca ora su The Word Games!" />
     <link rel="stylesheet" href="../style.css" />
     <style>
-        /* Stili specifici per Il Cerchio delle Parole Nascoste */
+        /* Stili generali del corpo e contenitore principale */
         body {
             font-family: 'Arial', sans-serif;
             color: #333;
@@ -27,13 +27,116 @@
             border-radius: 15px;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
             text-align: center;
-            flex-grow: 1; /* Permette al contenitore di espandersi */
+            flex-grow: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            position: relative; /* Necessario per posizionare la schermata iniziale */
         }
 
+        /* Schermata iniziale e di fine partita */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.95);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 20;
+            border-radius: 15px;
+        }
+
+        .overlay h2 {
+            color: #2c3e50;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .overlay p {
+            font-size: 1.2em;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .player-choice button, .overlay button {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin: 5px;
+        }
+
+        .player-choice button:hover, .overlay button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Sezione Giocatori */
+        .player-stats {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .player-card {
+            background-color: #f0f0f0;
+            padding: 10px 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            font-size: 1em;
+            font-weight: bold;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 120px;
+            transition: all 0.3s ease;
+        }
+
+        .player-card.active {
+            background-color: #ffe082; /* Giallo acceso per il giocatore attivo */
+            border: 2px solid #fbc02d;
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .player-card.eliminated {
+            background-color: #f8d7da; /* Rosso chiaro per eliminato */
+            color: #721c24;
+            opacity: 0.6;
+            text-decoration: line-through;
+            border: 1px solid #f5c6cb;
+        }
+
+        .player-card span {
+            display: block;
+            margin-top: 5px;
+            font-size: 0.9em;
+            color: #666;
+        }
+        .player-card .name {
+            font-size: 1.2em;
+            color: #2c3e50;
+        }
+        .player-card .score {
+            color: #4CAF50;
+        }
+        .player-card .lives {
+            color: #dc3545;
+        }
+
+
+        /* Stili del gioco */
         .instructions {
             font-size: 1.1em;
             margin-bottom: 25px;
@@ -43,21 +146,21 @@
 
         .game-area {
             position: relative;
-            width: 350px; /* Dimensione base per il "cerchio" */
+            width: 350px;
             height: 350px;
             margin: 30px auto;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
-            border: 2px dashed #ccc; /* Effetto cerchio */
+            border: 2px dashed #ccc;
         }
 
         .nucleus-word {
             font-size: 2.2em;
             font-weight: bold;
             color: #2c3e50;
-            background-color: #ffe082; /* Giallo pastello */
+            background-color: #ffe082;
             border-radius: 50%;
             width: 120px;
             height: 120px;
@@ -70,7 +173,7 @@
 
         .hidden-word {
             position: absolute;
-            background-color: #e3f2fd; /* Azzurro molto chiaro */
+            background-color: #e3f2fd;
             border: 1px solid #90caf9;
             color: #1a237e;
             padding: 10px 15px;
@@ -82,26 +185,25 @@
             align-items: center;
             justify-content: center;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            opacity: 0; /* Inizialmente nascoste */
+            opacity: 0;
             transform: scale(0.8);
             transition: all 0.5s ease-out;
-            text-transform: uppercase; /* Per coerenza con l'input */
+            text-transform: uppercase;
         }
 
         .hidden-word.revealed {
             opacity: 1;
             transform: scale(1);
-            background-color: #c8e6c9; /* Verde chiaro per rivelato */
+            background-color: #c8e6c9;
             border-color: #66bb6a;
         }
 
-        /* Posizionamento delle parole nel cerchio (esempio per 5 parole) */
+        /* Posizionamento delle parole nel cerchio (per 5 parole) */
         .hidden-word:nth-child(1) { top: 20px; left: 50%; transform: translateX(-50%); }
         .hidden-word:nth-child(2) { top: 100px; right: 20px; }
         .hidden-word:nth-child(3) { bottom: 20px; right: 80px; }
         .hidden-word:nth-child(4) { bottom: 20px; left: 80px; }
         .hidden-word:nth-child(5) { top: 100px; left: 20px; }
-        /* Aggiungi altri stili :nth-child() se hai più di 5 parole nel cerchio */
 
         .input-area {
             margin-top: 30px;
@@ -123,7 +225,7 @@
         }
 
         .input-area button {
-            background-color: #4CAF50; /* Verde per Verifica */
+            background-color: #4CAF50;
             color: white;
             padding: 12px 25px;
             border: none;
@@ -146,7 +248,7 @@
             font-size: 1.2em;
             font-weight: bold;
             margin-top: 20px;
-            min-height: 25px; /* Per evitare salti di layout */
+            min-height: 25px;
         }
 
         .feedback-message.correct {
@@ -155,17 +257,6 @@
 
         .feedback-message.wrong {
             color: #dc3545;
-        }
-
-        .game-info {
-            margin-top: 20px;
-            font-size: 1.1em;
-            color: #666;
-        }
-
-        .game-info span {
-            font-weight: bold;
-            color: #333;
         }
 
         .game-buttons {
@@ -194,7 +285,29 @@
     <h1>Il Cerchio delle Parole Nascoste</h1>
 
     <div class="game-container">
-        <p class="instructions">Indovina le parole nascoste strettamente collegate alla Parola Nucleo. Scrivi la tua ipotesi e verifica! Riuscirai a completare il Cerchio?</p>
+        <div class="overlay" id="playerSelectScreen">
+            <h2>Quanti giocatori?</h2>
+            <p>Seleziona il numero di partecipanti per iniziare la sfida!</p>
+            <div class="player-choice">
+                <button onclick="startGame(1)">1 Giocatore</button>
+                <button onclick="startGame(2)">2 Giocatori</button>
+                <button onclick="startGame(3)">3 Giocatori</button>
+                <button onclick="startGame(4)">4 Giocatori</button>
+            </div>
+        </div>
+
+        <div class="overlay" id="endGameScreen" style="display: none;">
+            <h2 id="endGameTitle"></h2>
+            <p id="endGameMessage"></p>
+            <div class="player-stats" id="finalScores">
+                </div>
+            <button onclick="resetGame()">Gioca Ancora</button>
+        </div>
+
+        <p class="instructions">Indovina le parole nascoste strettamente collegate alla Parola Nucleo. Scrivi la tua ipotesi e verifica!</p>
+        
+        <div class="player-stats" id="playerStatsDisplay">
+            </div>
 
         <div class="game-area">
             <div class="nucleus-word" id="nucleusWord"></div>
@@ -206,172 +319,286 @@
         </div>
 
         <p class="feedback-message" id="feedbackMessage"></p>
-        <p class="game-info">Tentativi Rimanenti: <span id="attemptsCounter"></span> / <span id="maxAttempts"></span></p>
-
+        
         <div class="game-buttons">
-            <button id="newGameButton" onclick="newGame()">Nuova Partita</button>
-        </div>
+            <button id="nextRoundButton" onclick="nextRound()" style="display: none;">Prossimo Cerchio</button>
+            </div>
     </div>
 
     <script>
         const gameData = [
             {
                 nucleus: "MARE",
-                hiddenWords: ["AZZURRO", "ACQUA", "SABBIA", "PESCE", "ONDA"],
-                revealed: [false, false, false, false, false], // Stato delle parole rivelate
-                maxAttempts: 10
+                hiddenWords: ["AZZURRO", "ACQUA", "SABBIA", "PESCE", "ONDA"]
             },
             {
                 nucleus: "LIBRO",
-                hiddenWords: ["PAGINA", "LETTURA", "STORIA", "AUTORE", "COPERTINA"],
-                revealed: [false, false, false, false, false],
-                maxAttempts: 12
+                hiddenWords: ["PAGINA", "LETTURA", "STORIA", "AUTORE", "COPERTINA"]
             },
             {
                 nucleus: "MUSICA",
-                hiddenWords: ["NOTA", "CANTO", "RITMO", "STRUMENTO", "MELODIA"],
-                revealed: [false, false, false, false, false],
-                maxAttempts: 10
+                hiddenWords: ["NOTA", "CANTO", "RITMO", "STRUMENTO", "MELODIA"]
             },
             {
                 nucleus: "CITTA'",
-                hiddenWords: ["STRADA", "PALAZZO", "PONTE", "TRAFFICO", "MONUMENTO"],
-                revealed: [false, false, false, false, false],
-                maxAttempts: 11
+                hiddenWords: ["STRADA", "PALAZZO", "PONTE", "TRAFFICO", "MONUMENTO"]
             },
             {
                 nucleus: "INVERNO",
-                hiddenWords: ["FREDDO", "NEVE", "GHIACCIO", "SCI", "NATALE"],
-                revealed: [false, false, false, false, false],
-                maxAttempts: 9
+                hiddenWords: ["FREDDO", "NEVE", "GHIACCIO", "SCI", "NATALE"]
+            },
+            {
+                nucleus: "SOLE",
+                hiddenWords: ["CALORE", "LUCE", "GIORNO", "ESTATE", "CIELO"]
+            },
+            {
+                nucleus: "CUCINA",
+                hiddenWords: ["FORNO", "PADELLA", "COLTELLO", "FUOCO", "RICETTA"]
+            },
+            {
+                nucleus: "SPORT",
+                hiddenWords: ["SQUADRA", "ATLETA", "PALLONE", "VITTORIA", "ALLENAMENTO"]
             }
         ];
 
-        let currentCircleIndex = 0;
-        let currentAttempts = 0;
+        let players = [];
+        let currentPlayerIndex = 0;
+        let activePlayersCount = 0; // Conta i giocatori ancora in gioco
+        let currentCircleData = null;
+        let revealedCount = 0; // Conta quante parole sono state rivelate nel cerchio attuale
 
+        // Elementi DOM
+        const playerSelectScreen = document.getElementById('playerSelectScreen');
+        const endGameScreen = document.getElementById('endGameScreen');
+        const endGameTitle = document.getElementById('endGameTitle');
+        const endGameMessage = document.getElementById('endGameMessage');
+        const finalScoresDisplay = document.getElementById('finalScores');
+        const playerStatsDisplay = document.getElementById('playerStatsDisplay');
         const nucleusWordElem = document.getElementById('nucleusWord');
         const wordInput = document.getElementById('wordInput');
         const checkButton = document.getElementById('checkButton');
         const feedbackMessage = document.getElementById('feedbackMessage');
-        const attemptsCounter = document.getElementById('attemptsCounter');
-        const maxAttemptsElem = document.getElementById('maxAttempts');
         const gameArea = document.querySelector('.game-area');
+        const nextRoundBtn = document.getElementById('nextRoundButton');
 
-        // Funzioni di utilità per il posizionamento delle parole
-        function getPosition(index, total, radius = 120, centerX = 175, centerY = 175) {
-            const angle = (Math.PI * 2 / total) * index - (Math.PI / 2); // Inizia dall'alto
-            const x = centerX + radius * Math.cos(angle);
-            const y = centerY + radius * Math.sin(angle);
-            return { left: `${x - 40}px`, top: `${y - 15}px` }; // Sottrai metà larghezza/altezza elemento
+        // --- Funzioni di Inizio e Fine Gioco ---
+
+        function startGame(numPlayers) {
+            players = [];
+            for (let i = 0; i < numPlayers; i++) {
+                players.push({ id: i, name: `Giocatore ${i + 1}`, lives: 3, score: 0, eliminated: false });
+            }
+            activePlayersCount = numPlayers;
+            currentPlayerIndex = 0; // Inizia sempre dal Giocatore 1
+            
+            playerSelectScreen.style.display = 'none'; // Nasconde la schermata di selezione
+            endGameScreen.style.display = 'none'; // Assicurati che la schermata di fine sia nascosta
+
+            updatePlayerStatsDisplay();
+            newRound(); // Inizia il primo round
         }
 
-        function newGame() {
-            currentCircleIndex = Math.floor(Math.random() * gameData.length);
-            const currentCircle = gameData[currentCircleIndex];
-            currentAttempts = 0;
-            updateAttemptsDisplay();
-            feedbackMessage.textContent = '';
+        function newRound() {
+            // Seleziona un nuovo cerchio casuale non ancora giocato (per futura espansione)
+            // Per ora, selezioniamo casualmente da tutti i dati disponibili
+            const randomIndex = Math.floor(Math.random() * gameData.length);
+            currentCircleData = JSON.parse(JSON.stringify(gameData[randomIndex])); // Clona l'oggetto per non modificare l'originale
+            currentCircleData.revealed = currentCircleData.hiddenWords.map(() => false);
+            revealedCount = 0;
+
+            nucleusWordElem.textContent = currentCircleData.nucleus;
             wordInput.value = '';
             wordInput.disabled = false;
             checkButton.disabled = false;
-
-            // Resetta lo stato delle parole rivelate per il cerchio corrente
-            currentCircle.revealed = currentCircle.hiddenWords.map(() => false);
-
-            nucleusWordElem.textContent = currentCircle.nucleus;
+            feedbackMessage.textContent = '';
+            nextRoundBtn.style.display = 'none'; // Nascondi il pulsante "Prossimo Cerchio"
 
             // Rimuovi le parole precedenti
             const oldHiddenWords = document.querySelectorAll('.hidden-word');
             oldHiddenWords.forEach(word => word.remove());
 
             // Crea e posiziona le nuove parole nascoste
-            currentCircle.hiddenWords.forEach((word, index) => {
+            currentCircleData.hiddenWords.forEach((word, index) => {
                 const hiddenWordElem = document.createElement('div');
                 hiddenWordElem.classList.add('hidden-word');
-                hiddenWordElem.textContent = '?'.repeat(word.length); // Mostra solo i trattini inizialmente
+                hiddenWordElem.textContent = '_'.repeat(word.length); // Mostra solo trattini
                 hiddenWordElem.dataset.word = word; // Salva la parola corretta
                 
-                const pos = getPosition(index, currentCircle.hiddenWords.length);
-                hiddenWordElem.style.left = pos.left;
-                hiddenWordElem.style.top = pos.top;
+                // Posizionamento nel cerchio (adattato per supportare diverse quantità di parole)
+                const totalWords = currentCircleData.hiddenWords.length;
+                const radius = 120; // Raggio del cerchio delle parole
+                const centerX = 175; // Centro del game-area
+                const centerY = 175;
+                const angle = (Math.PI * 2 / totalWords) * index - (Math.PI / 2); // Inizia dall'alto
+                const x = centerX + radius * Math.cos(angle);
+                const y = centerY + radius * Math.sin(angle);
+                
+                // Aggiusta il posizionamento per centrare l'elemento
+                hiddenWordElem.style.left = `${x - (hiddenWordElem.offsetWidth / 2 || 40)}px`; // 40 è un'approssimazione iniziale
+                hiddenWordElem.style.top = `${y - (hiddenWordElem.offsetHeight / 2 || 15)}px`; // 15 è un'approssimazione iniziale
                 
                 gameArea.appendChild(hiddenWordElem);
             });
-
-            // Imposta il contatore massimo tentativi
-            maxAttemptsElem.textContent = currentCircle.maxAttempts;
+            updatePlayerStatsDisplay(); // Aggiorna per evidenziare il giocatore di turno
         }
 
-        function updateAttemptsDisplay() {
-            attemptsCounter.textContent = currentAttempts;
+        function updatePlayerStatsDisplay() {
+            playerStatsDisplay.innerHTML = '';
+            players.forEach(player => {
+                const playerCard = document.createElement('div');
+                playerCard.classList.add('player-card');
+                if (player.id === currentPlayerIndex && !player.eliminated) {
+                    playerCard.classList.add('active');
+                }
+                if (player.eliminated) {
+                    playerCard.classList.add('eliminated');
+                }
+                
+                playerCard.innerHTML = `
+                    <span class="name">${player.name}</span>
+                    <span class="score">Punti: ${player.score}</span>
+                    <span class="lives">Vite: ${player.lives}</span>
+                `;
+                playerStatsDisplay.appendChild(playerCard);
+            });
         }
 
         function checkWord() {
+            const currentPlayer = players[currentPlayerIndex];
+            if (currentPlayer.eliminated) return; // Non dovrebbe succedere ma per sicurezza
+
             const guessedWord = wordInput.value.trim().toUpperCase();
+            wordInput.value = ''; // Pulisci l'input immediatamente
+
             if (!guessedWord) {
                 feedbackMessage.textContent = "Per favore, digita una parola.";
                 feedbackMessage.className = 'feedback-message wrong';
                 return;
             }
 
-            const currentCircle = gameData[currentCircleIndex];
-            const foundIndex = currentCircle.hiddenWords.findIndex(
-                (word, idx) => word === guessedWord && !currentCircle.revealed[idx]
+            const foundIndex = currentCircleData.hiddenWords.findIndex(
+                (word, idx) => word === guessedWord && !currentCircleData.revealed[idx]
             );
 
             if (foundIndex !== -1) {
                 // Parola corretta e non ancora rivelata
-                currentCircle.revealed[foundIndex] = true;
+                currentCircleData.revealed[foundIndex] = true;
+                revealedCount++;
+                currentPlayer.score++; // Assegna punto al giocatore
+                
                 const revealedWordElem = document.querySelector(`.hidden-word[data-word="${guessedWord}"]`);
                 revealedWordElem.textContent = guessedWord;
                 revealedWordElem.classList.add('revealed');
-                feedbackMessage.textContent = "Corretto!";
+                
+                feedbackMessage.textContent = "Corretto! Continua il tuo turno!";
                 feedbackMessage.className = 'feedback-message correct';
-                wordInput.value = ''; // Pulisci l'input
-
-                // Controlla se tutte le parole sono state rivelate
-                if (currentCircle.revealed.every(status => status === true)) {
-                    feedbackMessage.textContent = "Complimenti! Hai completato il Cerchio!";
-                    feedbackMessage.className = 'feedback-message correct';
+                
+                updatePlayerStatsDisplay(); // Aggiorna punti del giocatore
+                
+                if (revealedCount === currentCircleData.hiddenWords.length) {
+                    // Cerchio completato!
+                    feedbackMessage.textContent = `Complimenti ${currentPlayer.name}! Hai completato il Cerchio!`;
                     wordInput.disabled = true;
                     checkButton.disabled = true;
+                    nextRoundBtn.style.display = 'block'; // Mostra il pulsante per il prossimo cerchio
                 }
             } else {
                 // Parola sbagliata o già indovinata
-                currentAttempts++;
-                updateAttemptsDisplay();
-                feedbackMessage.textContent = "Parola sbagliata o già trovata. Riprova!";
+                currentPlayer.lives--; // Perde una vita
+                feedbackMessage.textContent = `Sbagliato, ${currentPlayer.name}! Hai perso una vita.`;
                 feedbackMessage.className = 'feedback-message wrong';
+                
+                updatePlayerStatsDisplay(); // Aggiorna vite del giocatore
 
-                if (currentAttempts >= currentCircle.maxAttempts) {
-                    feedbackMessage.textContent = "Hai esaurito i tentativi! Riprova con una nuova partita.";
-                    feedbackMessage.className = 'feedback-message wrong';
-                    wordInput.disabled = true;
-                    checkButton.disabled = true;
-                    // Rivelare le parole non trovate
-                    currentCircle.hiddenWords.forEach((word, idx) => {
-                        if (!currentCircle.revealed[idx]) {
-                            const hiddenWordElem = document.querySelector(`.hidden-word[data-word="${word}"]`);
-                            hiddenWordElem.textContent = word;
-                            hiddenWordElem.classList.add('revealed');
-                            hiddenWordElem.style.backgroundColor = '#ffcdd2'; /* Rosso chiaro per non trovata */
-                            hiddenWordElem.style.borderColor = '#ef9a9a';
-                        }
-                    });
+                if (currentPlayer.lives <= 0) {
+                    currentPlayer.eliminated = true; // Elimina il giocatore
+                    activePlayersCount--;
+                    feedbackMessage.textContent += ` ${currentPlayer.name} è stato eliminato!`;
+                    updatePlayerStatsDisplay(); // Aggiorna per mostrare eliminato
+                }
+
+                checkGameEnd(); // Controlla se la partita è finita
+                if (activePlayersCount > 1) { // Se la partita non è finita, passa il turno
+                    nextTurn(); 
                 }
             }
         }
 
-        // Inizializza il gioco al caricamento della pagina
-        document.addEventListener('DOMContentLoaded', newGame);
+        function nextTurn() {
+            let originalPlayerIndex = currentPlayerIndex;
+            do {
+                currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
+            } while (players[currentPlayerIndex].eliminated && currentPlayerIndex !== originalPlayerIndex); // Cerca il prossimo giocatore attivo
+
+            if (players[currentPlayerIndex].eliminated) {
+                // Questo significa che tutti i giocatori sono eliminati, ma activePlayersCount è > 0.
+                // Questo caso dovrebbe essere gestito da checkGameEnd() prima.
+                // Si tratta di una condizione di fallback per prevenire loop infiniti se activePlayersCount non è aggiornato correttamente.
+                checkGameEnd();
+                return;
+            }
+            updatePlayerStatsDisplay(); // Evidenzia il nuovo giocatore di turno
+            feedbackMessage.textContent = `È il turno di ${players[currentPlayerIndex].name}!`;
+            feedbackMessage.className = 'feedback-message'; // Reset feedback
+        }
+
+        function checkGameEnd() {
+            if (activePlayersCount <= 1) {
+                endGame();
+            }
+        }
+
+        function endGame() {
+            wordInput.disabled = true;
+            checkButton.disabled = true;
+            nextRoundBtn.style.display = 'none';
+
+            let winner = null;
+            if (activePlayersCount === 1) {
+                winner = players.find(p => !p.eliminated);
+                endGameTitle.textContent = `Partita Terminata!`;
+                endGameMessage.textContent = `${winner.name} ha vinto la partita con ${winner.score} punti!`;
+            } else {
+                // Tutti eliminati, nessuno ha vinto o c'è un pareggio non gestito
+                endGameTitle.textContent = `Partita Terminata!`;
+                endGameMessage.textContent = `Nessun vincitore, tutti i giocatori sono stati eliminati!`;
+            }
+
+            // Mostra i punteggi finali
+            finalScoresDisplay.innerHTML = '';
+            players.sort((a, b) => b.score - a.score).forEach(player => {
+                const finalCard = document.createElement('div');
+                finalCard.classList.add('player-card');
+                finalCard.innerHTML = `
+                    <span class="name">${player.name}</span>
+                    <span class="score">Punti: ${player.score}</span>
+                    <span class="lives">Vite rimanenti: ${player.lives > 0 ? player.lives : 0}</span>
+                `;
+                if (player.eliminated) finalCard.classList.add('eliminated');
+                finalScoresDisplay.appendChild(finalCard);
+            });
+
+            endGameScreen.style.display = 'flex';
+        }
+
+        function resetGame() {
+            players = [];
+            currentPlayerIndex = 0;
+            activePlayersCount = 0;
+            endGameScreen.style.display = 'none';
+            playerSelectScreen.style.display = 'flex'; // Torna alla selezione giocatori
+            playerStatsDisplay.innerHTML = ''; // Pulisce i display dei giocatori
+        }
 
         // Permetti di premere Invio per verificare la parola
         wordInput.addEventListener('keypress', function(event) {
-            if (event.key === 'Enter') {
+            if (event.key === 'Enter' && !wordInput.disabled) {
                 checkButton.click();
             }
         });
+
+        // Inizializza con la schermata di selezione giocatori
+        // La chiamata a newRound() verrà fatta da startGame()
     </script>
 </body>
 </html>

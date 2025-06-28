@@ -54,8 +54,14 @@ body {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-#actions button:hover {
+#actions button:hover:not(:disabled) { /* Aggiunto :not(:disabled) */
     background-color: #8b4513; /* Colore bottone al passaggio del mouse */
+}
+
+#actions button:disabled { /* Stile per i bottoni disabilitati */
+    background-color: #cccccc;
+    cursor: not-allowed;
+    opacity: 0.7;
 }
 
 #actions button:last-child {
@@ -68,6 +74,7 @@ body {
     border-radius: 5px;
     padding: 10px;
     min-height: 80px;
+    max-height: 200px; /* Aggiunto un max-height per evitare che diventi troppo grande */
     overflow-y: auto;
     font-size: 0.9em;
     color: #555;

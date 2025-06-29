@@ -1,54 +1,6 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <!-- Firebase SDK -->
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
-  import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js";
-
-  const firebaseConfig = {
-  apiKey: "AIzaSyASmHbcaqN6I9GGFyyoE5NsGoHU3vCKVL4",
-  authDomain: "thewordgame-7a623.firebaseapp.com",
-  databaseURL: "https://thewordgame-7a623-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "thewordgame-7a623",
-  storageBucket: "thewordgame-7a623.firebasestorage.app",
-  messagingSenderId: "300842053288",
-  appId: "1:300842053288:web:418df39b647f9e69759c9d",
-  measurementId: "G-S96948QXGE"
-};
-
-  // 🔌 Inizializza Firebase
-  const app = initializeApp(firebaseConfig);
-  const db = getDatabase(app);
-
-  // ✍️ Funzione per salvare punteggio
-  window.salvaPunteggio = function(nickname, punteggio) {
-    const refClassifica = ref(db, "classifica/");
-    push(refClassifica, {
-      nickname,
-      punteggio,
-      timestamp: Date.now()
-    });
-  }
-
-  // 📊 Funzione per mostrare classifica
-  const refClassifica = ref(db, "classifica/");
-  onValue(refClassifica, (snapshot) => {
-    const dati = snapshot.val() || {};
-    const ordinati = Object.values(dati)
-      .sort((a, b) => b.punteggio - a.punteggio)
-      .slice(0, 10);
-
-    const ul = document.getElementById("classifica");
-    ul.innerHTML = "";
-    ordinati.forEach((entry, index) => {
-      const li = document.createElement("li");
-      li.textContent = `${index + 1}. ${entry.nickname} - ${entry.punteggio} pt`;
-      ul.appendChild(li);
-    });
-  });
-</script>
-
   <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-W4X29R76SB"></script>
 <script>
@@ -460,17 +412,7 @@
   <i class="fas fa-gamepad"></i> Altri giochi!
     </button>
   </div>
-    <h2>🏆 Classifica</h2>
-<ul id="classifica"></ul>
-
-<hr>
-
-<h3>🎮 Invia il tuo punteggio:</h3>
-<input type="text" id="nick" placeholder="Nickname">
-<input type="number" id="score" placeholder="Punteggio">
-<button onclick="salvaPunteggio(document.getElementById('nick').value, parseInt(document.getElementById('score').value))">
-  Salva
-</button>
+    
 
 
     <footer>

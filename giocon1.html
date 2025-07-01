@@ -1,410 +1,454 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Disegna il Logo</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@600&display=swap');
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Disegna il Logo</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@600&display=swap');
 
-    body {
-      margin: 0;
-      background: #111;
-      color: white;
-      font-family: 'Outfit', sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 40px 60px;
-      min-height: 100vh;
-    }
+        body {
+            margin: 0;
+            background: #111;
+            color: white;
+            font-family: 'Outfit', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 60px;
+            min-height: 100vh;
+        }
 
-    h1 {
-      color: #ff9500;
-      text-shadow: 0 0 15px #ff9500cc;
-      text-align: center;
-      margin-bottom: 25px;
-      font-size: 2.8rem;
-    }
+        h1 {
+            color: #ff9500;
+            text-shadow: 0 0 15px #ff9500cc;
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 2.8rem;
+        }
 
-    #modeSelector {
-      margin-top: 70px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 30px;
-    }
+        #modeSelector {
+            margin-top: 70px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
 
-    #gameUI {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      gap: 30px;
-      width: 90vw;
-      max-width: 1200px;
-    }
+        #gameUI {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            width: 90vw;
+            max-width: 1200px;
+        }
 
-    .main-container {
-      display: flex;
-      flex-wrap: nowrap;
-      gap: 50px;
-      justify-content: center;
-      width: 100%;
-    }
+        .main-container {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 50px;
+            justify-content: center;
+            width: 100%;
+        }
 
-    .canvas-box, .logo-box {
-      background: #1c1c1c;
-      border-radius: 20px;
-      padding: 30px;
-      box-shadow: 0 0 30px #000;
-      width: 500px;
-      height: 500px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+        .canvas-box, .logo-box {
+            background: #1c1c1c;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 0 30px #000;
+            width: 500px;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-    canvas {
-      background: #fff;
-      border-radius: 16px;
-      cursor: crosshair;
-      width: 480px !important;
-      height: 480px !important;
-    }
+        canvas {
+            background: #fff;
+            border-radius: 16px;
+            cursor: crosshair;
+            width: 480px !important;
+            height: 480px !important;
+        }
 
-    .logo-box img {
-      max-width: 100%;
-      max-height: 100%;
-      filter: drop-shadow(0 0 10px #ff9500cc);
-    }
+        .logo-box img {
+            max-width: 100%;
+            max-height: 100%;
+            filter: drop-shadow(0 0 10px #ff9500cc);
+        }
 
-    .color-tools {
-      margin-top: 35px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 15px;
-    }
+        .color-tools {
+            margin-top: 35px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
 
-    .color-tools input[type="color"] {
-      width: 90px;
-      height: 60px;
-      border: none;
-      border-radius: 16px;
-      cursor: pointer;
-    }
+        .color-tools input[type="color"] {
+            width: 90px;
+            height: 60px;
+            border: none;
+            border-radius: 16px;
+            cursor: pointer;
+        }
 
-    .tool-options label {
-      margin-right: 30px;
-      font-size: 1.2rem;
-    }
+        .tool-options label {
+            margin-right: 30px;
+            font-size: 1.2rem;
+        }
 
-    .controls {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 15px;
-    }
+        .controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
 
-    .controls select {
-      padding: 14px;
-      border-radius: 14px;
-      background: #222;
-      color: white;
-      font-size: 1.1rem;
-    }
+        .controls select {
+            padding: 14px;
+            border-radius: 14px;
+            background: #222;
+            color: white;
+            font-size: 1.1rem;
+        }
 
-    .btn {
-      padding: 18px 38px;
-      font-size: 1.4rem;
-      border: none;
-      border-radius: 40px;
-      cursor: pointer;
-      font-family: 'Outfit', sans-serif;
-      background: #ff9500;
-      color: #000;
-      box-shadow: 0 0 20px #ff9500cc;
-      transition: transform 0.25s;
-      font-weight: 700;
-    }
+        .btn {
+            padding: 18px 38px;
+            font-size: 1.4rem;
+            border: none;
+            border-radius: 40px;
+            cursor: pointer;
+            font-family: 'Outfit', sans-serif;
+            background: #ff9500;
+            color: #000;
+            box-shadow: 0 0 20px #ff9500cc;
+            transition: transform 0.25s;
+            font-weight: 700;
+        }
 
-    .btn:hover {
-      transform: scale(1.08);
-    }
+        .btn:hover {
+            transform: scale(1.08);
+        }
 
-    @media (max-width: 1080px) {
-      .main-container {
-        flex-wrap: wrap;
-        gap: 40px;
-      }
-      .canvas-box, .logo-box {
-        width: 90vw;
-        height: auto;
-      }
-      canvas {
-        width: 90vw !important;
-        height: auto !important;
-      }
-    }
-  </style>
+        /* Nuovo stile per il pulsante "Torna al menu" */
+        .btn.back-to-menu {
+            background: #555; /* Colore grigio scuro */
+            box-shadow: 0 0 10px #555555cc; /* Ombra grigia */
+            margin-top: 20px; /* Spazio sopra */
+            font-size: 1.2rem; /* Leggermente più piccolo degli altri */
+            padding: 14px 30px;
+        }
+
+        .btn.back-to-menu:hover {
+            background: #777; /* Colore più chiaro al hover */
+            transform: scale(1.05); /* Effetto hover più leggero */
+        }
+
+
+        @media (max-width: 1080px) {
+            .main-container {
+                flex-wrap: wrap;
+                gap: 40px;
+            }
+            .canvas-box, .logo-box {
+                width: 90vw;
+                height: auto;
+            }
+            canvas {
+                width: 90vw !important;
+                height: auto !important;
+            }
+        }
+    </style>
 </head>
 <body>
 
-  <div id="modeSelector">
-    <h1>Scegli la Modalità</h1>
-    <button class="btn" onclick="startGame('free')">🎨 Disegno Libero</button>
-    <button class="btn" onclick="startGame('hard')">🧠 Vedi e disegna</button>
-  </div>
-
-  <div id="gameUI">
-    <h1>Disegna il logo: <span id="brandName">Apple</span></h1>
-
-    <div class="controls">
-      <select id="logoSelect">
-        <option value="apple">Apple</option>
-        <option value="nike">Nike</option>
-        <option value="youtube">YouTube</option>
-        <option value="mcdonalds">McDonald's</option>
-        <option value="instagram">Instagram</option>
-        <option value="google">Google</option>
-        <option value="facebook">Facebook</option>
-        <option value="pepsi">Pepsi</option>
-        <option value="adidas">Adidas</option>
-        <option value="tiktok">TikTok</option>
-        <option value="amazon">Amazon</option>
-        <option value="playstation">PlayStation</option>
-        <option value="windows">Windows</option>
-        <option value="spotify">Spotify</option>
-        <option value="netflix">Netflix</option>
-        <option value="tesla">Tesla</option>
-        <option value="linkedin">Linkedin</option>
-        <option value="audi">Audi</option>
-        <option value="android">Android</option>
-        <option value="samsung">Samsung</option>
-        <option value="burgerking">BurgerKing</option>
-        <option value="rolex">Rolex</option>
-      </select>
-      <div style="display: flex; gap: 10px;">
-        <button class="btn" id="resetBtn">Reset</button>
-        <button class="btn" id="revealBtn">Rivela Originale</button>
-      </div>
+    <div id="modeSelector">
+        <h1>Scegli la Modalità</h1>
+        <button class="btn" onclick="startGame('free')">🎨 Disegno Libero</button>
+        <button class="btn" onclick="startGame('hard')">🧠 Vedi e disegna</button>
+        <button class="btn back-to-menu" onclick="window.location.href='https://thewordgames.netlify.app/altrigiochi.html'">Torna al menu</button>
     </div>
 
-    <div class="main-container">
-      <div class="canvas-box">
-        <canvas id="drawCanvas" width="480" height="480"></canvas>
-      </div>
-      <div class="logo-box" id="logoBox" style="display: none;">
-        <img id="logoImage" src="" alt="Logo Originale" />
-      </div>
+    <div id="gameUI">
+        <h1>Disegna il logo: <span id="brandName">Apple</span></h1>
+
+        <div class="controls">
+            <select id="logoSelect">
+                <option value="apple">Apple</option>
+                <option value="nike">Nike</option>
+                <option value="youtube">YouTube</option>
+                <option value="mcdonalds">McDonald's</option>
+                <option value="instagram">Instagram</option>
+                <option value="google">Google</option>
+                <option value="facebook">Facebook</option>
+                <option value="pepsi">Pepsi</option>
+                <option value="adidas">Adidas</option>
+                <option value="tiktok">TikTok</option>
+                <option value="amazon">Amazon</option>
+                <option value="playstation">PlayStation</option>
+                <option value="windows">Windows</option>
+                <option value="spotify">Spotify</option>
+                <option value="netflix">Netflix</option>
+                <option value="tesla">Tesla</option>
+                <option value="linkedin">Linkedin</option>
+                <option value="audi">Audi</option>
+                <option value="android">Android</option>
+                <option value="samsung">Samsung</option>
+                <option value="burgerking">BurgerKing</option>
+                <option value="rolex">Rolex</option>
+            </select>
+            <div style="display: flex; gap: 10px;">
+                <button class="btn" id="resetBtn">Reset</button>
+                <button class="btn" id="revealBtn">Rivela Originale</button>
+            </div>
+            <button class="btn back-to-menu" onclick="window.location.href='https://thewordgames.netlify.app/altrigiochi.html'">Torna al menu</button>
+        </div>
+
+        <div class="main-container">
+            <div class="canvas-box">
+                <canvas id="drawCanvas" width="480" height="480"></canvas>
+            </div>
+            <div class="logo-box" id="logoBox" style="display: none;">
+                <img id="logoImage" src="" alt="Logo Originale" />
+            </div>
+        </div>
+
+        <div class="color-tools">
+            <label for="colorPicker">🎨 Colore</label>
+            <input type="color" id="colorPicker" value="#ff9500">
+
+            <div class="tool-options">
+                <label><input type="radio" name="tool" value="brush" checked> ✏️ Pennello</label>
+                <label><input type="radio" name="tool" value="eraser"> 🧽 Gomma</label>
+                <label><input type="radio" name="tool" value="bucket"> 🪣 Secchio</label>
+            </div>
+        </div>
     </div>
 
-    <div class="color-tools">
-      <label for="colorPicker">🎨 Colore</label>
-      <input type="color" id="colorPicker" value="#ff9500">
+    <script>
+        const canvas = document.getElementById('drawCanvas');
+        const ctx = canvas.getContext('2d');
+        const resetBtn = document.getElementById('resetBtn');
+        const revealBtn = document.getElementById('revealBtn');
+        const logoSelect = document.getElementById('logoSelect');
+        const logoImage = document.getElementById('logoImage');
+        const logoBox = document.getElementById('logoBox');
+        const brandName = document.getElementById('brandName');
+        const colorPicker = document.getElementById('colorPicker');
+        const gameUI = document.getElementById('gameUI');
+        const modeSelector = document.getElementById('modeSelector');
 
-      <div class="tool-options">
-        <label><input type="radio" name="tool" value="brush" checked> ✏️ Pennello</label>
-        <label><input type="radio" name="tool" value="eraser"> 🧽 Gomma</label>
-        <label><input type="radio" name="tool" value="bucket"> 🪣 Secchio</label>
-      </div>
-    </div>
-  </div>
+        const logos = {
+            apple: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg",
+            nike: "https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg",
+            youtube: "https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg",
+            mcdonalds: "https://upload.wikimedia.org/wikipedia/commons/b/bf/Flag_of_the_McDonald%27s_Corporation.svg",
+            instagram: "https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg",
+            google: "https://upload.wikimedia.org/wikipedia/commons/c/c9/Google_logo_%282013-2015%29.svg",
+            facebook: "https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg",
+            pepsi: "https://upload.wikimedia.org/wikipedia/commons/0/0f/Pepsi_logo_2014.svg",
+            adidas: "https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg",
+            tiktok: "https://upload.wikimedia.org/wikipedia/commons/3/34/Ionicons_logo-tiktok.svg",
+            amazon: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg",
+            playstation: "https://upload.wikimedia.org/wikipedia/commons/4/4e/Playstation_logo_colour.svg",
+            windows: "https://upload.wikimedia.org/wikipedia/commons/0/0a/Unofficial_Windows_logo_variant_-_2002%E2%80%932012_%28Multicolored%29.svg",
+            spotify: "https://upload.wikimedia.org/wikipedia/commons/7/74/Spotify_App_Logo.svg",
+            netflix: "https://upload.wikimedia.org/wikipedia/commons/7/75/Netflix_icon.svg",
+            tesla: "https://upload.wikimedia.org/wikipedia/commons/b/bb/Tesla_T_symbol.svg",
+            linkedin: "https://upload.wikimedia.org/wikipedia/commons/4/43/Linkedin-web-vt.png",
+            audi: "https://upload.wikimedia.org/wikipedia/commons/9/92/Audi-Logo_2016.svg",
+            android: "https://upload.wikimedia.org/wikipedia/commons/5/5e/Android_logo_%282019-2023%29.svg",
+            samsung: "https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg",
+            burgerking: "https://upload.wikimedia.org/wikipedia/commons/4/4b/Burger_King_logo_%281999%E2%80%932020%29.svg",
+            rolex: "https://upload.wikimedia.org/wikipedia/commons/f/f4/Logo_da_Rolex.png"
+        };
 
-  <script>
-    const canvas = document.getElementById('drawCanvas');
-    const ctx = canvas.getContext('2d');
-    const resetBtn = document.getElementById('resetBtn');
-    const revealBtn = document.getElementById('revealBtn');
-    const logoSelect = document.getElementById('logoSelect');
-    const logoImage = document.getElementById('logoImage');
-    const logoBox = document.getElementById('logoBox');
-    const brandName = document.getElementById('brandName');
-    const colorPicker = document.getElementById('colorPicker');
-    const gameUI = document.getElementById('gameUI');
-    const modeSelector = document.getElementById('modeSelector');
+        let mode = "free";
+        let tool = "brush";
 
-    const logos = {
-      apple: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg",
-      nike: "https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg",
-      youtube: "https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg",
-      mcdonalds: "https://upload.wikimedia.org/wikipedia/commons/b/bf/Flag_of_the_McDonald%27s_Corporation.svg",
-      instagram: "https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg",
-      google: "https://upload.wikimedia.org/wikipedia/commons/c/c9/Google_logo_%282013-2015%29.svg",
-      facebook: "https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg",
-      pepsi: "https://upload.wikimedia.org/wikipedia/commons/0/0f/Pepsi_logo_2014.svg",
-      adidas: "https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg",
-      tiktok: "https://upload.wikimedia.org/wikipedia/commons/3/34/Ionicons_logo-tiktok.svg",
-      amazon: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg",
-      playstation: "https://upload.wikimedia.org/wikipedia/commons/4/4e/Playstation_logo_colour.svg",
-      windows: "https://upload.wikimedia.org/wikipedia/commons/0/0a/Unofficial_Windows_logo_variant_-_2002%E2%80%932012_%28Multicolored%29.svg",
-      spotify: "https://upload.wikimedia.org/wikipedia/commons/7/74/Spotify_App_Logo.svg",
-      netflix: "https://upload.wikimedia.org/wikipedia/commons/7/75/Netflix_icon.svg",
-      tesla: "https://upload.wikimedia.org/wikipedia/commons/b/bb/Tesla_T_symbol.svg",
-      linkedin: "https://upload.wikimedia.org/wikipedia/commons/4/43/Linkedin-web-vt.png",
-      audi: "https://upload.wikimedia.org/wikipedia/commons/9/92/Audi-Logo_2016.svg",
-      android: "https://upload.wikimedia.org/wikipedia/commons/5/5e/Android_logo_%282019-2023%29.svg",
-      samsung: "https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg",
-      burgerking: "https://upload.wikimedia.org/wikipedia/commons/4/4b/Burger_King_logo_%281999%E2%80%932020%29.svg",
-      rolex: "https://upload.wikimedia.org/wikipedia/commons/f/f4/Logo_da_Rolex.png"
-    };
+        // Imposta lo stile del pennello iniziale
+        ctx.lineWidth = 3; // Imposta una larghezza predefinita per il pennello
+        ctx.lineCap = 'round'; // Bordo arrotondato
+        ctx.lineJoin = 'round'; // Angoli arrotondati
+        ctx.strokeStyle = colorPicker.value; // Colore iniziale del pennello
+        ctx.fillStyle = colorPicker.value; // Colore iniziale per il secchio
 
-    let mode = "free";
-    let tool = "brush";
+        function startGame(selectedMode) {
+            mode = selectedMode;
+            modeSelector.style.display = "none";
+            gameUI.style.display = "flex";
+            setLogo(logoSelect.value);
 
-    function startGame(selectedMode) {
-      mode = selectedMode;
-      modeSelector.style.display = "none";
-      gameUI.style.display = "flex";
-      setLogo(logoSelect.value);
-
-      if (mode === "hard") {
-        logoBox.style.display = "flex";
-        setTimeout(() => logoBox.style.display = "none", 4000);
-      }
-    }
-
-    function setLogo(name) {
-      brandName.textContent = name.charAt(0).toUpperCase() + name.slice(1);
-      logoImage.src = logos[name];
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-    }
-
-    logoSelect.addEventListener('change', () => {
-      setLogo(logoSelect.value);
-      if (mode === "hard") {
-        logoBox.style.display = "flex";
-        setTimeout(() => logoBox.style.display = "none", 4000);
-      } else {
-        logoBox.style.display = "none";
-      }
-    });
-
-    revealBtn.addEventListener('click', () => {
-      logoBox.style.display = 'flex';
-    });
-
-    resetBtn.addEventListener('click', () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-    });
-
-    colorPicker.addEventListener('input', () => {
-      if (tool === "brush" || tool === "bucket") {
-        ctx.strokeStyle = colorPicker.value;
-        ctx.fillStyle = colorPicker.value;
-      }
-    });
-
-    document.querySelectorAll('input[name="tool"]').forEach(el => {
-      el.addEventListener('change', (e) => {
-        tool = e.target.value;
-        if (tool === "eraser") {
-          ctx.strokeStyle = "#ffffff";
-          ctx.fillStyle = "#ffffff";
-        } else {
-          ctx.strokeStyle = colorPicker.value;
-          ctx.fillStyle = colorPicker.value;
+            if (mode === "hard") {
+                logoBox.style.display = "flex";
+                // Nascondi dopo 4 secondi, ma solo se l'utente non lo ha già rivelato esplicitamente
+                setTimeout(() => {
+                    if (logoBox.style.display === "flex" && revealBtn.dataset.revealed !== 'true') {
+                        logoBox.style.display = "none";
+                    }
+                }, 4000);
+            }
         }
-      });
-    });
 
-    let drawing = false;
-    let startX, startY;
-
-    canvas.addEventListener('mousedown', e => {
-      drawing = true;
-      [startX, startY] = getMousePos(canvas, e);
-      if (tool === "bucket") {
-        bucketFill(startX, startY);
-      } else {
-        ctx.beginPath();
-        ctx.moveTo(startX, startY);
-      }
-    });
-
-    canvas.addEventListener('mousemove', e => {
-      if (!drawing) return;
-      const [x, y] = getMousePos(canvas, e);
-      if (tool === "brush" || tool === "eraser") {
-        ctx.lineTo(x, y);
-        ctx.stroke();
-      }
-    });
-
-    canvas.addEventListener('mouseup', e => {
-      if (drawing && (tool === "brush" || tool === "eraser")) {
-        ctx.closePath();
-      }
-      drawing = false;
-    });
-
-    canvas.addEventListener('mouseleave', () => {
-      if (drawing && (tool === "brush" || tool === "eraser")) {
-        ctx.closePath();
-      }
-      drawing = false;
-    });
-
-    function getMousePos(canvas, evt) {
-      const rect = canvas.getBoundingClientRect();
-      return [
-        (evt.clientX - rect.left) * (canvas.width / rect.width),
-        (evt.clientY - rect.top) * (canvas.height / rect.height)
-      ];
-    }
-
-    // Simple bucket fill implementation (flood fill)
-    function bucketFill(x, y) {
-      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-      const data = imageData.data;
-      const width = imageData.width;
-      const height = imageData.height;
-
-      const startPos = (Math.floor(y) * width + Math.floor(x)) * 4;
-      const startR = data[startPos];
-      const startG = data[startPos + 1];
-      const startB = data[startPos + 2];
-      const startA = data[startPos + 3];
-
-      const fillColor = hexToRgba(ctx.fillStyle);
-
-      if (startR === fillColor.r && startG === fillColor.g && startB === fillColor.b && startA === fillColor.a) {
-        return; // Already filled
-      }
-
-      const stack = [[Math.floor(x), Math.floor(y)]];
-      while (stack.length) {
-        const [cx, cy] = stack.pop();
-        let pos = (cy * width + cx) * 4;
-        if (cx < 0 || cx >= width || cy < 0 || cy >= height) continue;
-        if (data[pos] === startR && data[pos + 1] === startG && data[pos + 2] === startB && data[pos + 3] === startA) {
-          data[pos] = fillColor.r;
-          data[pos + 1] = fillColor.g;
-          data[pos + 2] = fillColor.b;
-          data[pos + 3] = fillColor.a;
-
-          stack.push([cx + 1, cy]);
-          stack.push([cx - 1, cy]);
-          stack.push([cx, cy + 1]);
-          stack.push([cx, cy - 1]);
+        function setLogo(name) {
+            brandName.textContent = name.charAt(0).toUpperCase() + name.slice(1);
+            logoImage.src = logos[name];
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // Pulisce il canvas
+            revealBtn.dataset.revealed = 'false'; // Resetta lo stato del pulsante rivela
         }
-      }
-      ctx.putImageData(imageData, 0, 0);
-    }
 
-    function hexToRgba(hex) {
-      let c;
-      if(/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)){
-          c = hex.substring(1).split('');
-          if(c.length === 3){
-              c= [c[0], c[0], c[1], c[1], c[2], c[2]];
-          }
-          c= '0x'+c.join('');
-          return {r:(c>>16)&255, g:(c>>8)&255, b:c&255, a:255};
-      }
-      throw new Error('Invalid Hex: '+hex);
-    }
-  </script>
+        logoSelect.addEventListener('change', () => {
+            setLogo(logoSelect.value);
+            if (mode === "hard") {
+                logoBox.style.display = "flex";
+                setTimeout(() => {
+                    if (logoBox.style.display === "flex" && revealBtn.dataset.revealed !== 'true') {
+                        logoBox.style.display = "none";
+                    }
+                }, 4000);
+            } else {
+                logoBox.style.display = "none";
+            }
+        });
+
+        revealBtn.addEventListener('click', () => {
+            logoBox.style.display = 'flex';
+            revealBtn.dataset.revealed = 'true'; // Imposta un flag che indica che è stato rivelato manualmente
+        });
+
+        resetBtn.addEventListener('click', () => {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        });
+
+        colorPicker.addEventListener('input', () => {
+            if (tool === "brush" || tool === "bucket") {
+                ctx.strokeStyle = colorPicker.value;
+                ctx.fillStyle = colorPicker.value;
+            }
+        });
+
+        document.querySelectorAll('input[name="tool"]').forEach(el => {
+            el.addEventListener('change', (e) => {
+                tool = e.target.value;
+                if (tool === "eraser") {
+                    ctx.strokeStyle = "#ffffff"; // Colore della gomma (bianco per il canvas)
+                    ctx.fillStyle = "#ffffff";
+                    ctx.lineWidth = 15; // Gomma più spessa per facilitare la cancellazione
+                } else {
+                    ctx.strokeStyle = colorPicker.value;
+                    ctx.fillStyle = colorPicker.value;
+                    ctx.lineWidth = 3; // Torna alla larghezza del pennello normale
+                }
+            });
+        });
+
+        let drawing = false;
+        let startX, startY;
+
+        canvas.addEventListener('mousedown', e => {
+            drawing = true;
+            [startX, startY] = getMousePos(canvas, e);
+            if (tool === "bucket") {
+                bucketFill(startX, startY);
+            } else {
+                ctx.beginPath();
+                ctx.moveTo(startX, startY);
+            }
+        });
+
+        canvas.addEventListener('mousemove', e => {
+            if (!drawing) return;
+            const [x, y] = getMousePos(canvas, e);
+            if (tool === "brush" || tool === "eraser") {
+                ctx.lineTo(x, y);
+                ctx.stroke();
+            }
+        });
+
+        canvas.addEventListener('mouseup', e => {
+            if (drawing && (tool === "brush" || tool === "eraser")) {
+                ctx.closePath();
+            }
+            drawing = false;
+        });
+
+        canvas.addEventListener('mouseleave', () => {
+            if (drawing && (tool === "brush" || tool === "eraser")) {
+                ctx.closePath();
+            }
+            drawing = false;
+        });
+
+        function getMousePos(canvas, evt) {
+            const rect = canvas.getBoundingClientRect();
+            return [
+                (evt.clientX - rect.left) * (canvas.width / rect.width),
+                (evt.clientY - rect.top) * (canvas.height / rect.height)
+            ];
+        }
+
+        // Simple bucket fill implementation (flood fill)
+        function bucketFill(x, y) {
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            const data = imageData.data;
+            const width = imageData.width;
+            const height = imageData.height;
+
+            const startPos = (Math.floor(y) * width + Math.floor(x)) * 4;
+            const startR = data[startPos];
+            const startG = data[startPos + 1];
+            const startB = data[startPos + 2];
+            const startA = data[startPos + 3];
+
+            const fillColor = hexToRgba(ctx.fillStyle);
+
+            // Se il colore di partenza è già uguale al colore di riempimento, non fare nulla
+            if (startR === fillColor.r && startG === fillColor.g && startB === fillColor.b && startA === fillColor.a) {
+                return;
+            }
+
+            const stack = [[Math.floor(x), Math.floor(y)]];
+            while (stack.length) {
+                const [cx, cy] = stack.pop();
+                let pos = (cy * width + cx) * 4;
+
+                // Controlla i limiti del canvas
+                if (cx < 0 || cx >= width || cy < 0 || cy >= height) continue;
+
+                // Controlla se il pixel corrente ha lo stesso colore di partenza
+                if (data[pos] === startR && data[pos + 1] === startG && data[pos + 2] === startB && data[pos + 3] === startA) {
+                    // Imposta il colore di riempimento
+                    data[pos] = fillColor.r;
+                    data[pos + 1] = fillColor.g;
+                    data[pos + 2] = fillColor.b;
+                    data[pos + 3] = fillColor.a;
+
+                    // Aggiungi i pixel vicini allo stack
+                    stack.push([cx + 1, cy]);
+                    stack.push([cx - 1, cy]);
+                    stack.push([cx, cy + 1]);
+                    stack.push([cx, cy - 1]);
+                }
+            }
+            ctx.putImageData(imageData, 0, 0);
+        }
+
+        function hexToRgba(hex) {
+            let c;
+            if(/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)){
+                c = hex.substring(1).split('');
+                if(c.length === 3){
+                    c= [c[0], c[0], c[1], c[1], c[2], c[2]];
+                }
+                c= '0x'+c.join('');
+                return {r:(c>>16)&255, g:(c>>8)&255, b:c&255, a:255};
+            }
+            throw new Error('Invalid Hex: '+hex);
+        }
+    </script>
 
 </body>
 </html>

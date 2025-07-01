@@ -96,19 +96,30 @@ body {
     margin: 10px; /* Spazio tra i pulsanti di start screen */
 }
 
-.start-btn.reset-button { /* Stile specifico per il pulsante reset */
-    background-color: #e06c75; /* Un colore diverso per il reset */
-    font-size: 1.1em;
-    padding: 12px 25px;
-}
-
 .start-btn:hover {
     background-color: #a55ee1; /* Tonalità più scura al hover */
     transform: translateY(-3px); /* Leggero sollevamento al hover */
 }
 
-.start-btn.reset-button:hover {
-    background-color: #c0404b; /* Tonalità più scura per il reset al hover */
+/* Stili per il pulsante "Torna al menu" */
+.secondary-btn {
+    background-color: #6a6a6a; /* Un colore più neutro */
+    color: white;
+    margin-top: 15px; /* Spazio dal pulsante principale o dal contenuto sopra */
+    font-size: 1.1em;
+    padding: 12px 25px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.secondary-btn:hover {
+    background-color: #888; /* Leggermente più chiaro al hover */
+    transform: translateY(-2px);
+}
+
+/* Stili specifici per il pulsante nel modal, se vuoi che sia diverso */
+.modal-btn {
+    margin-top: 20px; /* Più spazio rispetto agli altri elementi del modal */
 }
 
 

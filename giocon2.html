@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Velocity Typer: Ready, Set, Type!</title>
+    <link rel="stylesheet" href="giocon2.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="start-screen" id="start-screen">
+        <h1>Benvenuto in Velocity Typer!</h1>
+        <p>Metti alla prova la tua velocità di digitazione.</p>
+        <div class="input-group">
+            <label for="player-name">Inserisci il tuo nome:</label>
+            <input type="text" id="player-name" placeholder="Il tuo nome" maxlength="20">
+        </div>
+        <button id="start-game-btn" class="start-btn">Inizia Ora</button>
+        </div>
+
+    <div class="game-container hidden" id="game-container">
+        <h1>Velocity Typer</h1>
+
+        <div class="stats-container">
+            <div class="stat-item">WPM: <span id="wpm">0</span></div>
+            <div class="stat-item">Accuracy: <span id="accuracy">100%</span></div>
+            <div class="stat-item">Time: <span id="timer">0.00</span>s</div>
+        </div>
+
+        <div class="text-display" id="text-display">
+            </div>
+
+        <input type="text" id="text-input" class="text-input" placeholder="Inizia a digitare qui..." disabled>
+
+        <div class="progress-bar-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+
+        <button id="finish-btn" class="finish-btn" disabled>Finito</button>
+        <button id="restart-btn" class="restart-btn" style="display: none;">Nuova Partita</button>
+
+        <div class="modal" id="result-modal">
+            <div class="modal-content">
+                <h2>Game Over!</h2>
+                <p>Giocatore: <span id="final-player-name"></span></p>
+                <p>Il tuo WPM finale: <span id="final-wpm"></span></p>
+                <p>Accuratezza: <span id="final-accuracy"></span></p>
+                <p>Errori totali: <span id="final-errors"></span></p>
+                <h3>I Tuoi Migliori Punteggi:</h3>
+                <ul id="local-leaderboard"></ul>
+                <button id="modal-close-btn">Chiudi</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="giocon2.js"></script>
+</body>
+</html>

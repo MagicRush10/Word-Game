@@ -1,0 +1,445 @@
+/* Variabili CSS per una facile personalizzazione dei colori */
+:root {
+    --bg-color: #282c34;            /* Sfondo principale scuro (quasi nero) */
+    --text-color: #abb2bf;          /* Colore testo principale (grigio chiaro) */
+    --highlight-color: #61afef;     /* Blu elettrico per evidenziazioni */
+    --error-color: #e06c75;         /* Rosso per gli errori di digitazione */
+    --success-color: #98c379;       /* Verde per il testo corretto/barra progresso */
+    --accent-color: #c678dd;        /* Viola per pulsanti e bordi di accento */
+    --container-bg: #3a404a;        /* Sfondo dei contenitori principali (più chiaro del bg) */
+    --input-bg: #21252b;            /* Sfondo dei campi input e display testo */
+}
+
+/* Stili Globali e Reset */
+body {
+    font-family: 'Roboto Mono', monospace; /* Font pulito e monospaziato, ideale per la digitazione */
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Occupa tutta l'altezza della viewport */
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box; /* Include padding e border nella larghezza totale */
+    overflow: hidden; /* Evita scroll indesiderati sulla pagina principale */
+}
+
+/* Utilità: Nascosto */
+.hidden {
+    display: none !important; /* Forza la scomparsa di un elemento */
+}
+
+/* --- Schermata di Benvenuto (Start Screen) --- */
+.start-screen {
+    background-color: var(--container-bg);
+    padding: 60px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); /* Ombra per profondità */
+    width: 90%;
+    max-width: 600px;
+    text-align: center;
+    border: 2px solid var(--accent-color); /* Bordo di accento */
+    color: var(--text-color);
+}
+
+.start-screen h1 {
+    color: var(--highlight-color);
+    font-size: 2.8em;
+    margin-bottom: 20px;
+    letter-spacing: 1px; /* Leggera spaziatura per il titolo */
+}
+
+.start-screen p {
+    font-size: 1.2em;
+    margin-bottom: 40px;
+}
+
+.input-group {
+    margin-bottom: 30px;
+}
+
+.input-group label {
+    display: block; /* Metti l'etichetta sopra l'input */
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    color: var(--highlight-color);
+}
+
+.start-screen input[type="text"] {
+    width: calc(100% - 40px); /* Larghezza dinamica con padding */
+    padding: 15px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.3em;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    outline: none; /* Rimuovi il bordo di focus predefinito del browser */
+    box-shadow: 0 0 0 2px var(--accent-color); /* Bordo personalizzato */
+    transition: box-shadow 0.3s ease; /* Animazione smooth al focus */
+    text-align: center;
+}
+
+.start-screen input[type="text"]:focus {
+    box-shadow: 0 0 0 3px var(--highlight-color), 0 0 15px var(--highlight-color); /* Effetto glow al focus */
+}
+
+.start-btn {
+    background-color: var(--accent-color);
+    color: white;
+    padding: 18px 40px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.5em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Animazioni al hover */
+    margin: 10px; /* Spazio tra i pulsanti di start screen */
+}
+
+.start-btn.reset-button { /* Stile specifico per il pulsante reset */
+    background-color: #e06c75; /* Un colore diverso per il reset */
+    font-size: 1.1em;
+    padding: 12px 25px;
+}
+
+.start-btn:hover {
+    background-color: #a55ee1; /* Tonalità più scura al hover */
+    transform: translateY(-3px); /* Leggero sollevamento al hover */
+}
+
+.start-btn.reset-button:hover {
+    background-color: #c0404b; /* Tonalità più scura per il reset al hover */
+}
+
+
+/* --- Contenitore del Gioco (Game Container) --- */
+.game-container {
+    background-color: var(--container-bg);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    width: 90%;
+    max-width: 900px;
+    text-align: center;
+    position: relative;
+    border: 2px solid var(--accent-color);
+}
+
+.game-container h1 {
+    color: var(--highlight-color);
+    margin-bottom: 30px;
+    font-size: 2.5em;
+    letter-spacing: 2px;
+}
+
+.stats-container {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 30px;
+    font-size: 1.2em;
+    color: var(--highlight-color); /* Colore delle etichette delle statistiche */
+}
+
+.stat-item span {
+    font-weight: bold;
+    color: var(--text-color); /* Colore dei valori delle statistiche */
+}
+
+.text-display {
+    background-color: var(--input-bg);
+    padding: 25px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    min-height: 150px; /* Altezza fissa per evitare salti di layout */
+    text-align: left;
+    line-height: 1.8; /* Spaziatura tra le righe per leggibilità */
+    font-size: 1.6em; /* Testo più grande per leggibilità */
+    overflow: hidden; /* Nasconde il testo che esce dal box */
+    white-space: normal; /* Permette al testo di andare a capo */
+    word-wrap: break-word; /* Forza il testo a capo se la parola è troppo lunga */
+}
+
+/* Stili per i singoli caratteri nel display del testo */
+.text-display span {
+    display: inline-block;
+    transition: transform 0.1s ease-out, opacity 0.3s ease;
+    /* Aggiungi un piccolo spazio tra i caratteri per la leggibilità */
+    margin-right: 1px;
+    /* Assicurati che anche gli spazi (che potrebbero essere span vuoti) abbiano una larghezza minima */
+    min-width: 0.5em;
+    text-align: center; /* Centra il carattere nello span se c'è un min-width */
+}
+
+/* Stile specifico per gli spazi, li rende più "larghi" come un vero spazio */
+.text-display span.space {
+    width: 0.5em; /* Larghezza fissa per gli spazi */
+    margin-right: 0; /* Rimuovi il margine aggiuntivo per gli spazi */
+}
+
+
+.text-display span.current {
+    color: var(--highlight-color);
+    font-weight: bold;
+    transform: scale(1.03); /* Lieve ingrandimento */
+    animation: pulse-word 1.5s infinite alternate; /* Pulsazione leggera */
+}
+
+@keyframes pulse-word {
+    from { text-shadow: 0 0 5px rgba(97, 175, 239, 0.3); }
+    to { text-shadow: 0 0 10px rgba(97, 175, 239, 0.7); }
+}
+
+.text-display span.correct {
+    color: var(--success-color);
+}
+
+.text-display span.incorrect {
+    color: var(--error-color);
+    animation: shake 0.2s; /* Piccola scossa per l'errore */
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-2px); }
+    50% { transform: translateX(2px); }
+    75% { transform: translateX(-2px); }
+    100% { transform: translateX(0); }
+}
+
+.text-display span.typed {
+    opacity: 0.5; /* Rende più tenue il testo già digitato */
+}
+
+/* Campo di Input del Giocatore */
+.text-input {
+    width: calc(100% - 50px); /* Larga quasi quanto il container */
+    padding: 15px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.4em;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    outline: none;
+    box-shadow: 0 0 0 2px var(--accent-color); /* Bordo animato al focus */
+    transition: box-shadow 0.3s ease;
+}
+
+.text-input:focus {
+    box-shadow: 0 0 0 3px var(--highlight-color), 0 0 15px var(--highlight-color); /* Effetto glow al focus */
+}
+
+.text-input:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* Barra di Progresso */
+.progress-bar-container {
+    width: 100%;
+    background-color: #4a505b; /* Sfondo della barra grigio più scuro */
+    border-radius: 5px;
+    height: 10px;
+    margin-top: 25px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background-color: var(--success-color);
+    transition: width 0.1s linear; /* Transizione fluida per la barra */
+}
+
+/* Pulsanti di Controllo del Gioco */
+.finish-btn,
+.restart-btn {
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2em;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.finish-btn {
+    background-color: var(--success-color); /* Verde per il pulsante "Finito" */
+}
+
+.finish-btn:hover {
+    background-color: #7ab36a; /* Tonalità più scura al hover */
+    transform: translateY(-2px);
+}
+
+.finish-btn:disabled {
+    background-color: #666;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.restart-btn {
+    background-color: var(--accent-color); /* Viola per il pulsante "Nuova Partita" */
+    margin-left: 15px; /* Spazio tra i due pulsanti */
+}
+
+.restart-btn:hover {
+    background-color: #a55ee1; /* Tonalità più scura al hover */
+    transform: translateY(-2px);
+}
+
+/* --- Modal dei Risultati --- */
+.modal {
+    display: none; /* Nascosto di default */
+    position: fixed; /* Si sovrappone a tutto */
+    z-index: 10; /* Livello di sovrapposizione alto */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.7); /* Sfondo semi-trasparente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: var(--container-bg);
+    margin: auto;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    width: 80%;
+    max-width: 500px;
+    text-align: center;
+    border: 2px solid var(--highlight-color);
+    color: var(--text-color);
+}
+
+.modal-content h2 {
+    color: var(--highlight-color);
+    margin-bottom: 20px;
+    font-size: 2em;
+}
+
+.modal-content p {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.modal-content #final-player-name {
+    color: var(--accent-color);
+    font-weight: bold;
+}
+
+.modal-content #final-wpm,
+.modal-content #final-accuracy,
+.modal-content #final-errors {
+    font-weight: bold;
+    color: var(--success-color);
+}
+
+/* Classifica Locale nel Modal */
+#local-leaderboard {
+    list-style: none; /* Rimuovi i pallini dell'elenco */
+    padding: 0;
+    margin-top: 20px;
+    max-height: 150px; /* Limita l'altezza e aggiungi scroll se necessario */
+    overflow-y: auto;
+    border-top: 1px solid var(--text-color); /* Separatore */
+    padding-top: 10px;
+}
+
+#local-leaderboard li {
+    background-color: var(--input-bg); /* Sfondo per ogni elemento della classifica */
+    margin-bottom: 8px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between; /* Spazia gli elementi */
+    align-items: center;
+    font-size: 1.1em;
+    flex-wrap: wrap; /* Permetti agli elementi di andare a capo su schermi piccoli */
+}
+
+#local-leaderboard li span:first-child {
+    color: var(--highlight-color);
+    font-weight: bold;
+}
+
+#local-leaderboard li span:last-child {
+    color: var(--success-color);
+    font-size: 0.9em; /* Rendi più piccolo il dato di data/ora */
+}
+
+/* Pulsante di chiusura del Modal */
+#modal-close-btn {
+    background-color: var(--accent-color);
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+    margin-top: 30px;
+    transition: background-color 0.3s ease;
+}
+
+#modal-close-btn:hover {
+    background-color: #a55ee1;
+}
+
+/* --- Media Queries per la Reattività (Mobile First) --- */
+@media (max-width: 768px) {
+    .game-container, .start-screen {
+        padding: 25px;
+        width: 100%;
+        border-radius: 0; /* Rimuovi i bordi arrotondati su schermi piccoli */
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    .stats-container {
+        flex-direction: column; /* Impila le statistiche in colonna */
+        gap: 10px; /* Spazio tra gli elementi impilati */
+    }
+
+    .stat-item {
+        font-size: 1em;
+    }
+
+    .text-display {
+        font-size: 1.3em;
+        min-height: 120px;
+        padding: 15px;
+    }
+
+    .text-input {
+        font-size: 1.1em;
+        padding: 12px 20px;
+    }
+
+    .finish-btn, .restart-btn {
+        padding: 12px 20px;
+        font-size: 1em;
+        margin-left: 0; /* Rimuovi il margine sinistro */
+        margin-top: 15px; /* Più spazio sopra */
+        width: 100%; /* Occupano tutta la larghezza disponibile */
+    }
+
+    .restart-btn {
+        margin-top: 10px; /* Meno spazio tra i due pulsanti una volta impilati */
+    }
+
+    .modal-content {
+        width: 95%;
+        padding: 25px;
+    }
+
+    .modal-content p, .modal-content #local-leaderboard li {
+        font-size: 1em;
+    }
+}

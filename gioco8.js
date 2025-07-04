@@ -36,6 +36,24 @@ const questions = [{
       points: 50
     }, ],
   }, {
+    question: "Nomina un film di animazione Disney molto conosciuto",
+    answers: [{
+      text: "BIANCANEVE",
+      points: 90
+    }, {
+      text: "RE LEONE",
+      points: 85
+    }, {
+      text: "ALADDIN",
+      points: 70
+    }, {
+      text: "CENERENTOLA",
+      points: 60
+    }, {
+      text: "FROZEN",
+      points: 50
+    }, ],
+  },{
     question: "Paesi europei più visitati:",
     answers: [{
       text: "FRANCIA",
@@ -249,6 +267,24 @@ const questions = [{
       points: 60
     }, {
       text: "PUBG",
+      points: 50
+    }, ],
+  },{
+    question: "Personaggi iconici dei videogiochi",
+    answers: [{
+      text: "MARIO",
+      points: 100
+    }, {
+      text: "SONIC",
+      points: 80
+    }, {
+      text: "LINK",
+      points: 70
+    }, {
+      text: "LARA CROFT",
+      points: 60
+    }, {
+      text: "CRASH BANDICOOT",
       points: 50
     }, ],
   },{

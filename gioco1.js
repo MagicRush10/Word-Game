@@ -22,7 +22,8 @@ const dizionario = [
   "BANDE", "BELVA", "BELVE", "AGLIO", "AGILE", "AGILI", "ADDIO", "AMBRA", "AMBRE", "ABILE",
   "CIPRO", "CIRCO", "CIRCA", "CLAVA", "CLOWN", "COLCO", "COLLA", "CORNA", "COSTO", "COTTO",
   "CORSO", "CORSA", "CORSE", "COTTA", "COTTE", "DANZE", "DELTA", "BRIGA", "BRUTO", "BRUNO",
-  "CAPRE", "CARGO", "CASSA", "CASTO", "CAUSA", "CERCO", "CICLO", "CICLI", "CIGNO", "CINTA"
+  "CAPRE", "CARGO", "CASSA", "CASTO", "CAUSA", "CERCO", "CICLO", "CICLI", "CIGNO", "CINTA",
+  "MORTO", "NONNO", "NONNA", "NANNA", "PORTA", "BORSA", "FALSO", "FALSA", "FALSI", "FALSE"
 ];
 
 // Sceglie una parola a caso

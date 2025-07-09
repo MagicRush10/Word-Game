@@ -446,6 +446,46 @@ const tabooCards = [
   {
     "target": "TOMBOLA",
     "taboo": ["NUMERI", "NATALE", "CARTELLA", "ESTRAZIONE"]
+  },
+  {
+    "target": "MERCURIO",
+    "taboo": ["PIANETA", "TERMOMETRO", "ARGENTO", "VELENO"]
+  },
+    {
+    "target": "BISCOTTO",
+    "taboo": ["COLAZIONE", "LATTE", "MERENDA", "CROCCANTE"]
+  },
+    {
+    "target": "ZUCCHERO",
+    "taboo": ["DOLCIFICANTE", "BIANCO", "GRANELLI", "SAPORE"]
+  },
+      {
+    "target": "VULCANO",
+    "taboo": ["ERUZIONE", "MAGMA", "VESUVIO", "ETNA"]
+  },
+      {
+    "target": "SIRENA",
+    "taboo": ["MARE", "CODA", "VOCE", "AUTO"]
+  },
+    {
+    "target": "BOTTONE",
+    "taboo": ["CAMICIA", "CHIUDERE", "GIACCA", "ATTACCARE"]
+  },
+    {
+    "target": "OMBRELLO",
+    "taboo": ["PIOGGIA", "APERTURA", "ACQUA", "MANICO"]
+  },
+   {
+    "target": "TAPPETO",
+    "taboo": ["PAVIMENTO", "DECORAZIONE", "MORBIDO", "ORIENTALE"]
+  },
+  {
+    "target": "SCACCHI",
+    "taboo": ["RE", "REGINA", "TORRE", "PEDONE"]
+  },
+  {
+    "target": "POMODORO",
+    "taboo": ["ROSSO", "ORTO", "SALSA", "INSALATA"]
   }
 ];
 

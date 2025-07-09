@@ -54,6 +54,23 @@ const emojiWords = [
     { word: "GIUDICE", emoji: "⚖️👨‍⚖️", hint: "Pronuncia sentenze" },
     { word: "DEATHNOTE", emoji: "🍎📓🧠", hint: "L'anime del quaderno della morte" },
     { word: "DRACULA", emoji: "🧛‍♂️🌑🦇🩸", hint:"Mostro notturno"},
+    { word: "BATMAN", emoji: "🦇🏙️🚗🦸‍♂️", hint: "Il cavaliere oscuro di Gotham" },
+    { word: "SCOOBYDOO", emoji: "🐶🚐👻🍪", hint: "Risolvono misteri... con tanti snack!" },
+    { word: "MARIOKART", emoji: "🏎️🍌🚀🏁", hint: "Corse pazze con i personaggi Nintendo" },
+    { word: "TRANSFORMERS", emoji: "🚗🤖🚀⚡", hint: "Robot che si trasformano in veicoli" },
+    { word: "MATRIX", emoji: "🕶️💊💻🤯", hint: "Rivoluzione virtuale e scelta tra pillole" },
+    { word: "VENOM", emoji: "🦠👅🕷️🖤", hint: "Un simbionte molto pericoloso" },
+    { word: "PIRATIDEICARAIBI", emoji: "🏴‍☠️⚓🍺💰", hint: "Avventure con il capitano Jack" },
+    { word: "ROBINHOOD", emoji: "🏹🌲👑💰", hint: "Ruba ai ricchi per dare ai poveri" },
+    { word: "NARUTO", emoji: "🍜🥷🌀🐊", hint: "Il ninja con il sogno di diventare Hokage" },
+    { word: "CARS", emoji: "🚗🏁⚙️🌟", hint: "Le macchine che corrono e parlano" },
+    { word: "TARZAN", emoji: "🌴🦍🌿🏃‍♂️", hint: "L’uomo cresciuto nella giungla" },
+    { word: "PINOCCHIO", emoji: "🤥🪵🦗🌟", hint: "Il burattino dal naso lungo" },
+    { word: "HERCULES", emoji: "🏋️‍♂️⚡🏛️🦁", hint: "L’eroe della mitologia greca" },
+    { word: "GODZILLA", emoji: "🦖🏙️🔥🌊", hint: "Un mostro gigante che distrugge le città" },
+    { word: "PACMAN", emoji: "🟡🍒👻🎮", hint: "Mangia tutto quello che trova, fantasmi inclusi" },
+    { word: "MEGAMIND", emoji: "🧠🔵🎤👾", hint: "Supercattivo… con un cuore buono" },
+    { word: "SAILORMOON", emoji: "🌙💖🪄👧", hint: "Guerriera che combatte il male col potere della luna" }
   ];
   
   // Stato del gioco

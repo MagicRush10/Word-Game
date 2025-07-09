@@ -35,7 +35,62 @@ const questions = [{
       text: "SUCCO D'ARANCIA",
       points: 50
     }, ],
+  }, 
+    {
+    question: "Qual è un condimento popolare per la pizza?",
+    answers: [{
+      text: "MOZZARELLA",
+      points: 90
+    }, {
+      text: "PATATINE",
+      points: 85
+    }, {
+      text: "SALAME",
+      points: 70
+    }, {
+      text: "FUNGHI",
+      points: 60
+    }, {
+      text: "PEPERONI",
+      points: 50
+    }, ],
   }, {
+    question: "Nomina qualcosa che ha i denti:",
+    answers: [{
+      text: "PETTINE",
+      points: 90
+    }, {
+      text: "PERSONA",
+      points: 85
+    }, {
+      text: "ANIMALE",
+      points: 70
+    }, {
+      text: "CERNIERA",
+      points: 60
+    }, {
+      text: "SEGA",
+      points: 50
+    }, ],
+  },{
+    question: "Nomina parti del corpo che iniziano con la lettera "C":",
+    answers: [{
+      text: "CUORE",
+      points: 90
+    }, {
+      text: "CERVELLO",
+      points: 85
+    }, {
+      text: "COLLO",
+      points: 70
+    }, {
+      text: "CAVIGLIA",
+      points: 60
+    }, {
+      text: "COSTOLA",
+      points: 50
+    }, ],
+  },{
     question: "Nomina un film di animazione Disney molto conosciuto",
     answers: [{
       text: "BIANCANEVE",

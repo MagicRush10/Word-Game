@@ -35,9 +35,8 @@ const questions = [{
       text: "SUCCO D'ARANCIA",
       points: 50
     }, ],
-  }, 
-    {
-    question: "Qual è un condimento popolare per la pizza?",
+  }, {
+    question: "Qual è un condimento popolare per la pizza:",
     answers: [{
       text: "MOZZARELLA",
       points: 90
@@ -73,7 +72,7 @@ const questions = [{
       points: 50
     }, ],
   },{
-    question: "Nomina parti del corpo che iniziano con la lettera "C":",
+    question: "Nomina parti del corpo che iniziano con la lettera C:",
     answers: [{
       text: "CUORE",
       points: 90

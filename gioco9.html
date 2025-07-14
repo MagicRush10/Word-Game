@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pointless Giocatore Singolo</title>
+    <link rel="stylesheet" href="style.css"> <style>
+        /* Stili specifici per Pointless, che sovrascrivono o aggiungono a style.css */
+        body {
+            background-color: #121212; /* Sfondo scuro come Tapple */
+            color: #FFD700; /* Testo giallo/oro */
+            font-family: 'Arial', sans-serif; /* Font generico se Merriweather non caricato */
+            text-align: center;
+            padding: 20px;
+            display: flex;
+            flex-direction: column; /* Cambiato per allineare top-down */
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        h1 {
+            color: #FFD700;
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.4);
+            margin-bottom: 25px;
+            font-size: 2.2em; /* Leggermente più grande */
+        }
+
+        .game-area {
+            background-color: #1E1E1E; /* Sfondo dei pannelli scuro */
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 2px solid #FFD700; /* Bordo giallo/oro */
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.1);
+        }
+
+        .question-box {
+            background-color: #333; /* Colore più scuro per il box domanda */
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #FFD700; /* Bordo giallo */
+        }
+        .question {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #FFD700; /* Colore giallo */
+        }
+        input[type="text"] {
+            width: calc(100% - 22px);
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 2px solid #FFD700; /* Bordo giallo */
+            border-radius: 5px;
+            font-size: 1.1em;
+            background-color: #222; /* Sfondo scuro per l'input */
+            color: #fff; /* Testo chiaro */
+            transition: border-color 0.3s ease;
+        }
+        input[type="text"]:focus {
+            border-color: #FFD700; /* Giallo al focus */
+            outline: none;
+        }
+        button#submit-btn, button.next-action-btn { /* Stile per i pulsanti di gioco */
+            background-color: #FFD700;
+            color: #121212;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+        button#submit-btn:hover, button.next-action-btn:hover {
+            background-color: #e6c200; /* Verde leggermente più scuro */
+            transform: translateY(-2px);
+            box-shadow: 0 0 10px #FFD700;
+        }
+        .result {
+            margin-top: 25px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #FFD700; /* Giallo */
+        }
+        .score-display {
+            font-size: 1.5em;
+            color: #FFD700; /* Giallo */
+            margin-top: 15px;
+        }
+        .instructions {
+            font-size: 0.9em;
+            color: #ccc; /* Grigio chiaro per istruzioni */
+            margin-top: 20px;
+        }
+        
+        .pointless-text {
+            color: #7FFF00; /* Verde brillante per Pointless */
+        }
+        .restart-btn {
+            background-color: #FF5555; /* Rosso per restart */
+            margin-top: 20px;
+        }
+        .restart-btn:hover {
+            background-color: #cc4444;
+        }
+
+        /* Stili per i punteggi rivelati */
+        .revealed-answers {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px dashed #FFD700; /* Bordo giallo/oro */
+            text-align: left;
+        }
+        .revealed-answers h3 {
+            color: #FFD700;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        .revealed-answers ul {
+            list-style: none;
+            padding: 0;
+            max-height: 180px; /* Aumentato leggermente */
+            overflow-y: auto;
+            border: 1px solid #FFD700; /* Bordo giallo */
+            border-radius: 5px;
+            background-color: #222; /* Sfondo scuro */
+        }
+        .revealed-answers li {
+            padding: 10px 12px;
+            border-bottom: 1px solid #333; /* Divisore più scuro */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #eee; /* Testo più chiaro */
+        }
+        .revealed-answers li:last-child {
+            border-bottom: none;
+        }
+        .revealed-answers .answer-text {
+            font-weight: normal;
+        }
+        .revealed-answers .answer-score {
+            font-weight: bold;
+            color: #FFD700; /* Giallo per i punteggi */
+        }
+        .revealed-answers .answer-score.pointless-score {
+            color: #7FFF00; /* Verde brillante per i pointless rivelati */
+        }
+    </style>
+</head>
+<body>
+  <button class="back-button" onclick="window.location.href='index.html'">← Torna al menu</button>
+
+  <div class="container">
+    <h1>POINTLESS - GIOCATORE SINGOLO</h1>
+    
+    <div class="game-area" id="gameArea">
+      <div class="question-box">
+          <p class="question" id="question-text"></p>
+          <input type="text" id="answer-input" placeholder="La tua risposta..." autocomplete="off">
+          <button id="submit-btn">Invia Risposta</button>
+      </div>
+      <p class="result" id="result-text"></p>
+      <div class="revealed-answers" id="revealed-answers-box" style="display: none;">
+          <h3>Punteggi per il tuo turno:</h3>
+          <ul id="answers-list">
+          </ul>
+      </div>
+      <p class="score-display">Punteggio Totale: <span id="total-score">0</span></p>
+      <button id="next-action-btn" class="next-action-btn">Prossima Domanda</button>
+      <button id="restart-btn" class="restart-btn">Ricomincia Partita</button>
+      <p class="instructions">L'obiettivo è trovare le risposte corrette con il punteggio più basso. Una risposta "Pointless" vale 0 punti!</p>
+    </div>
+  </div>
+
+  <script>
+    // Configurazione del gioco - Domande con *tutte* le risposte possibili e la loro "rarità"
+    const baseQuestions = [
+        {
+            question: "Nomina un colore che non sia primario.",
+            answers: { // Ogni risposta ha un 'rarity' per influenzare il punteggio
+                "verde": 0.8, "arancione": 0.7, "viola": 0.6, "rosa": 0.5, "marrone": 0.4,
+                "grigio": 0.3, "nero": 0.2, "bianco": 0.2, "ciano": 0.1, "magenta": 0.1,
+                "indaco": 0.05, "turchese": 0.05, "oro": 0.02, "argento": 0.02, "corallo": 0.01
+            }
+        },
+        {
+            question: "Nomina un paese che confina con la Francia.",
+            answers: {
+                "germania": 0.9, "belgio": 0.8, "spagna": 0.8, "italia": 0.7, "svizzera": 0.6,
+                "lussemburgo": 0.5, "monaco": 0.3, "andorra": 0.1
+            }
+        },
+        {
+            question: "Nomina un animale della savana africana.",
+            answers: {
+                "leone": 0.9, "elefante": 0.8, "giraffa": 0.7, "zebra": 0.7, "rinoceronte": 0.6,
+                "ghepardo": 0.5, "gnu": 0.4, "impala": 0.3, "suricato": 0.2, "okapi": 0.1,
+                "dik-dik": 0.05, "pangolino": 0.01
+            }
+        },
+        {
+            question: "Nomina un frutto rosso.",
+            answers: {
+                "mela": 0.9, "ciliegia": 0.8, "fragola": 0.7, "lampone": 0.6, "ribes": 0.5,
+                "melograno": 0.4, "amarena": 0.3, "mora": 0.2, "uva rossa": 0.1,
+                "ribes nero": 0.05, "gelso": 0.02
+            }
+        },
+        {
+            question: "Nomina un pianeta del sistema solare.",
+            answers: {
+                "terra": 0.9, "marte": 0.8, "giove": 0.7, "venere": 0.6, "saturno": 0.5,
+                "urano": 0.4, "nettuno": 0.3, "mercurio": 0.2
+            }
+        },
+        // --- NUOVI TEMI (30) ---
+        {
+            question: "Nomina un animale che depone le uova.",
+            answers: {
+                "gallina": 0.9, "serpente": 0.7, "uccello": 0.6, "tartaruga": 0.5, "pesce": 0.4,
+                "coccodrillo": 0.3, "ornitorinco": 0.1, "kiwi": 0.05, "echidna": 0.01
+            }
+        },
+        {
+            question: "Nomina un oggetto che si trova in cucina.",
+            answers: {
+                "frigorifero": 0.9, "forno": 0.8, "tavolo": 0.7, "sedia": 0.6, "pentola": 0.5,
+                "piatto": 0.4, "tostapane": 0.3, "frullatore": 0.2, "spremiagrumi": 0.1,
+                "tagliere": 0.05, "mestolo": 0.02
+            }
+        },
+        {
+            question: "Nomina un tipo di sport olimpico estivo.",
+            answers: {
+                "nuoto": 0.9, "atletica": 0.8, "calcio": 0.7, "pallavolo": 0.6, "ginnastica": 0.5,
+                "ciclismo": 0.4, "tennis": 0.3, "scherma": 0.2, "canottaggio": 0.1,
+                "pentathlon moderno": 0.05, "trampolino elastico": 0.02
+            }
+        },
+        {
+            question: "Nomina una capitale europea.",
+            answers: {
+                "roma": 0.9, "parigi": 0.8, "londra": 0.8, "berlino": 0.7, "madrid": 0.6,
+                "bruxelles": 0.5, "lisbona": 0.4, "varsavia": 0.3, "dublino": 0.2,
+                "tallinn": 0.1, "skopje": 0.05, "chisinau": 0.01
+            }
+        },
+        {
+            question: "Nomina un personaggio dei cartoni animati Disney.",
+            answers: {
+                "topolino": 0.9, "paperino": 0.8, "minnie": 0.7, "pippo": 0.6, "pluto": 0.5,
+                "biancaneve": 0.4, "cenerentola": 0.3, "simba": 0.2, "elsa": 0.1,
+                "stitch": 0.05, "figaro": 0.02
+            }
+        },
+        {
+            question: "Nomina un fiume italiano.",
+            answers: {
+                "po": 0.9, "tiber": 0.8, "arno": 0.7, "adige": 0.6, "tanaro": 0.5,
+                "omblone": 0.3, "fiora": 0.2, "volturno": 0.1, "seveso": 0.05, "serio": 0.02
+            }
+        },
+        {
+            question: "Nomina un supereroe Marvel.",
+            answers: {
+                "spiderman": 0.9, "iron man": 0.8, "capitan america": 0.7, "hulk": 0.6, "thor": 0.5,
+                "vedova nera": 0.4, "pantera nera": 0.3, "dr strange": 0.2, "scarlet witch": 0.1,
+                "ant-man": 0.05, "visione": 0.02
+            }
+        },
+        {
+            question: "Nomina un mezzo di trasporto pubblico.",
+            answers: {
+                "autobus": 0.9, "treno": 0.8, "metropolitana": 0.7, "tram": 0.6, "taxi": 0.5,
+                "nave": 0.4, "aereo": 0.3, "monorotaia": 0.1, "filobus": 0.05, "teleferica": 0.01
+            }
+        },
+        {
+            question: "Nomina un genere musicale.",
+            answers: {
+                "pop": 0.9, "rock": 0.8, "hip hop": 0.7, "classica": 0.6, "jazz": 0.5,
+                "blues": 0.4, "reggae": 0.3, "heavy metal": 0.2, "folk": 0.1,
+                "gospel": 0.05, "zydeco": 0.01
+            }
+        },
+        {
+            question: "Nomina una spezia.",
+            answers: {
+                "pepe": 0.9, "sale": 0.8, "paprika": 0.7, "curcuma": 0.6, "zenzero": 0.5,
+                "cumino": 0.4, "cannella": 0.3, "noce moscata": 0.2, "cardamomo": 0.1,
+                "zafferano": 0.05, "sumac": 0.01
+            }
+        },
+        {
+            question: "Nomina un paese asiatico.",
+            answers: {
+                "cina": 0.9, "india": 0.8, "giappone": 0.7, "corea del sud": 0.6, "thailandia": 0.5,
+                "indonesia": 0.4, "filippine": 0.3, "vietnam": 0.2, "iran": 0.1,
+                "bhutan": 0.05, "timor est": 0.01
+            }
+        },
+        {
+            question: "Nomina un attrezzo da giardinaggio.",
+            answers: {
+                "pala": 0.9, "rastrello": 0.8, "forbici": 0.7, "vanga": 0.6, "annaffiatoio": 0.5,
+                "zappa": 0.4, "guanti": 0.3, "carriola": 0.2, "decespugliatore": 0.1,
+                "scarificatore": 0.05, "aeratore": 0.01
+            }
+        },
+        {
+            question: "Nomina un tipo di formaggio.",
+            answers: {
+                "parmigiano": 0.9, "mozzarella": 0.8, "gorgonzola": 0.7, "pecorino": 0.6, "emmental": 0.5,
+                "brie": 0.4, "cheddar": 0.3, "feta": 0.2, "taleggio": 0.1,
+                "robiola": 0.05, "stracchino": 0.02
+            }
+        },
+        {
+            question: "Nomina una bandiera con il rosso, bianco e blu.",
+            answers: {
+                "stati uniti": 0.9, "regno unito": 0.8, "francia": 0.7, "russia": 0.6, "olanda": 0.5,
+                "australia": 0.4, "nuova zelanda": 0.3, "norvegia": 0.2, "cile": 0.1,
+                "samoa": 0.05, "islanda": 0.02
+            }
+        },
+        {
+            question: "Nomina un classico della letteratura italiana.",
+            answers: {
+                "i promessi sposi": 0.9, "la divina commedia": 0.8, "il decameron": 0.7, "pinocchio": 0.6,
+                "il fu mattia pascal": 0.5, "il gattopardo": 0.4, "uno nessuno centomila": 0.3,
+                "le confessioni di un italiano": 0.1, "il nome della rosa": 0.05
+            }
+        },
+        {
+            question: "Nomina una materia scolastica.",
+            answers: {
+                "matematica": 0.9, "italiano": 0.8, "storia": 0.7, "geografia": 0.6, "scienze": 0.5,
+                "inglese": 0.4, "arte": 0.3, "educazione fisica": 0.2, "religione": 0.1,
+                "filosofia": 0.05, "latino": 0.02
+            }
+        },
+        {
+            question: "Nomina un tipo di pane.",
+            answers: {
+                "bianco": 0.9, "integrale": 0.8, "francese": 0.7, "ai cereali": 0.6, "segale": 0.5,
+                "ciabatta": 0.4, "focaccia": 0.3, "pugliese": 0.2, "azimo": 0.1,
+                "carasau": 0.05, "chapati": 0.01
+            }
+        },
+        {
+            question: "Nomina un genere di film.",
+            answers: {
+                "azione": 0.9, "commedia": 0.8, "drammatico": 0.7, "horror": 0.6, "fantascienza": 0.5,
+                "thriller": 0.4, "animazione": 0.3, "documentario": 0.2, "musical": 0.1,
+                "noir": 0.05, "western": 0.02
+            }
+        },
+        {
+            question: "Nomina un tipo di uccello.",
+            answers: {
+                "passero": 0.9, "colombo": 0.8, "aquila": 0.7, "corvo": 0.6, "gabbiano": 0.5,
+                "pinguino": 0.4, "struzzo": 0.3, "gufo": 0.2, "picchio": 0.1,
+                "airone": 0.05, "rondine": 0.02
+            }
+        },
+        {
+            question: "Nomina una bevanda calda.",
+            answers: {
+                "caffè": 0.9, "tè": 0.8, "cioccolata calda": 0.7, "cappuccino": 0.6, "tisana": 0.5,
+                "latte caldo": 0.4, "infuso": 0.3, "punch caldo": 0.1, "vin brulé": 0.05,
+                "chai latte": 0.02
+            }
+        },
+        {
+            question: "Nomina un famoso scienziato.",
+            answers: {
+                "einstein": 0.9, "newton": 0.8, "galileo": 0.7, "marie curie": 0.6, "darwin": 0.5,
+                "tesla": 0.4, "feynman": 0.3, "hawking": 0.2, "edison": 0.1,
+                "mendel": 0.05, "copernico": 0.02
+            }
+        },
+        {
+            question: "Nomina un attore italiano contemporaneo.",
+            answers: {
+                "pierfrancesco favino": 0.9, "alessandro borghi": 0.8, "riccardo scamarcio": 0.7,
+                "elena sofia ricci": 0.6, "marco giallini": 0.5, "paola cortellesi": 0.4,
+                "anna foglietta": 0.3, "luca marinelli": 0.2, "jasmine trinca": 0.1,
+                "fabrizio gifuni": 0.05, "valerio mastandrea": 0.02
+            }
+        },
+        {
+            question: "Nomina un materiale da costruzione.",
+            answers: {
+                "cemento": 0.9, "mattone": 0.8, "legno": 0.7, "acciaio": 0.6, "vetro": 0.5,
+                "pietra": 0.4, "intonaco": 0.3, "gesso": 0.2, "rame": 0.1,
+                "argilla": 0.05, "sughero": 0.02
+            }
+        },
+        {
+            question: "Nomina un attrezzo musicale.",
+            answers: {
+                "chitarra": 0.9, "pianoforte": 0.8, "batteria": 0.7, "violino": 0.6, "flauto": 0.5,
+                "tromba": 0.4, "sassofono": 0.3, "clarinetto": 0.2, "arpa": 0.1,
+                "mandolino": 0.05, "gong": 0.01
+            }
+        },
+        {
+            question: "Nomina un'invenzione importante del XX secolo.",
+            answers: {
+                "televisione": 0.9, "computer": 0.8, "internet": 0.7, "cellulare": 0.6, "aeroplano": 0.5,
+                "lavatrice": 0.4, "frigorifero": 0.3, "forno a microonde": 0.2, "plastica": 0.1,
+                "penicillina": 0.05, "ray-x": 0.01
+            }
+        },
+        {
+            question: "Nomina un animale domestico (non cane o gatto).",
+            answers: {
+                "coniglio": 0.9, "pesce rosso": 0.8, "criceto": 0.7, "pappagallo": 0.6, "cavallo": 0.5,
+                "porcellino d'india": 0.4, "tartaruga": 0.3, "furetto": 0.2, "geco": 0.1,
+                "riccio africano": 0.05, "camaleonte": 0.01
+            }
+        },
+        {
+            question: "Nomina un tipo di pasta italiana.",
+            answers: {
+                "spaghetti": 0.9, "penne": 0.8, "rigatoni": 0.7, "fusilli": 0.6, "farfalle": 0.5,
+                "lasagne": 0.4, "tortellini": 0.3, "orecchiette": 0.2, "bucatini": 0.1,
+                "paccheri": 0.05, "cavatelli": 0.02
+            }
+        },
+        {
+            question: "Nomina un famoso dipinto.",
+            answers: {
+                "monna lisa": 0.9, "l'ultima cena": 0.8, "notte stellata": 0.7, "guernica": 0.6,
+                "la nascita di venere": 0.5, "il bacio": 0.4, "urlo": 0.3, "la persistenza della memoria": 0.2,
+                "campo di grano con corvi": 0.1, "il giardino delle delizie": 0.05, "la ragazza con l'orecchino di perla": 0.02
+            }
+        },
+        {
+            question: "Nomina un accessorio per il bagno.",
+            answers: {
+                "spazzolino": 0.9, "asciugamano": 0.8, "saponetta": 0.7, "shampoo": 0.6, "dentifricio": 0.5,
+                "specchio": 0.4, "tappeto": 0.3, "portasapone": 0.2, "scopino": 0.1,
+                "tenda doccia": 0.05, "bilancia": 0.02
+            }
+        },
+        {
+            question: "Nomina un segno zodiacale.",
+            answers: {
+                "ariete": 0.9, "toro": 0.8, "gemelli": 0.7, "cancro": 0.6, "leone": 0.5,
+                "vergine": 0.4, "bilancia": 0.3, "scorpione": 0.2, "sagittario": 0.1,
+                "capricorno": 0.05, "acquario": 0.02, "pesci": 0.01
+            }
+        },
+        {
+            question: "Nomina un tipo di albero.",
+            answers: {
+                "quercia": 0.9, "pino": 0.8, "abete": 0.7, "betulla": 0.6, "faggio": 0.5,
+                "pioppo": 0.4, "salice": 0.3, "olivo": 0.2, "sequoia": 0.1,
+                "ginkgo biloba": 0.05, "baobab": 0.01
+            }
+        },
+        {
+            question: "Nomina un tipo di fiore.",
+            answers: {
+                "rosa": 0.9, "tulipano": 0.8, "margherita": 0.7, "girasole": 0.6, "orchidea": 0.5,
+                "giglio": 0.4, "viola": 0.3, "primula": 0.2, "dalia": 0.1,
+                "stella di natale": 0.05, "bucaneve": 0.01
+            }
+        },
+        {
+            question: "Nomina un tipo di insetto.",
+            answers: {
+                "formica": 0.9, "mosca": 0.8, "zanzara": 0.7, "ape": 0.6, "farfalla": 0.5,
+                "scarabeo": 0.4, "ragno": 0.3, "coccinella": 0.2, "cavalletta": 0.1,
+                "mantide religiosa": 0.05, "lucciola": 0.01
+            }
+        },
+        {
+            question: "Nomina un condimento o salsa comune.",
+            answers: {
+                "ketchup": 0.9, "maionese": 0.8, "senape": 0.7, "olio": 0.6, "aceto": 0.5,
+                "salsa barbecue": 0.4, "pesto": 0.3, "salsa di soia": 0.2, "hummus": 0.1,
+                "salsa agrodolce": 0.05, "tabasco": 0.02
+            }
+        },
+        {
+            question: "Nomina un veicolo a due ruote.",
+            answers: {
+                "bicicletta": 0.9, "moto": 0.8, "scooter": 0.7, "motorino": 0.6, "tandem": 0.5,
+                "monopattino": 0.4, "moto d'acqua": 0.3, "segway": 0.1, "hoverboard": 0.05,
+                "unicycle": 0.01
+            }
+        },
+        {
+            question: "Nomina un tipo di evento atmosferico.",
+            answers: {
+                "pioggia": 0.9, "sole": 0.8, "vento": 0.7, "neve": 0.6, "temporale": 0.5,
+                "grandine": 0.4, "nebbia": 0.3, "uragano": 0.2, "tornado": 0.1,
+                "ciclone": 0.05, "tromba d'aria": 0.01
+            }
+        }
+    ];
+
+    let currentQuestions = []; // Una copia mescolata delle domande base
+    let currentQuestionIndex = 0;
+    let gameEnded = false;
+    let currentTurnScores = {}; // Memorizza i punteggi generati per il turno corrente del giocatore
+
+    // Elementi DOM
+    const gameArea = document.getElementById("gameArea");
+    const questionText = document.getElementById('question-text');
+    const answerInput = document.getElementById('answer-input');
+    const submitBtn = document.getElementById('submit-btn');
+    const resultText = document.getElementById('result-text');
+    const totalScoreDisplay = document.getElementById('total-score');
+    const nextActionButton = document.getElementById('next-action-btn');
+    const restartBtn = document.getElementById('restart-btn');
+    const revealedAnswersBox = document.getElementById('revealed-answers-box');
+    const answersList = document.getElementById('answers-list');
+    const messageDisplay = document.createElement('div');
+    messageDisplay.id = 'message';
+    messageDisplay.style.marginTop = '15px';
+    messageDisplay.style.minHeight = '30px';
+    document.querySelector('.game-area').insertBefore(messageDisplay, document.querySelector('.question-box').nextSibling);
+
+    let player = { name: "Giocatore", totalGameScore: 0 }; // Single player object
+
+    // Funzione per generare un numero casuale in un range
+    function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    // Funzione per generare un punteggio basato sulla rarità (sempre > 0)
+    function generateScore(rarity) {
+        let score;
+        // I punteggi saranno tra 1 e 100
+        if (rarity <= 0.05) { // Molto raro
+            score = getRandomInt(1, 10);
+        } else if (rarity <= 0.2) { // Raro
+            score = getRandomInt(1, 30);
+        } else if (rarity <= 0.5) { // Medio
+            score = getRandomInt(30, 70);
+        } else { // Comune
+            score = getRandomInt(70, 100);
+        }
+        return score;
+    }
+
+    // Funzione per generare tutti i punteggi per un turno, scegliendo esplicitamente un "pointless"
+    function generateScoresForTurn(questionData) {
+        const generatedScores = {};
+        
+        // Passo 1: Genera punteggi non-zero per tutte le risposte inizialmente
+        Object.entries(questionData.answers).forEach(([answerText, rarity]) => {
+            generatedScores[answerText] = generateScore(rarity);
+        });
+
+        // Passo 2: Seleziona UNA risposta casuale per essere la "pointless" (punteggio 0)
+        let pointlessCandidates = [];
+        Object.entries(questionData.answers).forEach(([answerText, rarity]) => {
+            // Assegna un peso basato sulla rarità: rarità inferiore = peso maggiore
+            let weight;
+            if (rarity <= 0.01) weight = 100; // Estremamente raro
+            else if (rarity <= 0.02) weight = 50;
+            else if (rarity <= 0.05) weight = 20;
+            else if (rarity <= 0.1) weight = 10;
+            else if (rarity <= 0.2) weight = 5;
+            else weight = 1; // Più comune, probabilità minore
+
+            for (let i = 0; i < weight; i++) {
+                pointlessCandidates.push(answerText);
+            }
+        });
+
+        // Assicurati che ci sia almeno un candidato, anche se la logica dei pesi fosse fallita
+        if (pointlessCandidates.length === 0 && Object.keys(questionData.answers).length > 0) {
+            pointlessCandidates.push(Object.keys(questionData.answers)[0]); // Fallback: scegli la prima risposta
+        } else if (pointlessCandidates.length === 0) {
+            // Questo caso non dovrebbe verificarsi con le nostre baseQuestions, ma per sicurezza
+            return {}; 
+        }
+
+        const randomIndex = getRandomInt(0, pointlessCandidates.length - 1);
+        const pointlessAnswer = pointlessCandidates[randomIndex];
+
+        // Passo 3: Imposta il punteggio della risposta scelta a 0
+        generatedScores[pointlessAnswer] = 0;
+
+        return generatedScores;
+    }
+
+    // Inizializza o ricomincia il gioco
+    function initializeGame() {
+        player.totalGameScore = 0; // Reset score for single player
+       
+        currentQuestions = shuffleArray(JSON.parse(JSON.stringify(baseQuestions))); // Solo mescola le domande
+        
+        currentQuestionIndex = 0;
+        gameEnded = false;
+        
+        gameArea.style.display = "block";
+        restartBtn.style.display = 'none';
+        nextActionButton.style.display = 'none'; // Nascondi inizialmente il pulsante "Prossima Domanda"
+        revealedAnswersBox.style.display = 'none';
+        
+        loadQuestion();
+    }
+
+    // Funzione per mescolare un array (Fisher-Yates)
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    // Carica la domanda corrente
+    function loadQuestion() {
+        if (currentQuestionIndex >= currentQuestions.length) {
+            endGame();
+            return;
+        }
+
+        const currentQData = currentQuestions[currentQuestionIndex];
+        questionText.textContent = currentQData.question;
+        answerInput.value = '';
+        resultText.textContent = '';
+        submitBtn.style.display = 'block';
+        answerInput.style.display = 'block';
+        answerInput.disabled = false;
+        nextActionButton.style.display = 'none';
+        revealedAnswersBox.style.display = 'none'; // Nasconde le risposte rivelate
+        answersList.innerHTML = '';
+        
+        totalScoreDisplay.textContent = player.totalGameScore; 
+        messageDisplay.textContent = ``; // Nessun messaggio "Tocca a..." per singolo giocatore
+
+        // Genera i punteggi per QUESTO specifico turno
+        currentTurnScores = generateScoresForTurn(currentQData);
+    }
+
+    // Invia la risposta
+    function submitAnswer() {
+        if (gameEnded) return;
+
+        const userAnswer = answerInput.value.trim().toLowerCase();
+        
+        let score = 100; // Punteggio predefinito alto per risposte non valide
+        let foundAnswer = false;
+
+        // Cerca la risposta tra i punteggi GENERATI per questo turno
+        if (currentTurnScores.hasOwnProperty(userAnswer)) {
+            score = currentTurnScores[userAnswer];
+            foundAnswer = true;
+        }
+
+        if (!foundAnswer) {
+            resultText.innerHTML = `"${userAnswer}" non è una delle risposte previste per questa domanda. Punti: <span style="color: red;">${score}</span>`;
+        } else {
+            if (score === 0) {
+                resultText.innerHTML = `Risposta: "${userAnswer}" - <span class="pointless-text">POINTLESS!</span> Hai ottenuto 0 punti! 🎉`;
+            } else {
+                resultText.innerHTML = `Risposta: "${userAnswer}" - Punti: <span style="color: ${score <= 30 ? 'green' : (score <= 60 ? 'orange' : 'red')};">${score}</span>`;
+            }
+        }
+
+        player.totalGameScore += score;
+        totalScoreDisplay.textContent = player.totalGameScore;
+
+        submitBtn.style.display = 'none';
+        answerInput.disabled = true;
+        messageDisplay.textContent = `Punti ottenuti: ${score}`;
+
+        // Mostra TUTTI i punteggi GENERATI per questo turno
+        displayAllScores(currentTurnScores);
+
+        // Prepara il pulsante per la prossima domanda
+        nextActionButton.textContent = 'Prossima Domanda';
+        currentQuestionIndex++; // Passa alla prossima domanda
+        nextActionButton.style.display = 'block';
+    }
+
+    // Mostra tutti i punteggi GENERATI per un dato turno
+    function displayAllScores(allAnswersWithScores) {
+        answersList.innerHTML = '';
+        
+        const sortedAnswers = Object.entries(allAnswersWithScores).sort(([, scoreA], [, scoreB]) => scoreA - scoreB);
+
+        sortedAnswers.forEach(([answer, score]) => {
+            const listItem = document.createElement('li');
+            const scoreClass = score === 0 ? 'pointless-score' : '';
+            listItem.innerHTML = `<span class="answer-text">${answer.charAt(0).toUpperCase() + answer.slice(1)}</span> <span class="answer-score ${scoreClass}">${score}</span>`;
+            answersList.appendChild(listItem);
+        });
+        revealedAnswersBox.style.display = 'block';
+    }
+
+    // Fine del gioco
+    function endGame() {
+        gameEnded = true;
+        
+        questionText.textContent = "Partita Terminata!";
+        resultText.innerHTML = `Hai completato il gioco con un punteggio totale di ${player.totalGameScore}. Bravo!`;
+        submitBtn.style.display = 'none';
+        answerInput.style.display = 'none';
+        nextActionButton.style.display = 'none';
+        restartBtn.style.display = 'block';
+        document.querySelector('.instructions').style.display = 'none';
+        revealedAnswersBox.style.display = 'none';
+        messageDisplay.textContent = "";
+    }
+
+    // Event Listeners
+    submitBtn.addEventListener('click', submitAnswer);
+    nextActionButton.addEventListener('click', loadQuestion); // loadQuestion gestisce il passaggio di domanda
+    answerInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' && !answerInput.disabled) {
+            submitAnswer();
+        }
+    });
+    restartBtn.addEventListener('click', initializeGame); // Per ricominciare il gioco
+
+    // Inizializza il gioco all'avvio della pagina (per giocatore singolo)
+    initializeGame();
+    
+  </script>
+</body>
+</html>
